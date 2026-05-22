@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { getAuthToken } from '@/utils/auth';
 
 export const SERVER_URL = import.meta.env.VITE_SERVER_URL;
 
@@ -12,7 +13,7 @@ const api = axios.create({
 // 요청 인터셉터 - JWT 토큰 자동 추가
 api.interceptors.request.use(
   config => {
-    const token = localStorage.getItem('token');
+    const token = getAuthToken();
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }

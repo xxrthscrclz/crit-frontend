@@ -6,6 +6,7 @@ import AnalysisPage from '@/pages/analysis';
 import LoginPage from '@/pages/login';
 import MainPage from '@/pages/main';
 import PrivateRoute from '@/routes/privateRoute';
+import MemberRoute from '@/routes/memberRoute';
 import ScrollToTop from '@/routes/ScrollToTop';
 
 const Router = () => {
@@ -16,10 +17,12 @@ const Router = () => {
         <Routes>
           <Route path="/login" element={<LoginPage />} />
           <Route path="/oauth-callback" element={<LoginPage />} />
-          <Route path="/" element={<MainPage />} />
-          <Route path="/recommend" element={<RecommendPage />} />
-          <Route path="/analysis" element={<PrivateRoute />}>
-            <Route index element={<AnalysisPage />} />
+          <Route element={<PrivateRoute />}>
+            <Route index element={<MainPage />} />
+            <Route path="recommend" element={<RecommendPage />} />
+            <Route path="analysis" element={<MemberRoute />}>
+              <Route index element={<AnalysisPage />} />
+            </Route>
           </Route>
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>

@@ -79,6 +79,12 @@ export interface VideoAnalysisResponse {
 
 // ===== API Functions =====
 
+// POST /login_guest - 비회원(guest) 토큰 발급
+export const postGuestLogin = async (): Promise<{ guestToken: string }> => {
+  const response = await api.post('/login_guest');
+  return response.data;
+};
+
 // POST /ai_recommend - AI 추천 주제 요청
 export const postRecommend = async (data: RecommendRequest) => {
   const params: Record<string, string> = {

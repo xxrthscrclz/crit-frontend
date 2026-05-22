@@ -2,11 +2,14 @@ import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import CritLogo from '@/assets/icons/critLogo.svg?react';
 import GoogleIcon from '@/assets/icons/google-icon.svg?react';
+import { postGuestLogin } from '@/api/command';
 import useUserStore from '@/stores/useUserStore';
+import { hasAuth, setGuestAuth, setMemberAuth } from '@/utils/auth';
 
 const LoginPage = () => {
   const navigate = useNavigate();
   const setUser = useUserStore(s => s.setUser);
+  const clearUser = useUserStore(s => s.clearUser);
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
@@ -14,12 +17,16 @@ const LoginPage = () => {
     const token = params.get('token');
     const channelName = params.get('channelName');
     const channelURL = params.get('channelUrl');
-    // 이메일과 가입일을 로그인했을 때, 추가로 받으면 좋을 것 같습니다. (가입일이라 함은 CRiT 서비스를 가입한 날짜)
 
     if (token) {
-      localStorage.setItem('token', token);
+      setMemberAuth(token);
       setUser(channelName, channelURL);
-      navigate('/');
+      navigate('/', { replace: true });
+      return;
+    }
+
+    if (hasAuth()) {
+      navigate('/', { replace: true });
     }
   }, [navigate, setUser]);
 
@@ -27,10 +34,21 @@ const LoginPage = () => {
     window.location.href = `${import.meta.env.VITE_AUTH_URL}/oauth2/authorization/google`;
   };
 
+  const handleGuestBrowse = async () => {
+    try {
+      const { guestToken } = await postGuestLogin();
+      clearUser();
+      setGuestAuth(guestToken);
+      navigate('/', { replace: true });
+    } catch (err) {
+      console.error('guest 토큰 발급 실패:', err);
+    }
+  };
+
   const handleMockLogin = () => {
-    localStorage.setItem('token', 'mock-jwt-token-for-development');
+    setMemberAuth('mock-jwt-token-for-development');
     setUser('CRiT', 'https://www.youtube.com/@CRiT');
-    navigate('/');
+    navigate('/', { replace: true });
   };
 
   return (
@@ -57,10 +75,10 @@ const LoginPage = () => {
 
           <button
             type="button"
-            onClick={() => navigate('/recommend')}
-            className="flex h-[54px] px-2 py-4 justify-center items-center self-stretch rounded-[10px] border border-[#E6E8E7] bg-white cursor-pointer hover:bg-gray-50"
+            onClick={handleGuestBrowse}
+            className="flex h-[54px] px-2 py-4 justify-center items-center self-stretch rounded-[10px] text-[#969696] typo-login-guest border-2 border-[#E6E8E7] bg-white cursor-pointer hover:border-[#CDC1FF] hover:text-[#6B4EFF]"
           >
-            <span className="text-[#969696] typo-login-guest">비회원으로 둘러보기</span>
+            <span>비회원으로 둘러보기</span>
           </button>
 
           {import.meta.env.VITE_USE_MOCK === 'true' && (
