@@ -139,3 +139,24 @@ export const mockChannelAnalysisResponse = {
   ],
   percentileDataCollectedAt: '2026-05-04T05:32:04.674274+00:00',
 };
+
+/** force=true 갱신 시 반환할 mock (점수·수집 시각 변경) */
+export const mockChannelAnalysisForceRefreshResponse = {
+  ...mockChannelAnalysisResponse,
+  channelScore: {
+    ...mockChannelAnalysisResponse.channelScore,
+    overall: 72,
+    topPercent: 28,
+    comment:
+      '강제 갱신 후 도달력이 소폭 개선되었습니다. 시청자 반응과 콘텐츠 만족도는 여전히 높은 수준을 유지하고 있습니다.',
+    factors: mockChannelAnalysisResponse.channelScore.factors.map(factor =>
+      factor.name === '도달력' ? { ...factor, score: 63 } : factor,
+    ),
+  },
+  summary: {
+    ...mockChannelAnalysisResponse.summary,
+    avgViewCountChange: 4.1,
+    uploadFrequencyChange: -1.5,
+  },
+  percentileDataCollectedAt: new Date().toISOString(),
+};

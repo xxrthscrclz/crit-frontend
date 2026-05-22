@@ -1,6 +1,9 @@
 import { http, HttpResponse } from 'msw';
 import { mockRecommendResponse, mockScriptResponse } from '@/mocks/data/recommendMock';
-import { mockChannelAnalysisResponse } from '@/mocks/data/analysisMock';
+import {
+  mockChannelAnalysisResponse,
+  mockChannelAnalysisForceRefreshResponse,
+} from '@/mocks/data/analysisMock';
 import { mockVideoAnalysisResponse } from '@/mocks/data/videoAnalysisMock';
 import { mockKeywordsResponse } from '@/mocks/data/keywordsMock';
 
@@ -22,9 +25,16 @@ export const handlers = [
     return HttpResponse.json(mockScriptResponse, { status: 200 });
   }),
 
-  // GET /analyze/channel - 채널 분석 요청
-  http.get(`${SERVER_URL}/analyze/channel`, () => {
-    return HttpResponse.json(mockChannelAnalysisResponse, { status: 200 });
+  // GET /analyze/channel - 채널 분석 요청 (force=true 시 갱신 데이터)
+  http.get(`${SERVER_URL}/analyze/channel`, async ({ request }) => {
+    const force = new URL(request.url).searchParams.get('force') === 'true';
+    if (force) {
+      await new Promise(resolve => setTimeout(resolve, 1000));
+    }
+    return HttpResponse.json(
+      force ? mockChannelAnalysisForceRefreshResponse : mockChannelAnalysisResponse,
+      { status: 200 },
+    );
   }),
 
   // GET /analyze/video/:videoId - 영상 상세 분석 요청
