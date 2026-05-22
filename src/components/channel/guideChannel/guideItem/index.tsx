@@ -52,13 +52,15 @@ const GuideItem = ({ comment, subcomment, metric, current, target, benchmark }: 
       : 0;
 
   return (
-    <div className="flex w-full px-5 py-5 justify-start items-start gap-2.5 self-stretch rounded-xl bg-[#F5EFFF]">
+    <div className="flex flex-1 self-stretch px-5 py-5 items-stretch gap-2.5 rounded-xl bg-[#F5EFFF]">
       <CommentIcon className="shrink-0 mt-0.5" />
-      <div className="flex w-full flex-col gap-2">
-        <div className="flex w-full justify-start text-black typo-body4-semibold">{comment}</div>
-        <div className="flex w-full justify-start text-[#555] typo-body5">{subcomment}</div>
+      <div className="flex flex-1 flex-col justify-between gap-4">
+        <div className="flex flex-col gap-2">
+          <div className="flex w-full justify-start text-black typo-body4-semibold">{comment}</div>
+          <div className="flex w-full justify-start text-[#555] typo-body5">{subcomment}</div>
+        </div>
         {metric && benchmark && current != null && (
-          <div className="flex flex-col gap-1.5 mt-2">
+          <div className="flex flex-col gap-1.5">
             <div className="flex justify-between items-center">
               <span className="text-xs text-[#717171]">{metricLabels[metric] ?? metric}</span>
               <span className="text-xs font-semibold text-[#7C5CFF]">

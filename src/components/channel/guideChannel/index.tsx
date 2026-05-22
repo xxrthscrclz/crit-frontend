@@ -14,7 +14,7 @@ const GuideChannel = () => {
           이렇게 해보세요! {data?.channel?.name ?? 'name'}님 맞춤 CRiT 가이드
         </div>
       </div>
-      <div className="flex w-full gap-8 justify-center items-center">
+      <div className="flex w-full gap-8 justify-center items-stretch">
         {guides.length > 0 ? (
           guides.map((guide, i) => (
             <GuideItem
