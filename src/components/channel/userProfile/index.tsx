@@ -37,10 +37,20 @@ const UserProfile = ({ onRefresh, isRefreshing }: UserProfileProps) => {
           disabled={isRefreshing}
           className="flex items-center gap-1.5 px-4 py-2 rounded-lg bg-[#7C5CFF] text-white typo-body5 cursor-pointer hover:bg-[#6344DD] disabled:opacity-50 disabled:cursor-not-allowed"
         >
-          <svg className={`w-4 h-4 ${isRefreshing ? 'animate-spin' : ''}`} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-            <path d="M21 12a9 9 0 11-2.2-5.9M21 3v5h-5" strokeLinecap="round" strokeLinejoin="round"/>
+          <svg
+            className={`w-4 h-4 ${isRefreshing ? 'animate-spin' : ''}`}
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+          >
+            <path
+              d="M21 12a9 9 0 11-2.2-5.9M21 3v5h-5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
           </svg>
-          {isRefreshing ? '갱신 중...' : '강제 갱신'}
+          {isRefreshing ? '갱신 중...' : '갱신 하기'}
         </button>
       )}
     </div>
