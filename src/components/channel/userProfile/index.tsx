@@ -1,4 +1,5 @@
 import useChannelStore from '@/stores/useChannelStore';
+import CritLogo from '@/assets/icons/critLogo.svg?react';
 
 interface UserProfileProps {
   onRefresh?: () => void;
@@ -12,14 +13,14 @@ const UserProfile = ({ onRefresh, isRefreshing }: UserProfileProps) => {
   return (
     <div className="flex w-full h-39 justify-between items-center gap-8 px-6 py-4 rounded-xl border border-[#A594F9]">
       <div className="flex items-center gap-8">
-        <div className="w-30 h-30 rounded-full bg-gray-500 overflow-hidden shrink-0">
-          {channel?.profileImageUrl && (
+        <div className="w-30 h-30 rounded-full bg-[radial-gradient(circle,#ffffff_0%,#CDC1FF_100%)] overflow-hidden shrink-0">
+          {(channel?.profileImageUrl && (
             <img
               src={channel.profileImageUrl}
               alt={channel.name}
               className="w-full h-full object-cover"
             />
-          )}
+          )) || <CritLogo className="w-30 h-30 object-cover" />}
         </div>
         <div className="flex flex-col justify-start gap-3">
           <div className="w-full typo-title2 text-black">{channel?.name ?? 'channel ID'}</div>
