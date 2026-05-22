@@ -7,6 +7,11 @@ import { mockKeywordsResponse } from '@/mocks/data/keywordsMock';
 const SERVER_URL = import.meta.env.VITE_SERVER_URL;
 
 export const handlers = [
+  // POST /login_guest - 비회원 토큰 발급
+  http.post(`${SERVER_URL}/login_guest`, () => {
+    return HttpResponse.json({ guestToken: 'mock-guest-token' }, { status: 200 });
+  }),
+
   // POST /ai_recommend - AI 추천 주제 요청
   http.post(`${SERVER_URL}/ai_recommend`, () => {
     return HttpResponse.json(mockRecommendResponse, { status: 200 });

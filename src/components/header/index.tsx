@@ -6,6 +6,7 @@ import CritLogo from '@/assets/icons/critLogo.svg?react';
 import useUserStore from '@/stores/useUserStore';
 import UserInfoModal from '@/pages/userInfoModal';
 import ConfirmModal from '@/components/confirmModal';
+import { clearAuth, isMember } from '@/utils/auth';
 
 const Header = () => {
   const navigate = useNavigate();
@@ -13,13 +14,12 @@ const Header = () => {
   const currentPath = location.pathname;
   const channelName = useUserStore(s => s.channelName);
   const clearUser = useUserStore(s => s.clearUser);
-  const channelURL = useUserStore(s => s.channelURL);
-  const isLoggedIn = !!channelURL;
+  const isLoggedIn = isMember();
   const [showModal, setShowModal] = useState(false);
   const [showLoginRequiredModal, setShowLoginRequiredModal] = useState(false);
 
-  const handleLogout = () => {
-    localStorage.removeItem('token');
+  const handleGoToLogin = () => {
+    clearAuth();
     clearUser();
     navigate('/login');
   };
@@ -34,7 +34,7 @@ const Header = () => {
 
   return (
     <div className="sticky top-0 z-50 flex w-full h-20 justify-between items-center border-b border-[#dad9d9]/30 px-5 bg-white/70 backdrop-blur-md">
-      <CritLogo className="w-38 h-11 cursor-pointer" onClick={() => navigate('/main')} />
+      <CritLogo className="w-38 h-11 cursor-pointer" onClick={() => navigate('/')} />
       <div className="flex justify-center items-center gap-5 self-stretch">
         <div
           className="flex w-24 h-9 flex-col justify-center text-center cursor-pointer typo-body2"
@@ -65,14 +65,14 @@ const Header = () => {
         ) : (
           <div
             className="text-[#6B4EFF] typo-body2 cursor-pointer hover:underline"
-            onClick={() => navigate('/login')}
+            onClick={handleGoToLogin}
           >
-            로그인
+            로그인 하러 가기
           </div>
         )}
       </div>
       <div className="flex h-11 items-center justify-end gap-5">
-        <LogoutIcon className="w-6 h-6 cursor-pointer" onClick={handleLogout} />
+        <LogoutIcon className="w-6 h-6 cursor-pointer" onClick={handleGoToLogin} />
         <PersonIcon className="w-6 h-6 cursor-pointer" onClick={() => setShowModal(true)} />
       </div>
       {showModal && <UserInfoModal onClose={() => setShowModal(false)} />}
@@ -83,7 +83,7 @@ const Header = () => {
           secondaryLabel="로그인 하러 가기"
           onSecondary={() => {
             setShowLoginRequiredModal(false);
-            navigate('/login');
+            handleGoToLogin();
           }}
         />
       )}

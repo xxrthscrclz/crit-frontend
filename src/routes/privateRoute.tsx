@@ -1,10 +1,9 @@
 import { Navigate, Outlet } from 'react-router-dom';
+import { hasAuth } from '@/utils/auth';
 
 const PrivateRoute = () => {
-  const token = localStorage.getItem('token');
-
-  if (!token) {
-    return <Navigate to="/recommend" replace />;
+  if (!hasAuth()) {
+    return <Navigate to="/login" replace />;
   }
 
   return <Outlet />;
