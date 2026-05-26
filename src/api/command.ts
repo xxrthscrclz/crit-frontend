@@ -110,17 +110,18 @@ export const postGuestLogin = async (): Promise<{ guestToken: string }> => {
   return response.data;
 };
 
-/** POST /login_test 응답 */
+/** POST /login_test 응답 항목 */
 export interface MemberLoginResponse {
   memberToken: string;
   channelName: string;
   channelUrl: string;
   userEmail: string;
   joinDate: string;
+  category: string;
 }
 
-// POST /login_test - 테스트 계정 로그인
-export const postTestLogin = async (): Promise<MemberLoginResponse> => {
+// POST /login_test - 테스트 계정 목록 조회
+export const postTestLogin = async (): Promise<MemberLoginResponse[]> => {
   const response = await api.post('/login_test');
   return response.data;
 };
@@ -160,9 +161,9 @@ export const postTitleResearch = async (
 };
 
 // GET /analyze/channel - 채널 분석 요청
-export const getChannelAnalysis = async (channel: string, force = false) => {
+export const getChannelAnalysis = async (channelURL: string, force = false) => {
   const response = await api.get('/analyze/channel', {
-    params: { channel, force },
+    params: { channel: channelURL, force },
   });
   return response.data;
 };

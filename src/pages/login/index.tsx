@@ -1,8 +1,9 @@
-import { useCallback, useEffect } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import CritLogo from '@/assets/icons/critLogo.svg?react';
 import GoogleIcon from '@/assets/icons/google-icon.svg?react';
 import { postGuestLogin, postTestLogin, type MemberLoginResponse } from '@/api/command';
+import TestAccountSelectModal from '@/pages/testAccountSelectModal';
 import useUserStore from '@/stores/useUserStore';
 import { hasAuth, setGuestAuth, setMemberAuth } from '@/utils/auth';
 import { mockMemberProfile } from '@/mocks/data/userMock';
@@ -11,19 +12,25 @@ const LoginPage = () => {
   const navigate = useNavigate();
   const setUser = useUserStore(s => s.setUser);
   const clearUser = useUserStore(s => s.clearUser);
+  const setTestAccounts = useUserStore(s => s.setTestAccounts);
+  const clearTestAccounts = useUserStore(s => s.clearTestAccounts);
+  const [showTestAccountModal, setShowTestAccountModal] = useState(false);
 
-  const applyMemberLogin = useCallback(
-    (data: MemberLoginResponse) => {
-      setMemberAuth(data.memberToken);
+  const applyTestAccountLogin = useCallback(
+    (account: MemberLoginResponse) => {
+      setMemberAuth(account.memberToken);
       setUser({
-        channelName: data.channelName ?? null,
-        channelURL: data.channelUrl ?? null,
-        userEmail: data.userEmail ?? null,
-        joinDate: data.joinDate ?? null,
+        channelName: account.channelName,
+        channelURL: account.channelUrl,
+        userEmail: account.userEmail,
+        joinDate: account.joinDate,
+        category: account.category,
       });
+      clearTestAccounts();
+      setShowTestAccountModal(false);
       navigate('/', { replace: true });
     },
-    [navigate, setUser],
+    [clearTestAccounts, navigate, setUser],
   );
 
   useEffect(() => {
@@ -37,6 +44,7 @@ const LoginPage = () => {
         channelURL: params.get('channelUrl'),
         userEmail: params.get('userEmail'),
         joinDate: params.get('joinDate'),
+        category: null,
       });
       navigate('/', { replace: true });
       return;
@@ -64,8 +72,9 @@ const LoginPage = () => {
 
   const handleTestLogin = async () => {
     try {
-      const res = await postTestLogin();
-      applyMemberLogin(res);
+      const accounts = await postTestLogin();
+      setTestAccounts(accounts);
+      setShowTestAccountModal(true);
     } catch (err) {
       console.error('테스트 로그인 실패:', err);
     }
@@ -75,6 +84,11 @@ const LoginPage = () => {
     setMemberAuth('mock-jwt-token-for-development');
     setUser(mockMemberProfile);
     navigate('/', { replace: true });
+  };
+
+  const handleCloseTestAccountModal = () => {
+    setShowTestAccountModal(false);
+    clearTestAccounts();
   };
 
   return (
@@ -128,6 +142,13 @@ const LoginPage = () => {
           )}
         </div>
       </div>
+
+      {showTestAccountModal && (
+        <TestAccountSelectModal
+          onClose={handleCloseTestAccountModal}
+          onLogin={applyTestAccountLogin}
+        />
+      )}
     </div>
   );
 };
