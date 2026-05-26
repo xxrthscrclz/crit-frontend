@@ -10,7 +10,7 @@ const formatScript = (text: string) => {
 const ScriptEditor = () => {
   const [copied, setCopied] = useState(false);
   const data = useAIFormStore(s => s.data);
-  const script = data?.conceptSummary ?? '';
+  const script = data?.fullScript ?? '';
 
   const handleCopy = async () => {
     if (!script) return;

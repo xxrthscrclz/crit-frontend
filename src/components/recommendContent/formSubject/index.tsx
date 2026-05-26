@@ -1,8 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 import SubjectItem from '@/components/recommendContent/formSubject/subjectItem';
 import useRecommendStore from '@/stores/useRecommendStore';
-import useAIFormStore from '@/stores/useAIFormStore';
-import { postScript } from '@/api/command';
+import { fetchAIContent } from '@/utils/fetchAIContent';
 import { useShallow } from 'zustand/react/shallow';
 
 interface FormSubjectProps {
@@ -19,8 +18,6 @@ const FormSubject = ({ onSelect }: FormSubjectProps) => {
       setSelectedSubjectIndex: s.setSelectedSubjectIndex,
     })),
   );
-  const setData = useAIFormStore(s => s.setData);
-
   const [selectedIndex, setSelectedIndex] = useState<number | null>(() => {
     const { autoSelectSubject, selectedSubjectIndex } = useRecommendStore.getState();
     return autoSelectSubject ? selectedSubjectIndex : null;
@@ -36,7 +33,7 @@ const FormSubject = ({ onSelect }: FormSubjectProps) => {
     }
   }, [recommendations]);
 
-  const handleClick = async (index: number) => {
+  const handleClick = (index: number) => {
     setSelectedIndex(index);
     setSelectedSubjectIndex(index);
     setCollapsed(true);
@@ -45,30 +42,15 @@ const FormSubject = ({ onSelect }: FormSubjectProps) => {
     const title = item?.suggestedTitle ?? '';
     const concept = item?.conceptSummary ?? '';
 
-    try {
-      const res = await postScript({
-        requestURL: formInput.requestURL,
-        title,
-        concept,
-        keywords: formInput.keywords,
-        category: formInput.category,
-        videoType: formInput.videoType,
-        time: formInput.videoType === 'short' ? null : formInput.time,
-      });
-      const item = res[0] ?? res;
-      setData({
-        conceptSummary: item.conceptSummary ?? '',
-        suggestedTitles: (item.suggestedTitles ?? []).slice(0, 3),
-        thumbnail: {
-          thumbnailImage: item.thumbnail?.thumbnailImage ?? '',
-          thumbnailGuide: item.thumbnail?.thumbnailGuide ?? '',
-        },
-        similarVideos: item.similarVideos ?? [],
-        similarCreators: item.similarCreators ?? [],
-      });
-    } catch (err) {
-      console.error('스크립트 요청 실패:', err);
-    }
+    fetchAIContent({
+      requestURL: formInput.requestURL,
+      title,
+      concept,
+      keywords: formInput.keywords,
+      category: formInput.category,
+      videoType: formInput.videoType,
+      time: formInput.videoType === 'short' ? null : formInput.time,
+    });
 
     onSelect?.();
   };
