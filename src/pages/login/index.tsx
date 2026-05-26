@@ -5,6 +5,7 @@ import GoogleIcon from '@/assets/icons/google-icon.svg?react';
 import { postGuestLogin } from '@/api/command';
 import useUserStore from '@/stores/useUserStore';
 import { hasAuth, setGuestAuth, setMemberAuth } from '@/utils/auth';
+import { mockMemberProfile } from '@/mocks/data/userMock';
 
 const LoginPage = () => {
   const navigate = useNavigate();
@@ -17,10 +18,12 @@ const LoginPage = () => {
     const token = params.get('token');
     const channelName = params.get('channelName');
     const channelURL = params.get('channelUrl');
+    const userEmail = params.get('userEmail');
+    const joinDate = params.get('joinDate');
 
     if (token) {
       setMemberAuth(token);
-      setUser(channelName, channelURL);
+      setUser({ channelName, channelURL, userEmail, joinDate });
       navigate('/', { replace: true });
       return;
     }
@@ -47,7 +50,7 @@ const LoginPage = () => {
 
   const handleMockLogin = () => {
     setMemberAuth('mock-jwt-token-for-development');
-    setUser('CRiT', 'https://www.youtube.com/@CRiT');
+    setUser(mockMemberProfile);
     navigate('/', { replace: true });
   };
 
