@@ -9,7 +9,7 @@ interface ContentItemProps {
 
 const ContentItem = ({ title, concept, onVideoRecommend, isLoading = false }: ContentItemProps) => {
   return (
-    <div className="flex flex-col w-full px-5.5 py-4.5 justify-center items-center gap-3 rounded-xl border-[0.5px] border-[#8257B4]">
+    <div className="flex flex-col w-full px-5.5 py-4.5 justify-between items-center gap-3 rounded-xl border-[0.5px] border-[#8257B4]">
       <div className="flex w-full justify-between items-center gap-2">
         <div className="flex justify-start items-start gap-2.5">
           <BulbIcon className="shrink-0" />
@@ -29,7 +29,7 @@ const ContentItem = ({ title, concept, onVideoRecommend, isLoading = false }: Co
             : 'text-[#4F378A] cursor-pointer hover:bg-[#D9D2FF] hover:text-[#4F378A] active:bg-[#C4B8FF]'
         }`}
       >
-        {isLoading ? '로딩 중...' : '영상 추천'}
+        {isLoading ? 'AI 콘텐츠 생성 중...' : '영상 추천'}
       </div>
     </div>
   );

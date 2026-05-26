@@ -10,6 +10,7 @@ import BarGraphIcon from '@/assets/icons/score-icons/video-detail/bar-graph-icon
 import RightIcon from '@/assets/icons/score-icons/video-detail/right-icon.svg?react';
 import InfoIcon from '@/assets/icons/score-icons/video-detail/info-icon.svg?react';
 import useCurrentVideoStore from '@/stores/useCurrentVideoStore';
+import { parseBraceList } from '@/utils/formatBraceList';
 
 const VideoInfo = () => {
   const [shared, setShared] = useState(false);
@@ -55,6 +56,8 @@ const VideoInfo = () => {
       setTimeout(() => setShared(false), 2000);
     }
   };
+
+  const categories = videoInfo ? parseBraceList(videoInfo.category) : [];
 
   const showLoading = isLoading || !videoInfo;
 
@@ -117,8 +120,10 @@ const VideoInfo = () => {
             <div className="text-black typo-body5">
               {showLoading ? (
                 <span className="animate-loading-pulse">카테고리</span>
+              ) : categories.length > 0 ? (
+                categories.join(', ')
               ) : (
-                videoInfo.category
+                '-'
               )}
             </div>
           </div>

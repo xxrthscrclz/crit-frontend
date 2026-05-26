@@ -21,10 +21,9 @@ const AnalysisPage = () => {
   const [isRefreshing, setIsRefreshing] = useState(false);
 
   const fetchData = async (force = false) => {
-    const url = channelURL;
-    if (!url) return;
+    if (!channelURL) return;
     try {
-      const res = await getChannelAnalysis(url, force);
+      const res = await getChannelAnalysis(channelURL, force);
       setData(res);
     } catch (err) {
       console.error('채널 분석 요청 실패:', err);

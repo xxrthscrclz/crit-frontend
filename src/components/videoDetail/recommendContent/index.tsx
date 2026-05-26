@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ContentItem from './contentItem';
 import TimeSlider from '@/components/recommendContent/formList/timeSlider';
@@ -9,11 +9,14 @@ import useUserStore from '@/stores/useUserStore';
 import useRecommendStore from '@/stores/useRecommendStore';
 import useAIFormStore from '@/stores/useAIFormStore';
 import { postRecommend, postScript } from '@/api/command';
+import { parseBraceList, toBraceFormat } from '@/utils/formatBraceList';
 
 interface RecommendItem {
   suggestedTitle: string;
   conceptSummary: string;
 }
+
+const FADE_DURATION_MS = 300;
 
 const RecommendContent = () => {
   const navigate = useNavigate();
@@ -31,47 +34,67 @@ const RecommendContent = () => {
   const [isSearching, setIsSearching] = useState(false);
   const [isLoadingScript, setIsLoadingScript] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
+  const [resultsOpacity, setResultsOpacity] = useState(1);
 
   // 키워드, 카테고리, 영상 타입은 videoInfo에서 가져옴
-  const keyword = videoAnalysis?.videoInfo?.keyword ?? '';
-  const category = videoAnalysis?.videoInfo?.category ?? '';
+  const keywords = videoAnalysis?.videoInfo?.keyword ?? '';
+  const rawCategory = videoAnalysis?.videoInfo?.category ?? '';
+  const category = toBraceFormat(rawCategory);
+  const categoryList = parseBraceList(rawCategory);
   const videoType = videoAnalysis?.videoInfo?.videoType ?? 'long';
   const isShortForm = videoType === 'short';
 
   // 추천 결과
   const [recommendations, setRecommendations] = useState<RecommendItem[]>([]);
 
-  const handleSearch = async () => {
-    if (!isShortForm && time === 0) {
-      setErrorMsg('영상 길이(Time)를 입력해주세요.');
-      return;
-    }
-    setErrorMsg('');
+  const fetchRecommendations = useCallback(
+    async (options?: { validateTime?: boolean; animateReplace?: boolean }) => {
+      const { validateTime = false, animateReplace = false } = options ?? {};
 
-    if (!channelURL) return;
+      if (validateTime && !isShortForm && time === 0) {
+        setErrorMsg('영상 길이(Time)를 입력해주세요.');
+        return;
+      }
+      setErrorMsg('');
 
-    setIsSearching(true);
+      if (!channelURL) return;
 
-    try {
-      const res = await postRecommend({
-        requestURL: channelURL,
-        keywords: keyword,
-        category: category,
-        videoType,
-      });
-      setRecommendations(res.slice(0, 3)); // 주제 3개만
-      setShowForm(false);
-    } catch (err) {
-      console.error('추천 요청 실패:', err);
-    } finally {
-      setIsSearching(false);
-    }
+      setIsSearching(true);
+
+      try {
+        const res = await postRecommend({
+          requestURL: channelURL,
+          keywords,
+          category,
+          videoType,
+        });
+        const nextRecommendations = res.slice(0, 3);
+
+        if (animateReplace && recommendations.length > 0) {
+          setResultsOpacity(0);
+          await new Promise(resolve => window.setTimeout(resolve, FADE_DURATION_MS));
+          setRecommendations(nextRecommendations);
+          requestAnimationFrame(() => setResultsOpacity(1));
+        } else {
+          setRecommendations(nextRecommendations);
+          setResultsOpacity(1);
+          setShowForm(false);
+        }
+      } catch (err) {
+        console.error('추천 요청 실패:', err);
+      } finally {
+        setIsSearching(false);
+      }
+    },
+    [category, channelURL, isShortForm, keywords, recommendations.length, time, videoType],
+  );
+
+  const handleSearch = () => {
+    void fetchRecommendations({ validateTime: true });
   };
 
-  const handleReset = () => {
-    setShowForm(true);
-    setTime(0);
-    setRecommendations([]);
+  const handleResearch = () => {
+    void fetchRecommendations({ animateReplace: true });
   };
 
   const handleVideoRecommend = async (index: number) => {
@@ -89,8 +112,8 @@ const RecommendContent = () => {
         requestURL: channelURL,
         title,
         concept,
-        keywords: keyword,
-        category: category,
+        keywords,
+        category,
         videoType,
         time: isShortForm ? null : time,
       });
@@ -112,8 +135,8 @@ const RecommendContent = () => {
       // RecommendStore에 데이터 세팅
       setFormInput({
         requestURL: channelURL,
-        keywords: keyword,
-        category: category,
+        keywords,
+        category,
         time: isShortForm ? null : time,
         videoType,
       });
@@ -139,10 +162,14 @@ const RecommendContent = () => {
         </div>
         {!showForm && (
           <div
-            onClick={handleReset}
-            className="px-3 py-1 rounded-md bg-[#D9D2FF] hover:bg-[#6B42FF] active:bg-[#C4B8FF] text-white typo-body6 cursor-pointer transition-colors"
+            onClick={isSearching ? undefined : handleResearch}
+            className={`px-3 py-1 rounded-md text-white typo-body6 transition-colors ${
+              isSearching
+                ? 'bg-gray-400 cursor-not-allowed'
+                : 'bg-[#7C5CFF] hover:bg-[#C4B8FF] active:bg-[#C4B8FF] hover:text-[#6452CE] active:text-[#6452CE] cursor-pointer'
+            }`}
           >
-            다시 검색
+            {isSearching ? '검색 중...' : '다시 검색'}
           </div>
         )}
       </div>
@@ -170,12 +197,12 @@ const RecommendContent = () => {
                       </div>
                     </div>
                     <div className="px-4 py-2.5 rounded-lg bg-[#F5EFFF] border border-[#8257B4] text-[#6452CE] typo-body5">
-                      {keyword || '키워드 없음'}
+                      {keywords || '키워드 없음'}
                     </div>
                   </div>
 
                   {/* 카테고리 (고정) */}
-                  <div className="flex flex-col w-[30%] gap-2">
+                  <div className="flex flex-col w-[30%] min-w-0 gap-2">
                     <div className="flex items-center gap-1.5 text-black typo-body4-semibold">
                       Category
                       <div className="relative group">
@@ -185,8 +212,11 @@ const RecommendContent = () => {
                         </div>
                       </div>
                     </div>
-                    <div className="px-4 py-2.5 rounded-lg bg-[#F5EFFF] border border-[#8257B4] text-[#6452CE] typo-body5">
-                      {category || '카테고리 없음'}
+                    <div
+                      className="px-4 py-2.5 rounded-lg bg-[#F5EFFF] border border-[#8257B4] text-[#6452CE] typo-body5 truncate"
+                      title={categoryList.length > 0 ? categoryList.join(', ') : undefined}
+                    >
+                      {categoryList.length > 0 ? categoryList.join(', ') : '카테고리 없음'}
                     </div>
                   </div>
 
@@ -209,11 +239,11 @@ const RecommendContent = () => {
                     <div className="absolute right-0 text-red-500 typo-body5">{errorMsg}</div>
                   )}
                   <div
-                    onClick={handleSearch}
-                    className={`flex py-2 px-8 mx-auto justify-center items-center rounded-lg typo-body4-semibold text-white cursor-pointer transition-colors ${
+                    onClick={isSearching ? undefined : handleSearch}
+                    className={`flex py-2 px-8 mx-auto justify-center items-center rounded-lg typo-body4-semibold text-white transition-colors ${
                       isSearching
                         ? 'bg-gray-400 cursor-not-allowed'
-                        : 'bg-[#7C5CFF] hover:bg-[#6344DD] active:bg-[#8B6FFF]'
+                        : 'bg-[#7C5CFF] hover:bg-[#6344DD] active:bg-[#8B6FFF] cursor-pointer'
                     }`}
                   >
                     {isSearching ? '검색 중...' : '콘텐츠 추천 받기'}
@@ -226,11 +256,14 @@ const RecommendContent = () => {
 
         {/* 추천 결과 */}
         {!showForm && (
-          <div className="flex w-full justify-center items-stretch gap-5 py-4">
+          <div
+            className="flex w-full justify-center items-stretch gap-5 py-4 transition-opacity ease-in-out"
+            style={{ opacity: resultsOpacity, transitionDuration: `${FADE_DURATION_MS}ms` }}
+          >
             {recommendations.length > 0 ? (
               recommendations.map((item, index) => (
                 <ContentItem
-                  key={index}
+                  key={`${item.suggestedTitle}-${index}`}
                   title={item.suggestedTitle}
                   concept={item.conceptSummary}
                   onVideoRecommend={() => handleVideoRecommend(index)}
