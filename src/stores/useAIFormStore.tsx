@@ -11,7 +11,7 @@ interface SimilarCreator {
 }
 
 interface AIFormData {
-  fullScript: string;
+  conceptSummary: string;
   suggestedTitles: string[];
   thumbnail: {
     thumbnailImage: string;
@@ -22,7 +22,7 @@ interface AIFormData {
 }
 
 const createEmptyAIFormData = (): AIFormData => ({
-  fullScript: '',
+  conceptSummary: '',
   suggestedTitles: [],
   thumbnail: { thumbnailImage: '', thumbnailGuide: '' },
   similarVideos: [],

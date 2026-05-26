@@ -6,6 +6,8 @@ import {
   mockAITitleShortResponse,
   mockAIThumbnailLongResponse,
   mockAIThumbnailShortResponse,
+  mockAIScriptLongResponse,
+  mockAIScriptShortResponse,
   mockAIFullScriptLongResponse,
   mockAIFullScriptShortResponse,
   mockAIReferenceLongResponse,
@@ -66,7 +68,15 @@ export const handlers = [
     return HttpResponse.json(response, { status: 200 });
   }),
 
-  // POST /ai_fullScript - AI 대본 초안 요청
+  // POST /ai_script - AI 대본 초안(짧은 버전) 요청
+  http.post(`${SERVER_URL}/ai_script`, async ({ request }) => {
+    await new Promise(resolve => setTimeout(resolve, 1000));
+    const response =
+      getVideoType(request) === 'short' ? mockAIScriptShortResponse : mockAIScriptLongResponse;
+    return HttpResponse.json(response, { status: 200 });
+  }),
+
+  // POST /ai_fullScript - 풀버전 대본 생성 버튼용
   http.post(`${SERVER_URL}/ai_fullScript`, async ({ request }) => {
     await new Promise(resolve => setTimeout(resolve, 1200));
     const response =

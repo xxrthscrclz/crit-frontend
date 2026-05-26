@@ -31,8 +31,12 @@ export interface AIThumbnailResponse {
   thumbnailGuide: string;
 }
 
+export interface AIScriptResponse {
+  conceptSummary: string;
+}
+
 export interface AIFullScriptResponse {
-  fullScript: string;
+  conceptSummary: string;
 }
 
 export interface AIReferenceResponse {
@@ -175,7 +179,11 @@ export const postAITitle = (data: ScriptRequest) =>
 export const postAIThumbnail = (data: ScriptRequest) =>
   postWithScriptParams<AIThumbnailResponse>('/ai_thumbnail', data);
 
-// POST /ai_fullScript - AI 대본 초안 요청
+// POST /ai_script - AI 대본 초안(짧은 버전) 요청
+export const postAIScript = (data: ScriptRequest) =>
+  postWithScriptParams<AIScriptResponse>('/ai_script', data);
+
+// POST /ai_fullScript - 풀버전 대본 생성 버튼용
 export const postAIFullScript = (data: ScriptRequest) =>
   postWithScriptParams<AIFullScriptResponse>('/ai_fullScript', data);
 

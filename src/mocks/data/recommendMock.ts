@@ -144,13 +144,37 @@ export const mockAIThumbnailShortResponse = {
   thumbnailGuide: '세로 9:16 비율, 큰 숫자·짧은 문구, 대비 강한 색상으로 스크롤 멈춤 유도',
 };
 
-// POST /ai_fullScript
+// POST /ai_script - AI 대본 초안(짧은 버전, 풀버전과 동일 대괄호 형식)
+export const mockAIScriptLongResponse = {
+  conceptSummary: `[오프닝]
+'여러분 혹시 영상 올렸는데 조회수가 안 나온 적 있으시죠?' 로 공감 훅 시작.
+
+[본론]
+3가지 구조를 비교 분석.
+
+[마무리]
+구독 유도.`,
+};
+
+export const mockAIScriptShortResponse = {
+  conceptSummary: `[훅]
+[빠른 컷 + 자막]
+"이거 모르면 숏폼 조회수 절대 안 나와요."
+
+[핵심]
+첫 3초 결론 노출, 한 가지 메시지 유지.
+
+[마무리]
+저장·구독 CTA.`,
+};
+
+// POST /ai_fullScript - 풀버전 대본
 export const mockAIFullScriptLongResponse = {
-  fullScript: longFormFullScript,
+  conceptSummary: longFormFullScript,
 };
 
 export const mockAIFullScriptShortResponse = {
-  fullScript: shortFormFullScript,
+  conceptSummary: shortFormFullScript,
 };
 
 // POST /ai_reference

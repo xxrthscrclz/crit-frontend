@@ -1,7 +1,7 @@
 import {
   postAITitle,
   postAIThumbnail,
-  postAIFullScript,
+  postAIScript,
   postAIReference,
   type ScriptRequest,
 } from '@/api/command';
@@ -27,9 +27,9 @@ export const fetchAIContent = (data: ScriptRequest) => {
     )
     .catch(err => console.error('썸네일 요청 실패:', err));
 
-  postAIFullScript(data)
-    .then(res => patchData({ fullScript: res.fullScript ?? '' }))
-    .catch(err => console.error('대본 요청 실패:', err));
+  postAIScript(data)
+    .then(res => patchData({ conceptSummary: res.conceptSummary ?? '' }))
+    .catch(err => console.error('대본 초안 요청 실패:', err));
 
   postAIReference(data)
     .then(res =>
