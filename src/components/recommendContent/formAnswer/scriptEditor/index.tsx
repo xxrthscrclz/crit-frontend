@@ -24,14 +24,16 @@ const ScriptEditor = () => {
       <div className="flex flex-1 flex-col gap-4 animate-fade-in-up">
         <div className="flex w-full typo-title-bold text-[#0A0A0A] items-stretch">AI 대본 초안</div>
         <div className="relative group w-full flex-1 min-h-0">
-          <div className="h-full overflow-y-auto px-3 py-4 rounded-xl bg-[#FAFAFA] border border-[#A594F9] typo-body4-semibold text-black whitespace-pre-line break-keep leading-6 script-scroll">
-            {script ? (
-              formatScript(script)
-            ) : (
-              <span className="animate-loading-pulse text-gray-400">
-                검색 후 대본이 표시됩니다.
-              </span>
-            )}
+          <div className="h-full rounded-xl bg-[#FAFAFA] border border-[#A594F9] py-4 px-3">
+            <div className="h-full overflow-y-auto typo-body4-semibold text-black whitespace-pre-line break-keep leading-6 script-scroll">
+              {script ? (
+                formatScript(script)
+              ) : (
+                <span className="animate-loading-pulse text-gray-400">
+                  검색 후 대본이 표시됩니다.
+                </span>
+              )}
+            </div>
           </div>
           {script && (
             <button

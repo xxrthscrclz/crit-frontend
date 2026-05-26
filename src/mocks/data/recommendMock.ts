@@ -1,5 +1,5 @@
-// 첫 번째 API (/ai_recommend) 모킹 응답
-export const mockRecommendResponse = [
+// 첫 번째 API (/ai_recommend) 모킹 응답 - 롱폼
+export const mockRecommendLongResponse = [
   {
     suggestedTitle: '유튜브 알고리즘이 좋아하는 영상 구조 3가지',
     conceptSummary: '조회수를 높이는 영상 흐름을 실전 예시로 분석',
@@ -14,10 +14,26 @@ export const mockRecommendResponse = [
   },
 ];
 
-// 두 번째 API (/ai_script) 모킹 응답
-export const mockScriptResponse = [
+/** @deprecated mockRecommendLongResponse 사용 */
+export const mockRecommendResponse = mockRecommendLongResponse;
+
+// 첫 번째 API (/ai_recommend) 모킹 응답 - 숏폼
+export const mockRecommendShortResponse = [
   {
-    conceptSummary: `[0부] 인트로 및 오프닝
+    suggestedTitle: '30초 안에 끝내는 여행 브이로그 꿀팁',
+    conceptSummary: '짧은 숏폼으로 여행지 분위기를 빠르게 전달하는 구성',
+  },
+  {
+    suggestedTitle: '알고리즘이 좋아하는 숏폼 훅 5가지',
+    conceptSummary: '첫 3초에 시청자를 붙잡는 오프닝 패턴 정리',
+  },
+  {
+    suggestedTitle: '1분 챌린지로 조회수 올리기',
+    conceptSummary: '짧은 챌린지 콘텐츠 기획과 편집 포인트',
+  },
+];
+
+const longFormScript = `[0부] 인트로 및 오프닝
 [카메라 응시]
 안녕하세요! 여러분, 반갑습니다.
 오늘도 영상 클릭해 주셔서 정말 감사합니다.
@@ -75,7 +91,28 @@ export const mockScriptResponse = [
 여러분의 작은 응원이 저에게는 정말 큰 힘이 됩니다.
 
 그럼 저는 다음 주에 더 알차고 재미있는 영상으로 다시 찾아뵙겠습니다.
-여러분, 모두 좋은 하루 보내세요! 안녕~!`,
+여러분, 모두 좋은 하루 보내세요! 안녕~!`;
+
+const shortFormScript = `[0~3초] 훅
+[빠른 컷 + 자막]
+"이거 모르면 숏폼 조회수 절대 안 나와요."
+
+[3~15초] 핵심 1
+[화면 캡처 + 포인트 자막]
+첫 3초에 결론을 보여주세요. 시청자는 기다려주지 않습니다.
+
+[15~45초] 핵심 2~3
+[빠른 B-roll + 숫자 강조]
+① 강한 훅 ② 한 가지 메시지 ③ 마지막 CTA
+
+[45~60초] 마무리
+[카메라 or 텍스트 엔딩]
+"저장해두고 다음 숏폼 만들 때 써보세요!"`;
+
+// 두 번째 API (/ai_script) 모킹 응답 - 롱폼
+export const mockScriptLongResponse = [
+  {
+    conceptSummary: longFormScript,
     suggestedTitles: [
       '유튜브 알고리즘이 좋아하는 영상 구조 3가지 (이것만 알면 조회수 달라짐)',
       '조회수 안 나오는 영상의 공통점 | 구조가 문제입니다',
@@ -113,4 +150,57 @@ export const mockScriptResponse = [
       },
     ],
   },
+];
+
+/** @deprecated mockScriptLongResponse 사용 */
+export const mockScriptResponse = mockScriptLongResponse;
+
+// 두 번째 API (/ai_script) 모킹 응답 - 숏폼
+export const mockScriptShortResponse = [
+  {
+    conceptSummary: shortFormScript,
+    suggestedTitles: [
+      '30초 숏폼 훅 | 첫 3초가 전부입니다',
+      '알고리즘이 좋아하는 1분 숏폼 공식',
+      '숏폼 조회수 2배 | 이 3가지만 바꿔보세요',
+      '릴스·쇼츠 필수 | 빠른 전개 스크립트',
+      '1분 챌린지 숏폼 기획법 (초보도 OK)',
+    ],
+    thumbnail: {
+      thumbnailImage:
+        'https://www.shutterstock.com/ko/blog/wp-content/uploads/sites/17/2020/08/Youtube-thumbnail-banner.jpg?w=435&h=304&crop=1',
+      thumbnailGuide: '세로 9:16 비율, 큰 숫자·짧은 문구, 대비 강한 색상으로 스크롤 멈춤 유도',
+    },
+    similarVideos: [
+      {
+        videoUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+        videoTitle: '숏폼 훅 5가지 | 첫 3초 공식',
+      },
+      {
+        videoUrl: 'https://www.youtube.com/watch?v=jNQXAC9IVRw',
+        videoTitle: '1분 챌린지 숏폼 편집 팁',
+      },
+    ],
+    similarCreators: [
+      {
+        channelUrl: 'https://www.youtube.com/channel/UCzzzzzz',
+        creatorName: '숏폼 크리에이터 랩',
+      },
+    ],
+  },
+];
+
+export const mockTitleResearchLongResponses = [
+  { suggestedTitle: '조회수 폭발! 유튜브 알고리즘이 원하는 영상 구조 (완벽 정리)' },
+  { suggestedTitle: '이 구조만 알면 조회수 2배 | 유튜버 필수 영상 공식' },
+  { suggestedTitle: '알고리즘 타는 영상 만드는 3가지 핵심 (초보도 가능)' },
+];
+
+/** @deprecated mockTitleResearchLongResponses 사용 */
+export const mockTitleResearchResponses = mockTitleResearchLongResponses;
+
+export const mockTitleResearchShortResponses = [
+  { suggestedTitle: '30초 훅만 바꿔도 조회수 2배 | 숏폼 필수 공식' },
+  { suggestedTitle: '알고리즘이 좋아하는 1분 숏폼 | 첫 3초가 전부' },
+  { suggestedTitle: '릴스·쇼츠 조회수 올리는 스크립트 (초보도 OK)' },
 ];

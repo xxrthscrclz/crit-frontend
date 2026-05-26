@@ -1,33 +1,63 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import CopyIcon from '@/assets/icons/copy-icon.svg?react';
 import RefreshIcon from '@/assets/icons/refresh-icon.svg?react';
 
 interface VideoTitleProps {
   title: string;
-  onRegenerate?: () => void;
+  isRegenerating?: boolean;
+  onRegenerate?: () => void | Promise<void>;
 }
 
-const VideoTitle = ({ title, onRegenerate }: VideoTitleProps) => {
+const FADE_DURATION_MS = 300;
+
+const VideoTitle = ({ title, isRegenerating = false, onRegenerate }: VideoTitleProps) => {
   const [copied, setCopied] = useState(false);
-  const [regenerating, setRegenerating] = useState(false);
+  const [displayTitle, setDisplayTitle] = useState(title);
+  const [opacity, setOpacity] = useState(1);
+  const prevTitleRef = useRef(title);
+
+  useEffect(() => {
+    if (title === prevTitleRef.current) return;
+
+    const prevTitle = prevTitleRef.current;
+    prevTitleRef.current = title;
+
+    if (!prevTitle && title) {
+      setDisplayTitle(title);
+      return;
+    }
+
+    setOpacity(0);
+
+    const timer = window.setTimeout(() => {
+      setDisplayTitle(title);
+      requestAnimationFrame(() => setOpacity(1));
+    }, FADE_DURATION_MS);
+
+    return () => window.clearTimeout(timer);
+  }, [title]);
 
   const handleCopy = () => {
-    navigator.clipboard.writeText(title);
+    navigator.clipboard.writeText(displayTitle);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
 
   const handleRegenerate = () => {
-    setRegenerating(true);
-    onRegenerate?.();
-    setTimeout(() => setRegenerating(false), 2000);
+    if (isRegenerating || !onRegenerate) return;
+    onRegenerate();
   };
+
+  const formattedTitle = displayTitle ? displayTitle.replace(/\(/g, '\n(') : '';
 
   return (
     <div className="flex py-3 px-4 justify-end items-center gap-10 self-stretch rounded-xl border border-[#A594F9] bg-[#FAFAFA]">
-      <div className="w-64 typo-body4-semibold text-black whitespace-pre-line">
-        {title ? (
-          title.replace(/\(/g, '\n(')
+      <div
+        className="w-64 typo-body4-semibold text-black whitespace-pre-line transition-opacity ease-in-out"
+        style={{ opacity, transitionDuration: `${FADE_DURATION_MS}ms` }}
+      >
+        {displayTitle ? (
+          formattedTitle
         ) : (
           <span className="text-gray-400 animate-loading-pulse">제목을 생성하고 있습니다...</span>
         )}
@@ -42,10 +72,10 @@ const VideoTitle = ({ title, onRegenerate }: VideoTitleProps) => {
         </div>
         <div
           onClick={handleRegenerate}
-          className={`flex justify-end items-center gap-1.5 cursor-pointer ${regenerating ? 'text-[#6B4EFF]' : 'text-[#0a0a0a89] active:text-[#6B4EFF]'}`}
+          className={`flex justify-end items-center gap-1.5 ${isRegenerating || !onRegenerate ? 'cursor-not-allowed opacity-50' : 'cursor-pointer'} ${isRegenerating ? 'text-[#6B4EFF]' : 'text-[#0a0a0a89] active:text-[#6B4EFF]'}`}
         >
-          <RefreshIcon className={`w-4 h-4 ${regenerating ? 'animate-spin' : ''}`} />
-          <div className="typo-label">{regenerating ? '생성 중' : '다시생성'}</div>
+          <RefreshIcon className={`w-4 h-4 ${isRegenerating ? 'animate-spin' : ''}`} />
+          <div className="typo-label">{isRegenerating ? '생성 중' : '다시생성'}</div>
         </div>
       </div>
     </div>
