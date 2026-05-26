@@ -1,4 +1,5 @@
 import api from './axios';
+import { toBraceFormat } from '@/utils/formatBraceList';
 
 export type VideoType = 'long' | 'short';
 
@@ -99,7 +100,7 @@ const buildScriptParams = (data: ScriptRequest): Record<string, string | number 
   title: data.title,
   concept: data.concept,
   keywords: data.keywords,
-  category: data.category,
+  category: toBraceFormat(data.category),
   videoType: data.videoType,
   time: data.videoType === 'short' ? null : (data.time ?? null),
 });
@@ -130,7 +131,7 @@ export const postTestLogin = async (): Promise<MemberLoginResponse[]> => {
 export const postRecommend = async (data: RecommendRequest) => {
   const params: Record<string, string> = {
     keywords: data.keywords,
-    category: data.category,
+    category: toBraceFormat(data.category),
     videoType: data.videoType,
   };
   if (data.requestURL) {
