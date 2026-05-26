@@ -11,6 +11,8 @@ interface UserInfoModalProps {
 
 const UserInfoModal = ({ onClose }: UserInfoModalProps) => {
   const channelName = useUserStore(s => s.channelName);
+  const userEmail = useUserStore(s => s.userEmail);
+  const joinDate = useUserStore(s => s.joinDate);
 
   useEffect(() => {
     document.body.style.overflow = 'hidden';
@@ -50,9 +52,9 @@ const UserInfoModal = ({ onClose }: UserInfoModalProps) => {
           <div className="flex flex-col w-full px-5.5 py-2.5 justify-center items-center gap-2.5 rounded-xl border border-[#8257B4]">
             <UserInfoModalItem type="name" value={channelName ?? '사용자'} />
             <div className="w-full h-px bg-[#8257B4]"></div>
-            <UserInfoModalItem type="email" value="name@example.com" />
+            <UserInfoModalItem type="email" value={userEmail ?? '-'} />
             <div className="w-full h-px bg-[#8257B4]"></div>
-            <UserInfoModalItem type="date" value="0000.00.00" />
+            <UserInfoModalItem type="date" value={joinDate ?? '-'} />
             <div className="w-full h-px bg-[#8257B4]"></div>
             <UserInfoModalItem type="accountType" value="무료 사용자" />
           </div>
