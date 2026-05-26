@@ -2,8 +2,16 @@ import { http, HttpResponse } from 'msw';
 import {
   mockRecommendLongResponse,
   mockRecommendShortResponse,
-  mockScriptLongResponse,
-  mockScriptShortResponse,
+  mockAITitleLongResponse,
+  mockAITitleShortResponse,
+  mockAIThumbnailLongResponse,
+  mockAIThumbnailShortResponse,
+  mockAIScriptLongResponse,
+  mockAIScriptShortResponse,
+  mockAIFullScriptLongResponse,
+  mockAIFullScriptShortResponse,
+  mockAIReferenceLongResponse,
+  mockAIReferenceShortResponse,
   mockTitleResearchLongResponses,
   mockTitleResearchShortResponses,
 } from '@/mocks/data/recommendMock';
@@ -42,10 +50,49 @@ export const handlers = [
     return HttpResponse.json(response, { status: 200 });
   }),
 
-  // POST /ai_script - AI 제목/스크립트 요청
-  http.post(`${SERVER_URL}/ai_script`, ({ request }) => {
+  // POST /ai_title - AI 추천 제목 요청
+  http.post(`${SERVER_URL}/ai_title`, async ({ request }) => {
+    await new Promise(resolve => setTimeout(resolve, 400));
     const response =
-      getVideoType(request) === 'short' ? mockScriptShortResponse : mockScriptLongResponse;
+      getVideoType(request) === 'short' ? mockAITitleShortResponse : mockAITitleLongResponse;
+    return HttpResponse.json(response, { status: 200 });
+  }),
+
+  // POST /ai_thumbnail - AI 썸네일 가이드 요청
+  http.post(`${SERVER_URL}/ai_thumbnail`, async ({ request }) => {
+    await new Promise(resolve => setTimeout(resolve, 700));
+    const response =
+      getVideoType(request) === 'short'
+        ? mockAIThumbnailShortResponse
+        : mockAIThumbnailLongResponse;
+    return HttpResponse.json(response, { status: 200 });
+  }),
+
+  // POST /ai_script - AI 대본 초안(짧은 버전) 요청
+  http.post(`${SERVER_URL}/ai_script`, async ({ request }) => {
+    await new Promise(resolve => setTimeout(resolve, 1000));
+    const response =
+      getVideoType(request) === 'short' ? mockAIScriptShortResponse : mockAIScriptLongResponse;
+    return HttpResponse.json(response, { status: 200 });
+  }),
+
+  // POST /ai_fullScript - 풀버전 대본 생성 버튼용
+  http.post(`${SERVER_URL}/ai_fullScript`, async ({ request }) => {
+    await new Promise(resolve => setTimeout(resolve, 1200));
+    const response =
+      getVideoType(request) === 'short'
+        ? mockAIFullScriptShortResponse
+        : mockAIFullScriptLongResponse;
+    return HttpResponse.json(response, { status: 200 });
+  }),
+
+  // POST /ai_reference - AI 참고 영상/크리에이터 요청
+  http.post(`${SERVER_URL}/ai_reference`, async ({ request }) => {
+    await new Promise(resolve => setTimeout(resolve, 900));
+    const response =
+      getVideoType(request) === 'short'
+        ? mockAIReferenceShortResponse
+        : mockAIReferenceLongResponse;
     return HttpResponse.json(response, { status: 200 });
   }),
 

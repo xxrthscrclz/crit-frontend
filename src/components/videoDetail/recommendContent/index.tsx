@@ -7,8 +7,8 @@ import InfoIcon from '@/assets/icons/score-icons/video-detail/info-icon.svg?reac
 import useCurrentVideoStore from '@/stores/useCurrentVideoStore';
 import useUserStore from '@/stores/useUserStore';
 import useRecommendStore from '@/stores/useRecommendStore';
-import useAIFormStore from '@/stores/useAIFormStore';
-import { postRecommend, postScript } from '@/api/command';
+import { postRecommend } from '@/api/command';
+import { fetchAIContent } from '@/utils/fetchAIContent';
 import { parseBraceList, toBraceFormat } from '@/utils/formatBraceList';
 
 interface RecommendItem {
@@ -27,12 +27,10 @@ const RecommendContent = () => {
   const setRecommendationsStore = useRecommendStore(s => s.setRecommendations);
   const setSelectedSubjectIndex = useRecommendStore(s => s.setSelectedSubjectIndex);
   const setAutoSelectSubject = useRecommendStore(s => s.setAutoSelectSubject);
-  const setAIFormData = useAIFormStore(s => s.setData);
 
   const [showForm, setShowForm] = useState(true);
   const [time, setTime] = useState(0);
   const [isSearching, setIsSearching] = useState(false);
-  const [isLoadingScript, setIsLoadingScript] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
   const [resultsOpacity, setResultsOpacity] = useState(1);
 
@@ -97,60 +95,35 @@ const RecommendContent = () => {
     void fetchRecommendations({ animateReplace: true });
   };
 
-  const handleVideoRecommend = async (index: number) => {
+  const handleVideoRecommend = (index: number) => {
     if (!channelURL) return;
-
-    setIsLoadingScript(true);
 
     const selectedItem = recommendations[index];
     const title = selectedItem?.suggestedTitle ?? '';
     const concept = selectedItem?.conceptSummary ?? '';
 
-    try {
-      // postScript API 호출
-      const res = await postScript({
-        requestURL: channelURL,
-        title,
-        concept,
-        keywords,
-        category,
-        videoType,
-        time: isShortForm ? null : time,
-      });
+    setFormInput({
+      requestURL: channelURL,
+      keywords,
+      category,
+      time: isShortForm ? null : time,
+      videoType,
+    });
+    setRecommendationsStore(recommendations);
+    setSelectedSubjectIndex(index);
+    setAutoSelectSubject(true);
 
-      const resultItem = res[0] ?? res;
+    fetchAIContent({
+      requestURL: channelURL,
+      title,
+      concept,
+      keywords,
+      category,
+      videoType,
+      time: isShortForm ? null : time,
+    });
 
-      // AIFormStore에 결과 저장
-      setAIFormData({
-        conceptSummary: resultItem.conceptSummary ?? '',
-        suggestedTitles: (resultItem.suggestedTitles ?? []).slice(0, 3),
-        thumbnail: {
-          thumbnailImage: resultItem.thumbnail?.thumbnailImage ?? '',
-          thumbnailGuide: resultItem.thumbnail?.thumbnailGuide ?? '',
-        },
-        similarVideos: resultItem.similarVideos ?? [],
-        similarCreators: resultItem.similarCreators ?? [],
-      });
-
-      // RecommendStore에 데이터 세팅
-      setFormInput({
-        requestURL: channelURL,
-        keywords,
-        category,
-        time: isShortForm ? null : time,
-        videoType,
-      });
-      setRecommendationsStore(recommendations);
-      setSelectedSubjectIndex(index);
-      setAutoSelectSubject(true);
-
-      // /recommend 페이지로 이동
-      navigate('/recommend');
-    } catch (err) {
-      console.error('스크립트 요청 실패:', err);
-    } finally {
-      setIsLoadingScript(false);
-    }
+    navigate('/recommend');
   };
 
   return (
@@ -267,7 +240,6 @@ const RecommendContent = () => {
                   title={item.suggestedTitle}
                   concept={item.conceptSummary}
                   onVideoRecommend={() => handleVideoRecommend(index)}
-                  isLoading={isLoadingScript}
                 />
               ))
             ) : (

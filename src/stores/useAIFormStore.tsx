@@ -21,9 +21,19 @@ interface AIFormData {
   similarCreators: SimilarCreator[];
 }
 
+const createEmptyAIFormData = (): AIFormData => ({
+  conceptSummary: '',
+  suggestedTitles: [],
+  thumbnail: { thumbnailImage: '', thumbnailGuide: '' },
+  similarVideos: [],
+  similarCreators: [],
+});
+
 interface AIFormStore {
   data: AIFormData | null;
   setData: (data: AIFormData) => void;
+  initLoadingData: () => void;
+  patchData: (partial: Partial<AIFormData>) => void;
   updateSuggestedTitle: (index: number, title: string) => void;
   clear: () => void;
 }
@@ -31,6 +41,20 @@ interface AIFormStore {
 const useAIFormStore = create<AIFormStore>(set => ({
   data: null,
   setData: data => set({ data }),
+  initLoadingData: () => set({ data: createEmptyAIFormData() }),
+  patchData: partial =>
+    set(state => {
+      const base = state.data ?? createEmptyAIFormData();
+      return {
+        data: {
+          ...base,
+          ...partial,
+          ...(partial.thumbnail && {
+            thumbnail: { ...base.thumbnail, ...partial.thumbnail },
+          }),
+        },
+      };
+    }),
   updateSuggestedTitle: (index, title) =>
     set(state => {
       if (!state.data) return state;

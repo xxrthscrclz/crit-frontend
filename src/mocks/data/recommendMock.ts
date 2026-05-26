@@ -33,7 +33,7 @@ export const mockRecommendShortResponse = [
   },
 ];
 
-const longFormScript = `[0부] 인트로 및 오프닝
+const longFormFullScript = `[0부] 인트로 및 오프닝
 [카메라 응시]
 안녕하세요! 여러분, 반갑습니다.
 오늘도 영상 클릭해 주셔서 정말 감사합니다.
@@ -93,7 +93,7 @@ const longFormScript = `[0부] 인트로 및 오프닝
 그럼 저는 다음 주에 더 알차고 재미있는 영상으로 다시 찾아뵙겠습니다.
 여러분, 모두 좋은 하루 보내세요! 안녕~!`;
 
-const shortFormScript = `[0~3초] 훅
+const shortFormFullScript = `[0~3초] 훅
 [빠른 컷 + 자막]
 "이거 모르면 숏폼 조회수 절대 안 나와요."
 
@@ -109,86 +109,120 @@ const shortFormScript = `[0~3초] 훅
 [카메라 or 텍스트 엔딩]
 "저장해두고 다음 숏폼 만들 때 써보세요!"`;
 
-// 두 번째 API (/ai_script) 모킹 응답 - 롱폼
-export const mockScriptLongResponse = [
-  {
-    conceptSummary: longFormScript,
-    suggestedTitles: [
-      '유튜브 알고리즘이 좋아하는 영상 구조 3가지 (이것만 알면 조회수 달라짐)',
-      '조회수 안 나오는 영상의 공통점 | 구조가 문제입니다',
-      '유튜브 잘 되는 영상 vs 안 되는 영상 차이점 분석',
-      '알고리즘 탈 수 있는 영상 만드는 법 (실전 비교)',
-      '영상 구조만 바꿔도 조회수 2배 | 유튜브 성장 공식',
-    ],
-    thumbnail: {
-      thumbnailImage:
-        'https://www.shutterstock.com/ko/blog/wp-content/uploads/sites/17/2020/08/Youtube-thumbnail-banner.jpg?w=435&h=304&crop=1',
-      thumbnailGuide: "밝은 배경에 큰 텍스트로 '3가지' 강조, 화살표 이미지로 상승 추세 표현",
-    },
-    similarVideos: [
-      {
-        videoUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
-        videoTitle: '유튜브 조회수 늘리는 방법 TOP 5',
-      },
-      {
-        videoUrl: 'https://www.youtube.com/watch?v=jNQXAC9IVRw',
-        videoTitle: '영상 구조 분석 | 성공한 유튜버들의 공통점',
-      },
-      {
-        videoUrl: 'https://www.youtube.com/watch?v=9bZkp7q19f0',
-        videoTitle: '알고리즘 이해하고 영상 만들기',
-      },
-    ],
-    similarCreators: [
-      {
-        channelUrl: 'https://www.youtube.com/channel/UCxxxxxx',
-        creatorName: '유튜브 성장 전문가 채널',
-      },
-      {
-        channelUrl: 'https://www.youtube.com/channel/UCyyyyyy',
-        creatorName: '콘텐츠 기획 마스터',
-      },
-    ],
-  },
-];
+const thumbnailImageUrl =
+  'https://www.shutterstock.com/ko/blog/wp-content/uploads/sites/17/2020/08/Youtube-thumbnail-banner.jpg?w=435&h=304&crop=1';
 
-/** @deprecated mockScriptLongResponse 사용 */
-export const mockScriptResponse = mockScriptLongResponse;
+// POST /ai_title
+export const mockAITitleLongResponse = {
+  suggestedTitles: [
+    '유튜브 알고리즘이 좋아하는 영상 구조 3가지 (이것만 알면 조회수 달라짐)',
+    '조회수 안 나오는 영상의 공통점 | 구조가 문제입니다',
+    '유튜브 잘 되는 영상 vs 안 되는 영상 차이점 분석',
+    '알고리즘 탈 수 있는 영상 만드는 법 (실전 비교)',
+    '영상 구조만 바꿔도 조회수 2배 | 유튜브 성장 공식',
+  ],
+};
 
-// 두 번째 API (/ai_script) 모킹 응답 - 숏폼
-export const mockScriptShortResponse = [
-  {
-    conceptSummary: shortFormScript,
-    suggestedTitles: [
-      '30초 숏폼 훅 | 첫 3초가 전부입니다',
-      '알고리즘이 좋아하는 1분 숏폼 공식',
-      '숏폼 조회수 2배 | 이 3가지만 바꿔보세요',
-      '릴스·쇼츠 필수 | 빠른 전개 스크립트',
-      '1분 챌린지 숏폼 기획법 (초보도 OK)',
-    ],
-    thumbnail: {
-      thumbnailImage:
-        'https://www.shutterstock.com/ko/blog/wp-content/uploads/sites/17/2020/08/Youtube-thumbnail-banner.jpg?w=435&h=304&crop=1',
-      thumbnailGuide: '세로 9:16 비율, 큰 숫자·짧은 문구, 대비 강한 색상으로 스크롤 멈춤 유도',
+export const mockAITitleShortResponse = {
+  suggestedTitles: [
+    '30초 숏폼 훅 | 첫 3초가 전부입니다',
+    '알고리즘이 좋아하는 1분 숏폼 공식',
+    '숏폼 조회수 2배 | 이 3가지만 바꿔보세요',
+    '릴스·쇼츠 필수 | 빠른 전개 스크립트',
+    '1분 챌린지 숏폼 기획법 (초보도 OK)',
+  ],
+};
+
+// POST /ai_thumbnail
+export const mockAIThumbnailLongResponse = {
+  thumbnailImage: thumbnailImageUrl,
+  thumbnailGuide: "밝은 배경에 큰 텍스트로 '3가지' 강조, 화살표 이미지로 상승 추세 표현",
+};
+
+export const mockAIThumbnailShortResponse = {
+  thumbnailImage: thumbnailImageUrl,
+  thumbnailGuide: '세로 9:16 비율, 큰 숫자·짧은 문구, 대비 강한 색상으로 스크롤 멈춤 유도',
+};
+
+// POST /ai_script - AI 대본 초안(짧은 버전, 풀버전과 동일 대괄호 형식)
+export const mockAIScriptLongResponse = {
+  conceptSummary: `[오프닝]
+'여러분 혹시 영상 올렸는데 조회수가 안 나온 적 있으시죠?' 로 공감 훅 시작.
+
+[본론]
+3가지 구조를 비교 분석.
+
+[마무리]
+구독 유도.`,
+};
+
+export const mockAIScriptShortResponse = {
+  conceptSummary: `[훅]
+[빠른 컷 + 자막]
+"이거 모르면 숏폼 조회수 절대 안 나와요."
+
+[핵심]
+첫 3초 결론 노출, 한 가지 메시지 유지.
+
+[마무리]
+저장·구독 CTA.`,
+};
+
+// POST /ai_fullScript - 풀버전 대본
+export const mockAIFullScriptLongResponse = {
+  conceptSummary: longFormFullScript,
+};
+
+export const mockAIFullScriptShortResponse = {
+  conceptSummary: shortFormFullScript,
+};
+
+// POST /ai_reference
+export const mockAIReferenceLongResponse = {
+  similarVideos: [
+    {
+      videoUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+      videoTitle: '유튜브 조회수 늘리는 방법 TOP 5',
     },
-    similarVideos: [
-      {
-        videoUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
-        videoTitle: '숏폼 훅 5가지 | 첫 3초 공식',
-      },
-      {
-        videoUrl: 'https://www.youtube.com/watch?v=jNQXAC9IVRw',
-        videoTitle: '1분 챌린지 숏폼 편집 팁',
-      },
-    ],
-    similarCreators: [
-      {
-        channelUrl: 'https://www.youtube.com/channel/UCzzzzzz',
-        creatorName: '숏폼 크리에이터 랩',
-      },
-    ],
-  },
-];
+    {
+      videoUrl: 'https://www.youtube.com/watch?v=jNQXAC9IVRw',
+      videoTitle: '영상 구조 분석 | 성공한 유튜버들의 공통점',
+    },
+    {
+      videoUrl: 'https://www.youtube.com/watch?v=9bZkp7q19f0',
+      videoTitle: '알고리즘 이해하고 영상 만들기',
+    },
+  ],
+  similarCreators: [
+    {
+      channelUrl: 'https://www.youtube.com/channel/UCxxxxxx',
+      creatorName: '유튜브 성장 전문가 채널',
+    },
+    {
+      channelUrl: 'https://www.youtube.com/channel/UCyyyyyy',
+      creatorName: '콘텐츠 기획 마스터',
+    },
+  ],
+};
+
+export const mockAIReferenceShortResponse = {
+  similarVideos: [
+    {
+      videoUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+      videoTitle: '숏폼 훅 5가지 | 첫 3초 공식',
+    },
+    {
+      videoUrl: 'https://www.youtube.com/watch?v=jNQXAC9IVRw',
+      videoTitle: '1분 챌린지 숏폼 편집 팁',
+    },
+  ],
+  similarCreators: [
+    {
+      channelUrl: 'https://www.youtube.com/channel/UCzzzzzz',
+      creatorName: '숏폼 크리에이터 랩',
+    },
+  ],
+};
 
 export const mockTitleResearchLongResponses = [
   { suggestedTitle: '조회수 폭발! 유튜브 알고리즘이 원하는 영상 구조 (완벽 정리)' },

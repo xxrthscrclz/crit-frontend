@@ -12,7 +12,7 @@ interface RecommendRequest {
   videoType: VideoType;
 }
 
-interface ScriptRequest {
+export interface ScriptRequest {
   requestURL: string;
   keywords: string;
   category: string;
@@ -20,6 +20,28 @@ interface ScriptRequest {
   title: string;
   concept: string;
   videoType: VideoType;
+}
+
+export interface AITitleResponse {
+  suggestedTitles: string[];
+}
+
+export interface AIThumbnailResponse {
+  thumbnailImage: string;
+  thumbnailGuide: string;
+}
+
+export interface AIScriptResponse {
+  conceptSummary: string;
+}
+
+export interface AIFullScriptResponse {
+  conceptSummary: string;
+}
+
+export interface AIReferenceResponse {
+  similarVideos: { videoUrl: string; videoTitle: string }[];
+  similarCreators: { channelUrl: string; creatorName: string }[];
 }
 
 // ===== Response Types =====
@@ -141,14 +163,33 @@ export const postRecommend = async (data: RecommendRequest) => {
   return response.data;
 };
 
-// POST /ai_script - AI 제목/스크립트 요청
-export const postScript = async (data: ScriptRequest) => {
-  const response = await api.post('/ai_script', null, {
+const postWithScriptParams = async <T>(path: string, data: ScriptRequest): Promise<T> => {
+  const response = await api.post<T>(path, null, {
     params: buildScriptParams(data),
     paramsSerializer: serializeScriptParams,
   });
   return response.data;
 };
+
+// POST /ai_title - AI 추천 제목 요청
+export const postAITitle = (data: ScriptRequest) =>
+  postWithScriptParams<AITitleResponse>('/ai_title', data);
+
+// POST /ai_thumbnail - AI 썸네일 가이드 요청
+export const postAIThumbnail = (data: ScriptRequest) =>
+  postWithScriptParams<AIThumbnailResponse>('/ai_thumbnail', data);
+
+// POST /ai_script - AI 대본 초안(짧은 버전) 요청
+export const postAIScript = (data: ScriptRequest) =>
+  postWithScriptParams<AIScriptResponse>('/ai_script', data);
+
+// POST /ai_fullScript - 풀버전 대본 생성 버튼용
+export const postAIFullScript = (data: ScriptRequest) =>
+  postWithScriptParams<AIFullScriptResponse>('/ai_fullScript', data);
+
+// POST /ai_reference - AI 참고 영상/크리에이터 요청
+export const postAIReference = (data: ScriptRequest) =>
+  postWithScriptParams<AIReferenceResponse>('/ai_reference', data);
 
 // POST /ai_titleResearch - AI 추천 제목 1개 재생성
 export const postTitleResearch = async (
