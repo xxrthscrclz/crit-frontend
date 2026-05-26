@@ -110,6 +110,21 @@ export const postGuestLogin = async (): Promise<{ guestToken: string }> => {
   return response.data;
 };
 
+/** POST /login_test 응답 */
+export interface MemberLoginResponse {
+  memberToken: string;
+  channelName: string;
+  channelUrl: string;
+  userEmail: string;
+  joinDate: string;
+}
+
+// POST /login_test - 테스트 계정 로그인
+export const postTestLogin = async (): Promise<MemberLoginResponse> => {
+  const response = await api.post('/login_test');
+  return response.data;
+};
+
 // POST /ai_recommend - AI 추천 주제 요청
 export const postRecommend = async (data: RecommendRequest) => {
   const params: Record<string, string> = {

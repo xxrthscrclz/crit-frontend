@@ -13,6 +13,7 @@ import {
 } from '@/mocks/data/analysisMock';
 import { mockVideoAnalysisResponse } from '@/mocks/data/videoAnalysisMock';
 import { mockKeywordsResponse } from '@/mocks/data/keywordsMock';
+import { mockTestLoginResponse } from '@/mocks/data/userMock';
 
 const SERVER_URL = import.meta.env.VITE_SERVER_URL;
 
@@ -25,6 +26,11 @@ export const handlers = [
   // POST /login_guest - 비회원 토큰 발급
   http.post(`${SERVER_URL}/login_guest`, () => {
     return HttpResponse.json({ guestToken: 'mock-guest-token' }, { status: 200 });
+  }),
+
+  // POST /login_test - 테스트 계정 로그인
+  http.post(`${SERVER_URL}/login_test`, () => {
+    return HttpResponse.json(mockTestLoginResponse, { status: 200 });
   }),
 
   // POST /ai_recommend - AI 추천 주제 요청

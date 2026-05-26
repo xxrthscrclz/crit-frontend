@@ -1,8 +1,8 @@
-import { useEffect } from 'react';
+import { useCallback, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import CritLogo from '@/assets/icons/critLogo.svg?react';
 import GoogleIcon from '@/assets/icons/google-icon.svg?react';
-import { postGuestLogin } from '@/api/command';
+import { postGuestLogin, postTestLogin, type MemberLoginResponse } from '@/api/command';
 import useUserStore from '@/stores/useUserStore';
 import { hasAuth, setGuestAuth, setMemberAuth } from '@/utils/auth';
 import { mockMemberProfile } from '@/mocks/data/userMock';
@@ -12,18 +12,32 @@ const LoginPage = () => {
   const setUser = useUserStore(s => s.setUser);
   const clearUser = useUserStore(s => s.clearUser);
 
+  const applyMemberLogin = useCallback(
+    (data: MemberLoginResponse) => {
+      setMemberAuth(data.memberToken);
+      setUser({
+        channelName: data.channelName ?? null,
+        channelURL: data.channelUrl ?? null,
+        userEmail: data.userEmail ?? null,
+        joinDate: data.joinDate ?? null,
+      });
+      navigate('/', { replace: true });
+    },
+    [navigate, setUser],
+  );
+
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
-
     const token = params.get('token');
-    const channelName = params.get('channelName');
-    const channelURL = params.get('channelUrl');
-    const userEmail = params.get('userEmail');
-    const joinDate = params.get('joinDate');
 
     if (token) {
       setMemberAuth(token);
-      setUser({ channelName, channelURL, userEmail, joinDate });
+      setUser({
+        channelName: params.get('channelName'),
+        channelURL: params.get('channelUrl'),
+        userEmail: params.get('userEmail'),
+        joinDate: params.get('joinDate'),
+      });
       navigate('/', { replace: true });
       return;
     }
@@ -45,6 +59,15 @@ const LoginPage = () => {
       navigate('/', { replace: true });
     } catch (err) {
       console.error('guest 토큰 발급 실패:', err);
+    }
+  };
+
+  const handleTestLogin = async () => {
+    try {
+      const res = await postTestLogin();
+      applyMemberLogin(res);
+    } catch (err) {
+      console.error('테스트 로그인 실패:', err);
     }
   };
 
@@ -76,13 +99,23 @@ const LoginPage = () => {
             </div>
           </button>
 
-          <button
-            type="button"
-            onClick={handleGuestBrowse}
-            className="flex h-[54px] px-2 py-4 justify-center items-center self-stretch rounded-[10px] text-[#969696] typo-login-guest border-2 border-[#E6E8E7] bg-white cursor-pointer hover:border-[#CDC1FF] hover:text-[#6B4EFF]"
-          >
-            <span>비회원으로 둘러보기</span>
-          </button>
+          <div className="flex w-full gap-3 self-stretch">
+            <button
+              type="button"
+              onClick={handleGuestBrowse}
+              className="flex flex-1 h-[54px] px-2 py-4 justify-center items-center rounded-[10px] text-[#969696] typo-login-guest border-2 border-[#E6E8E7] bg-white cursor-pointer hover:border-[#CDC1FF] hover:text-[#6B4EFF]"
+            >
+              <span>비회원으로 둘러보기</span>
+            </button>
+
+            <button
+              type="button"
+              onClick={handleTestLogin}
+              className="flex flex-1 h-[54px] px-2 py-4 justify-center items-center rounded-[10px] text-[#6B4EFF] typo-login-guest border-2 border-[#CDC1FF] bg-white cursor-pointer hover:border-[#6B4EFF] hover:text-[#CDC1FF]"
+            >
+              <span>테스트 계정으로 로그인</span>
+            </button>
+          </div>
 
           {import.meta.env.VITE_USE_MOCK === 'true' && (
             <button
