@@ -16,6 +16,8 @@ const RecommendPage = () => {
 
   const autoSelectSubject = useRecommendStore(s => s.autoSelectSubject);
   const setAutoSelectSubject = useRecommendStore(s => s.setAutoSelectSubject);
+  const videoType = useRecommendStore(s => s.formInput.videoType);
+  const setVideoType = useRecommendStore(s => s.setVideoType);
   const clearRecommendStore = useRecommendStore(s => s.clear);
   const clearAIFormStore = useAIFormStore(s => s.clear);
 
@@ -62,7 +64,11 @@ const RecommendPage = () => {
       <div className="flex flex-col items-center px-10 gap-10">
         <div className="flex flex-col items-center mt-20 w-full mx-auto animate-fade-in-up">
           <div className="relative z-10 mb-[-32px]">
-            <TabList tabs={['롱폼', '숏폼']} />
+            <TabList
+              tabs={['롱폼', '숏폼']}
+              activeIndex={videoType === 'long' ? 0 : 1}
+              onChange={index => setVideoType(index === 0 ? 'long' : 'short')}
+            />
           </div>
           <FormList onSearch={handleSearch} initialKeyword={initialKeyword} />
         </div>

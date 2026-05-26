@@ -69,7 +69,7 @@ const FormList = ({ onSearch, initialKeyword = '' }: FormListProps) => {
     if (contentRef.current) {
       setContentHeight(contentRef.current.scrollHeight);
     }
-  }, []);
+  }, [formInput.videoType]);
 
   const handleCategoryToggle = (category: string, checked: boolean) => {
     setSelectedCategories(prev =>
@@ -87,7 +87,7 @@ const FormList = ({ onSearch, initialKeyword = '' }: FormListProps) => {
     const missing: string[] = [];
     if (!keyword.trim()) missing.push('Keyword');
     if (selectedCategories.length === 0) missing.push('Category');
-    if (time === 0) missing.push('Time');
+    if (formInput.videoType === 'long' && time === 0) missing.push('Time');
 
     if (missing.length > 0) {
       setErrorMsg(`${missing.join(', ')}을(를) 입력해주세요.`);
@@ -105,13 +105,15 @@ const FormList = ({ onSearch, initialKeyword = '' }: FormListProps) => {
         requestURL,
         keywords: keyword,
         category: `{${selectedCategories.join(', ')}}`,
+        videoType: formInput.videoType,
       });
       setRecommendations(res);
       setFormInput({
         requestURL,
         keywords: keyword,
         category: `{${selectedCategories.join(', ')}}`,
-        time,
+        time: formInput.videoType === 'long' ? time : null,
+        videoType: formInput.videoType,
       });
 
       onSearch?.();
@@ -192,16 +194,18 @@ const FormList = ({ onSearch, initialKeyword = '' }: FormListProps) => {
                 ))}
               </div>
             </div>
-            <div className="flex w-196 flex-col items-start gap-4">
-              <div className="typo-body1-medium text-[#0A0A0A]">Time</div>
-              <div className="flex w-full items-center justify-between">
+            {formInput.videoType === 'long' && (
+              <div className="flex w-196 flex-col items-start gap-4">
+                <div className="typo-body1-medium text-[#0A0A0A]">Time</div>
                 <TimeSlider value={time} onChange={setTime} />
-                <div
-                  onClick={handleReset}
-                  className="flex py-1.5 px-3 justify-center items-center rounded-md bg-[#FF6B6B] hover:bg-[#FF4757] active:bg-[#FF8787] typo-label text-white cursor-pointer transition-colors"
-                >
-                  초기화
-                </div>
+              </div>
+            )}
+            <div className="flex w-196 justify-end">
+              <div
+                onClick={handleReset}
+                className="flex py-1.5 px-3 justify-center items-center rounded-md bg-[#FF6B6B] hover:bg-[#FF4757] active:bg-[#FF8787] typo-label text-white cursor-pointer transition-colors"
+              >
+                초기화
               </div>
             </div>
           </div>

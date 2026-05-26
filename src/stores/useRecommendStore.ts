@@ -1,4 +1,5 @@
 import { create } from 'zustand';
+import type { VideoType } from '@/api/command';
 
 interface RecommendItem {
   suggestedTitle: string;
@@ -9,7 +10,8 @@ interface FormInput {
   requestURL: string;
   keywords: string;
   category: string;
-  time: number;
+  time: number | null;
+  videoType: VideoType;
 }
 
 interface TitleItem {
@@ -20,6 +22,7 @@ interface RecommendStore {
   // 폼 입력값
   formInput: FormInput;
   setFormInput: (data: FormInput) => void;
+  setVideoType: (videoType: VideoType) => void;
 
   // 추천 주제 (1차 API)
   recommendations: RecommendItem[];
@@ -40,9 +43,25 @@ interface RecommendStore {
   clear: () => void;
 }
 
+const defaultFormInput: FormInput = {
+  requestURL: '',
+  keywords: '',
+  category: '',
+  time: 0,
+  videoType: 'long',
+};
+
 const useRecommendStore = create<RecommendStore>(set => ({
-  formInput: { requestURL: '', keywords: '', category: '', time: 0 },
+  formInput: defaultFormInput,
   setFormInput: data => set({ formInput: data }),
+  setVideoType: videoType =>
+    set(state => ({
+      formInput: {
+        ...state.formInput,
+        videoType,
+        time: videoType === 'short' ? null : (state.formInput.time ?? 0),
+      },
+    })),
 
   recommendations: [],
   setRecommendations: data => set({ recommendations: data }),
@@ -60,7 +79,7 @@ const useRecommendStore = create<RecommendStore>(set => ({
     set({
       recommendations: [],
       titles: [],
-      formInput: { requestURL: '', keywords: '', category: '', time: 0 },
+      formInput: defaultFormInput,
       selectedSubjectIndex: null,
       autoSelectSubject: false,
     }),

@@ -12,10 +12,11 @@ interface FormSubjectProps {
 const FormSubject = ({ onSelect }: FormSubjectProps) => {
   const contentRef = useRef<HTMLDivElement>(null);
   const [contentHeight, setContentHeight] = useState<number | undefined>(undefined);
-  const { recommendations, formInput } = useRecommendStore(
+  const { recommendations, formInput, setSelectedSubjectIndex } = useRecommendStore(
     useShallow(s => ({
       recommendations: s.recommendations,
       formInput: s.formInput,
+      setSelectedSubjectIndex: s.setSelectedSubjectIndex,
     })),
   );
   const setData = useAIFormStore(s => s.setData);
@@ -37,6 +38,7 @@ const FormSubject = ({ onSelect }: FormSubjectProps) => {
 
   const handleClick = async (index: number) => {
     setSelectedIndex(index);
+    setSelectedSubjectIndex(index);
     setCollapsed(true);
 
     const item = recommendations[index];
@@ -50,7 +52,8 @@ const FormSubject = ({ onSelect }: FormSubjectProps) => {
         concept,
         keywords: formInput.keywords,
         category: formInput.category,
-        time: formInput.time,
+        videoType: formInput.videoType,
+        time: formInput.videoType === 'short' ? null : formInput.time,
       });
       const item = res[0] ?? res;
       setData({

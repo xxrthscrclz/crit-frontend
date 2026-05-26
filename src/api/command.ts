@@ -1,20 +1,24 @@
 import api from './axios';
 
+export type VideoType = 'long' | 'short';
+
 // ===== Request Types =====
 
 interface RecommendRequest {
   requestURL: string;
   keywords: string;
   category: string;
+  videoType: VideoType;
 }
 
 interface ScriptRequest {
   requestURL: string;
   keywords: string;
   category: string;
-  time: number;
+  time?: number | null;
   title: string;
   concept: string;
+  videoType: VideoType;
 }
 
 // ===== Response Types =====
@@ -29,6 +33,7 @@ export interface VideoAnalysisResponse {
     category: string;
     keyword: string;
     durationSeconds: number;
+    videoType: VideoType;
     score: {
       overall: number;
       topPercent: number;
@@ -79,6 +84,26 @@ export interface VideoAnalysisResponse {
 
 // ===== API Functions =====
 
+const serializeScriptParams = (params: Record<string, string | number | null>) =>
+  Object.entries(params)
+    .filter(([, value]) => value !== undefined)
+    .map(([key, value]) =>
+      value === null
+        ? `${encodeURIComponent(key)}=null`
+        : `${encodeURIComponent(key)}=${encodeURIComponent(String(value))}`,
+    )
+    .join('&');
+
+const buildScriptParams = (data: ScriptRequest): Record<string, string | number | null> => ({
+  requestURL: data.requestURL,
+  title: data.title,
+  concept: data.concept,
+  keywords: data.keywords,
+  category: data.category,
+  videoType: data.videoType,
+  time: data.videoType === 'short' ? null : (data.time ?? null),
+});
+
 // POST /login_guest - 비회원(guest) 토큰 발급
 export const postGuestLogin = async (): Promise<{ guestToken: string }> => {
   const response = await api.post('/login_guest');
@@ -90,6 +115,7 @@ export const postRecommend = async (data: RecommendRequest) => {
   const params: Record<string, string> = {
     keywords: data.keywords,
     category: data.category,
+    videoType: data.videoType,
   };
   if (data.requestURL) {
     params.requestURL = data.requestURL;
@@ -101,14 +127,19 @@ export const postRecommend = async (data: RecommendRequest) => {
 // POST /ai_script - AI 제목/스크립트 요청
 export const postScript = async (data: ScriptRequest) => {
   const response = await api.post('/ai_script', null, {
-    params: {
-      requestURL: data.requestURL,
-      title: data.title,
-      concept: data.concept,
-      keywords: data.keywords,
-      category: data.category,
-      time: data.time,
-    },
+    params: buildScriptParams(data),
+    paramsSerializer: serializeScriptParams,
+  });
+  return response.data;
+};
+
+// POST /ai_titleResearch - AI 추천 제목 1개 재생성
+export const postTitleResearch = async (
+  data: ScriptRequest,
+): Promise<{ suggestedTitle: string }> => {
+  const response = await api.post('/ai_titleResearch', null, {
+    params: buildScriptParams(data),
+    paramsSerializer: serializeScriptParams,
   });
   return response.data;
 };

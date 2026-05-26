@@ -32,15 +32,17 @@ const RecommendContent = () => {
   const [isLoadingScript, setIsLoadingScript] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
 
-  // 키워드, 카테고리는 videoInfo에서 가져옴
+  // 키워드, 카테고리, 영상 타입은 videoInfo에서 가져옴
   const keyword = videoAnalysis?.videoInfo?.keyword ?? '';
   const category = videoAnalysis?.videoInfo?.category ?? '';
+  const videoType = videoAnalysis?.videoInfo?.videoType ?? 'long';
+  const isShortForm = videoType === 'short';
 
   // 추천 결과
   const [recommendations, setRecommendations] = useState<RecommendItem[]>([]);
 
   const handleSearch = async () => {
-    if (time === 0) {
+    if (!isShortForm && time === 0) {
       setErrorMsg('영상 길이(Time)를 입력해주세요.');
       return;
     }
@@ -55,6 +57,7 @@ const RecommendContent = () => {
         requestURL: channelURL,
         keywords: keyword,
         category: category,
+        videoType,
       });
       setRecommendations(res.slice(0, 3)); // 주제 3개만
       setShowForm(false);
@@ -88,7 +91,8 @@ const RecommendContent = () => {
         concept,
         keywords: keyword,
         category: category,
-        time: time,
+        videoType,
+        time: isShortForm ? null : time,
       });
 
       const resultItem = res[0] ?? res;
@@ -110,7 +114,8 @@ const RecommendContent = () => {
         requestURL: channelURL,
         keywords: keyword,
         category: category,
-        time: time,
+        time: isShortForm ? null : time,
+        videoType,
       });
       setRecommendationsStore(recommendations);
       setSelectedSubjectIndex(index);
@@ -188,7 +193,13 @@ const RecommendContent = () => {
                   {/* 시간 설정 */}
                   <div className="flex flex-col w-[30%] gap-6">
                     <div className="text-black typo-body4-semibold">Time</div>
-                    <TimeSlider value={time} onChange={setTime} compact />
+                    {isShortForm ? (
+                      <div className="text-gray-400 animate-loading-pulse typo-body5">
+                        숏폼은 영상 길이를 설정할 수 없습니다.
+                      </div>
+                    ) : (
+                      <TimeSlider value={time} onChange={setTime} compact />
+                    )}
                   </div>
                 </div>
 

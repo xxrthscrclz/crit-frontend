@@ -1,5 +1,12 @@
 import { http, HttpResponse } from 'msw';
-import { mockRecommendResponse, mockScriptResponse } from '@/mocks/data/recommendMock';
+import {
+  mockRecommendLongResponse,
+  mockRecommendShortResponse,
+  mockScriptLongResponse,
+  mockScriptShortResponse,
+  mockTitleResearchLongResponses,
+  mockTitleResearchShortResponses,
+} from '@/mocks/data/recommendMock';
 import {
   mockChannelAnalysisResponse,
   mockChannelAnalysisForceRefreshResponse,
@@ -9,6 +16,11 @@ import { mockKeywordsResponse } from '@/mocks/data/keywordsMock';
 
 const SERVER_URL = import.meta.env.VITE_SERVER_URL;
 
+const getVideoType = (request: Request): 'long' | 'short' => {
+  const videoType = new URL(request.url).searchParams.get('videoType');
+  return videoType === 'short' ? 'short' : 'long';
+};
+
 export const handlers = [
   // POST /login_guest - 비회원 토큰 발급
   http.post(`${SERVER_URL}/login_guest`, () => {
@@ -16,13 +28,29 @@ export const handlers = [
   }),
 
   // POST /ai_recommend - AI 추천 주제 요청
-  http.post(`${SERVER_URL}/ai_recommend`, () => {
-    return HttpResponse.json(mockRecommendResponse, { status: 200 });
+  http.post(`${SERVER_URL}/ai_recommend`, ({ request }) => {
+    const response =
+      getVideoType(request) === 'short'
+        ? mockRecommendShortResponse
+        : mockRecommendLongResponse;
+    return HttpResponse.json(response, { status: 200 });
   }),
 
   // POST /ai_script - AI 제목/스크립트 요청
-  http.post(`${SERVER_URL}/ai_script`, () => {
-    return HttpResponse.json(mockScriptResponse, { status: 200 });
+  http.post(`${SERVER_URL}/ai_script`, ({ request }) => {
+    const response =
+      getVideoType(request) === 'short' ? mockScriptShortResponse : mockScriptLongResponse;
+    return HttpResponse.json(response, { status: 200 });
+  }),
+
+  // POST /ai_titleResearch - AI 추천 제목 1개 재생성
+  http.post(`${SERVER_URL}/ai_titleResearch`, ({ request }) => {
+    const titles =
+      getVideoType(request) === 'short'
+        ? mockTitleResearchShortResponses
+        : mockTitleResearchLongResponses;
+    const index = Math.floor(Math.random() * titles.length);
+    return HttpResponse.json(titles[index], { status: 200 });
   }),
 
   // GET /analyze/channel - 채널 분석 요청 (force=true 시 갱신 데이터)

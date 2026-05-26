@@ -10,6 +10,7 @@ export const mockVideoAnalysisResponse = {
     category: '과학 / 기술',
     keyword: '구글, 신제품, IT, 테크',
     durationSeconds: 743,
+    videoType: 'short',
     score: {
       overall: 82,
       topPercent: 18,
