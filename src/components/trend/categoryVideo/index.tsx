@@ -29,7 +29,7 @@ const CategoryVideo = ({ items, isLoading = false }: CategoryVideoProps) => {
           <div className="absolute -bottom-12 left-4 h-40 w-40 rounded-full bg-[#A594F9]/10 blur-2xl" />
         </div>
         <div className="relative z-10 px-5 py-4 max-md:px-4">
-          <div className="flex flex-row items-stretch gap-5 py-3 max-md:gap-3 max-md:overflow-x-auto max-md:py-2 max-md:script-scroll max-md:snap-x max-md:snap-mandatory">
+          <div className="flex flex-row justify-start items-start gap-5 overflow-x-auto script-scroll scroll-pl-2 scroll-pr-2 py-3 max-md:gap-3 max-md:py-2 max-md:scroll-pl-1 max-md:scroll-pr-1">
             {sortedItems.length > 0 ? (
               sortedItems.map(item => <CategoryItem key={item.categoryId} item={item} />)
             ) : isLoading ? (
