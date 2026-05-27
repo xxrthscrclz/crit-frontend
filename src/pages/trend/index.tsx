@@ -41,7 +41,7 @@ const TrendPage = () => {
   return (
     <div>
       <Header />
-      <div className="flex flex-col items-center px-40 gap-10">
+      <div className="flex flex-col items-center gap-10 px-24">
         <div className="flex w-full flex-col justify-center items-center gap-5">
           <div className="flex w-full text-[#6B4EFF] typo-title2 mt-10">트렌드</div>
           <div className="flex w-full justify-between items-center">
@@ -77,8 +77,8 @@ const TrendPage = () => {
           </div>
         </div>
         <CategoryVideo items={data?.categoryTop1 ?? []} />
-        <div className="flex w-full flex-row items-start gap-5 overflow-visible">
-          <div className="min-w-0 flex-1">
+        <div className="flex w-full flex-row items-stretch gap-5 overflow-visible">
+          <div className="flex min-h-0 min-w-0 flex-1 flex-col">
             <HotWord
               variant="keyword"
               title="핫 키워드 TOP 20"
@@ -86,7 +86,7 @@ const TrendPage = () => {
               items={data?.hotKeywords ?? []}
             />
           </div>
-          <div className="min-w-0 flex-1">
+          <div className="flex min-h-0 min-w-0 flex-1 flex-col">
             <HotWord
               variant="hashtag"
               title="핫 해시태그 TOP 20"

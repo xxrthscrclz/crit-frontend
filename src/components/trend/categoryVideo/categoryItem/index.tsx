@@ -14,7 +14,7 @@ const CategoryItem = ({ item }: CategoryItemProps) => {
         </span>
         <VideoContainer
           video={item}
-          className="w-full rounded-xl border border-transparent bg-white shadow-none transition-colors duration-200 hover:border-transparent active:border-transparent active:bg-[#F8F6FF]"
+          className="w-full h-full rounded-xl border border-transparent bg-white shadow-none transition-colors duration-200 hover:border-transparent active:border-transparent active:bg-[#F8F6FF]"
         />
       </div>
     </div>
