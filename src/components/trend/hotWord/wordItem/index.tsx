@@ -15,7 +15,7 @@ const WordItem = ({
   sizeScale,
   onClick,
 }: WordItemProps) => {
-  const label = isHashtag ? `# ${item.text}` : item.text;
+  const label = isHashtag ? `# ${item.text.replace(/ /g, '_')}` : item.text;
   const paddingX = 10 + Math.round(sizeScale * 5);
   const paddingY = 6 + Math.round(sizeScale * 3);
   const fontSize = (isHashtag ? 11 : 12) + Math.round(sizeScale * 2);

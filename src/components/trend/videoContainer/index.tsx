@@ -66,7 +66,7 @@ const VideoContainer = ({
         }`}
       >
         <div
-          className={`flex h-8 w-full shrink-0 items-center justify-start truncate text-black typo-body6 ${
+          className={`flex h-8 w-full shrink-0 items-center justify-start truncate text-black typo-body-bold ${
             compactMobile ? 'max-md:h-6' : ''
           }`}
         >
