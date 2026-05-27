@@ -21,6 +21,7 @@ import {
 } from '@/mocks/data/analysisMock';
 import { mockVideoAnalysisResponse } from '@/mocks/data/videoAnalysisMock';
 import { mockKeywordsResponse } from '@/mocks/data/keywordsMock';
+import { mockTrendingResponse } from '@/mocks/data/trendMock';
 import { mockTestLoginResponses } from '@/mocks/data/userMock';
 
 const SERVER_URL = import.meta.env.VITE_SERVER_URL;
@@ -126,5 +127,10 @@ export const handlers = [
   // GET /keywords - 트렌드 키워드 요청
   http.get(`${SERVER_URL}/keywords`, () => {
     return HttpResponse.json(mockKeywordsResponse, { status: 200 });
+  }),
+
+  // GET /trending - 트렌드 페이지 전체 데이터
+  http.get(`${SERVER_URL}/trending`, () => {
+    return HttpResponse.json(mockTrendingResponse, { status: 200 });
   }),
 ];

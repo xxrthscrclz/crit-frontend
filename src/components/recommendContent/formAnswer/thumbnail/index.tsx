@@ -18,7 +18,7 @@ const Thumbnail = () => {
             </div>
           )}
         </div>
-        <div className="w-full px-3 py-3 rounded-lg typo-body4-semibold text-[#0A0A0A] whitespace-pre-line break-keep leading-6">
+        <div className="w-full h-15 shrink-0 overflow-y-auto overflow-x-hidden script-scroll rounded-lg px-3 py-2 typo-body4-semibold text-[#0A0A0A] whitespace-pre-line break-keep leading-6">
           {thumbnailGuide || (
             <span className="animate-loading-pulse text-gray-400">썸네일 가이드가 표시됩니다.</span>
           )}
