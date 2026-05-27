@@ -21,7 +21,7 @@ const TabList = ({ tabs, defaultTab = 0, activeIndex, onChange }: TabListProps) 
   return (
     <div className="relative flex h-16 w-155 items-center justify-center overflow-hidden rounded-xl bg-[#6B4EFF] px-4 py-0.5 opacity-90 max-md:mx-auto max-md:origin-top max-md:scale-[0.88]">
       <div
-        className={`absolute h-11 w-72 rounded-xl bg-white transition-transform duration-300 ease-in-out max-md:w-45 max-md:h-9 ${currentIndex === 0 ? 'tab-indicator-left' : 'tab-indicator-right'}`}
+        className={`absolute h-11 w-72 rounded-xl bg-white transition-transform duration-300 ease-in-out max-md:w-[45%] max-md:h-9 ${currentIndex === 0 ? 'tab-indicator-left' : 'tab-indicator-right'}`}
       />
       {tabs.map((tab, index) => (
         <div
