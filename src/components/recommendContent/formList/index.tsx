@@ -126,10 +126,10 @@ const FormList = ({ onSearch, initialKeyword = '' }: FormListProps) => {
   };
 
   return (
-    <div className="flex w-250 flex-col items-center justify-end gap-10 rounded-xl bg-[#F5EFFF] px-8 pb-12 pt-18 max-md:w-full max-md:gap-6 max-md:px-3 max-md:pb-8 max-md:pt-12">
+    <div className="flex w-full flex-col items-center justify-end gap-10 rounded-xl bg-[#F5EFFF] px-8 pb-12 pt-18 max-md:w-full max-md:gap-6 max-md:px-3 max-md:pb-8 max-md:pt-12">
       <div
         ref={contentRef}
-        className={`flex flex-col collapse-panel gap-4 ${!collapsed ? 'is-open' : ''}`}
+        className={`flex flex-col w-full collapse-panel gap-4 ${!collapsed ? 'is-open' : ''}`}
         style={
           {
             '--collapse-max-height': collapsed ? '0px' : `${contentHeight}px`,
@@ -142,7 +142,7 @@ const FormList = ({ onSearch, initialKeyword = '' }: FormListProps) => {
             '원하는 키워드와 채널 정보를 입력하면\nAI가 트렌드와 채널 데이터를 분석해 맞춤 콘텐츠 아이디어를 추천합니다.'
           }
         </div>
-        <div className="flex w-234 flex-col items-center justify-center gap-6 overflow-visible rounded-xl border border-black/10 bg-white px-8 py-9 max-md:w-full max-md:gap-4 max-md:px-3 max-md:py-5">
+        <div className="flex w-full flex-col items-center justify-center gap-6 overflow-visible rounded-xl border border-black/10 bg-white px-8 py-9 max-md:w-full max-md:gap-4 max-md:px-3 max-md:py-5">
           <div className="flex w-full flex-col items-start gap-12 overflow-visible pb-14 pl-6 pr-4 max-md:gap-6 max-md:pb-6 max-md:pl-0 max-md:pr-0">
             <div className="flex w-full items-start gap-6 overflow-visible max-md:flex-col max-md:gap-4">
               <div className="min-w-0 w-full flex-1">
