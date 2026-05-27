@@ -30,7 +30,7 @@ const KeywordCard = ({ animationKey }: KeywordCardProps) => {
   return (
     <div
       key={animationKey}
-      className="relative flex flex-col w-80 p-6 gap-4 mr-30 rounded-2xl bg-white/80 backdrop-blur-md border border-[#8257B4]/30 shadow-lg animate-slide-in-right"
+      className="relative flex flex-col w-80 p-6 gap-4 mr-30 rounded-2xl bg-white/80 backdrop-blur-md border border-[#8257B4]/30 shadow-lg animate-slide-in-right max-md:mr-0 max-md:w-full max-md:max-w-80 max-md:p-5"
     >
       <button
         onClick={handleClose}

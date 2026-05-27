@@ -7,6 +7,7 @@ interface VideoContainerProps {
   video: TrendVideo;
   className?: string;
   rank?: number;
+  compactMobile?: boolean;
 }
 
 const formatViewCount = (count: number) => count.toLocaleString();
@@ -30,7 +31,12 @@ const normalizeHashtags = (hashtags: string[] | string): string[] => {
     .filter(Boolean);
 };
 
-const VideoContainer = ({ video, className = '', rank }: VideoContainerProps) => {
+const VideoContainer = ({
+  video,
+  className = '',
+  rank,
+  compactMobile = false,
+}: VideoContainerProps) => {
   const tags = normalizeHashtags(video.hashtags);
 
   return (
@@ -40,22 +46,30 @@ const VideoContainer = ({ video, className = '', rank }: VideoContainerProps) =>
       rel="noopener noreferrer"
       className={`relative flex h-full min-h-0 w-full flex-col overflow-hidden rounded-xl border border-[#E8E2FF] bg-white shadow-[0_4px_16px_rgba(107,78,255,0.08)] transition-all duration-300 ease-out hover:-translate-y-0.5 hover:border-[#A594F9] hover:shadow-[0_10px_28px_rgba(107,78,255,0.14)] active:translate-y-0 active:shadow-[0_6px_20px_rgba(107,78,255,0.12)] ${className}`}
     >
-      <div className="relative w-full shrink-0">
-        <img
-          src={video.thumbnailUrl}
-          alt={video.title}
-          className="aspect-video w-full object-cover"
-        />
+      <div className="relative aspect-video w-full shrink-0 overflow-hidden bg-[#1a1a1a]">
+        <img src={video.thumbnailUrl} alt={video.title} className="h-full w-full object-cover" />
         {rank != null && (
           <div
-            className={`absolute left-2.5 top-2.5 flex h-7 w-7 items-center justify-center rounded-lg border typo-body-bold shadow-sm ${getTrendRankBadgeClass(rank)}`}
+            className={`absolute left-2.5 top-2.5 flex h-7 w-7 items-center justify-center rounded-lg border typo-body-bold shadow-sm ${
+              compactMobile
+                ? 'max-md:left-2 max-md:top-2 max-md:h-5 max-md:w-5 max-md:text-[10px]'
+                : ''
+            } ${getTrendRankBadgeClass(rank)}`}
           >
             {rank}
           </div>
         )}
       </div>
-      <div className="flex min-h-0 flex-1 flex-col gap-2.5 px-3 py-3">
-        <div className="flex h-8 w-full shrink-0 items-center justify-start truncate text-black typo-body6">
+      <div
+        className={`flex min-h-0 flex-1 flex-col gap-2.5 px-3 py-3 ${
+          compactMobile ? 'max-md:gap-1.5' : ''
+        }`}
+      >
+        <div
+          className={`flex h-8 w-full shrink-0 items-center justify-start truncate text-black typo-body6 ${
+            compactMobile ? 'max-md:h-6' : ''
+          }`}
+        >
           {video.title}
         </div>
         <div className="flex w-full shrink-0 items-center justify-start truncate text-[#6D6D6D] typo-body6">
@@ -72,7 +86,11 @@ const VideoContainer = ({ video, className = '', rank }: VideoContainerProps) =>
             <span className="shrink-0">#--</span>
           )}
         </div>
-        <div className="min-h-10 w-full shrink-0 line-clamp-2 text-black typo-body6 leading-5">
+        <div
+          className={`min-h-10 w-full shrink-0 line-clamp-2 text-black typo-body6 leading-5 ${
+            compactMobile ? 'max-md:min-h-8 max-md:leading-4' : ''
+          }`}
+        >
           {video.aiAnalysis}
         </div>
         <div className="min-h-0 flex-1" aria-hidden />

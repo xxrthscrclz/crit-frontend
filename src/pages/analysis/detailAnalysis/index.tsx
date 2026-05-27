@@ -48,7 +48,7 @@ const DetailAnalysis = ({ onBack }: DetailAnalysisProps) => {
   }, [videoId, setVideoAnalysis, setLoading]);
 
   return (
-    <div className="flex flex-col w-300 items-center gap-6 px-10 py-10  animate-slide-in-right">
+    <div className="flex flex-col w-300 items-center gap-6 px-10 py-10 animate-slide-in-right max-md:w-full max-md:px-4 max-md:py-6">
       <div
         className="flex w-full justify-start items-center gap-2 cursor-pointer text-black/50 hover:text-[#6B4EFF] transition-colors"
         onClick={onBack}
@@ -60,13 +60,13 @@ const DetailAnalysis = ({ onBack }: DetailAnalysisProps) => {
         <VideoInfo />
       </div>
       <DetailScore />
-      <div className="flex w-full justify-center items-stretch gap-4">
+      <div className="flex w-full justify-center items-stretch gap-4 max-md:flex-col">
         <div className="flex flex-col w-full justify-start items-center gap-5">
           <AISummaryCard />
           <ViewGrowthCard />
           <ViewingTimeCard />
         </div>
-        <div className="flex flex-col w-[40%] justify-start items-center gap-5">
+        <div className="flex flex-col w-[40%] justify-start items-center gap-5 max-md:w-full">
           <ImprovementPointCard />
           <RecommendActionCard />
           {/* <SatisfactionCard /> */}

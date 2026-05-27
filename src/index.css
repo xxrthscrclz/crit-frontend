@@ -539,3 +539,108 @@
 .animate-modal-in {
   animation: modalIn 0.25s ease-out both;
 }
+
+@media (max-width: 1023px) {
+  .typo-title1 {
+    font-size: 21px;
+    letter-spacing: -0.525px;
+  }
+
+  .typo-title2 {
+    font-size: 24px;
+    letter-spacing: -0.6px;
+  }
+
+  .typo-body1-medium {
+    font-size: 17px;
+  }
+
+  .typo-title-bold {
+    font-size: 17px;
+  }
+
+  .typo-login-title {
+    font-size: 30px;
+    line-height: 42px;
+  }
+
+  .typo-login-body {
+    font-size: 17px;
+    line-height: 24px;
+  }
+
+  .typo-login-guest {
+    font-size: 16px;
+    line-height: 24px;
+  }
+}
+
+@media (max-width: 767px) {
+  .typo-title1 {
+    font-size: 18px;
+    letter-spacing: -0.45px;
+  }
+
+  .typo-title2 {
+    font-size: 19px;
+    letter-spacing: -0.475px;
+  }
+
+  .typo-body1-medium {
+    font-size: 14px;
+    line-height: 18px;
+  }
+
+  .typo-body2 {
+    font-size: 13px;
+    line-height: 18px;
+  }
+
+  .typo-body3 {
+    font-size: 13px;
+    line-height: 18px;
+  }
+
+  .typo-body4-semibold {
+    font-size: 12px;
+    line-height: 17px;
+  }
+
+  .typo-body-bold {
+    font-size: 13px;
+    line-height: 18px;
+  }
+
+  .typo-title-bold {
+    font-size: 15px;
+    line-height: 18px;
+  }
+
+  .typo-label {
+    font-size: 11px;
+    line-height: 18px;
+  }
+
+  .typo-body5,
+  .typo-body6 {
+    font-size: 9px;
+  }
+
+  .typo-login-title {
+    font-size: 24px;
+    line-height: 34px;
+    letter-spacing: -0.6px;
+  }
+
+  .typo-login-body {
+    font-size: 15px;
+    line-height: 22px;
+    letter-spacing: 0.5px;
+  }
+
+  .typo-login-guest {
+    font-size: 14px;
+    line-height: 22px;
+    letter-spacing: 0.5px;
+  }
+}

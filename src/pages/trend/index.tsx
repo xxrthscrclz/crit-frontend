@@ -45,18 +45,18 @@ const TrendPage = () => {
   return (
     <div>
       <Header />
-      <div className="flex flex-col items-center gap-10 px-40">
-        <div className="flex w-full flex-col justify-center items-center gap-5 animate-fade-in-up">
-          <div className="flex w-full text-[#6B4EFF] typo-title2 mt-10">트렌드</div>
-          <div className="flex w-full justify-between items-center">
+      <div className="flex flex-col items-center gap-10 px-45 max-md:px-4">
+        <div className="flex w-full flex-col items-center justify-center gap-5 animate-fade-in-up">
+          <div className="mt-10 flex w-full text-[#6B4EFF] typo-title2 max-md:mt-6">트렌드</div>
+          <div className="flex w-full items-center justify-between max-md:flex-col max-md:items-start max-md:gap-2">
             <div className="text-black typo-body2">
               실시간으로 급상승 중인 주제와 카테고리를 한눈에 확인해보세요.
             </div>
-            <div className="text-[#6D6D6D] typo-body2 shrink-0">
+            <div className="shrink-0 text-[#6D6D6D] typo-body2">
               {data ? `데이터 기준 ${formatUpdatedAt(data.updatedAt)}` : '데이터 기준 —'}
             </div>
           </div>
-          <div className="w-full h-px bg-[#A594F9]"></div>
+          <div className="h-px w-full bg-[#A594F9]" />
         </div>
         <div className="w-full animate-fade-in-up animate-delay-150">
           <TodayTrend aiSummary={data?.aiSummary} isLoading={isLoading} />
@@ -64,8 +64,8 @@ const TrendPage = () => {
         <div className="w-full animate-fade-in-up animate-delay-300">
           <PopularVideoSection videos={popularVideos} isLoading={isLoading} />
         </div>
-        <div className="flex w-full items-start gap-5 animate-fade-in-up animate-delay-450">
-          <div className="min-w-0 flex-1">
+        <div className="flex w-full items-start gap-5 animate-fade-in-up animate-delay-450 max-md:flex-col">
+          <div className="min-w-0 w-full flex-1">
             <MusicChart
               title="실시간 인기 국내 차트 TOP 10"
               items={data?.musicChartKR ?? []}
@@ -75,7 +75,7 @@ const TrendPage = () => {
               isLoading={isLoading}
             />
           </div>
-          <div className="min-w-0 flex-1">
+          <div className="min-w-0 w-full flex-1">
             <MusicChart
               title="실시간 인기 글로벌 차트 TOP 10"
               items={data?.musicChartGlobal ?? []}
@@ -89,7 +89,7 @@ const TrendPage = () => {
         <div className="w-full animate-fade-in-up animate-delay-600">
           <CategoryVideo items={data?.categoryTop1 ?? []} isLoading={isLoading} />
         </div>
-        <div className="flex w-full flex-row items-start gap-5 animate-fade-in-up animate-delay-600">
+        <div className="flex w-full flex-row items-start gap-5 animate-fade-in-up animate-delay-600 max-md:flex-col">
           <div className="flex min-w-0 flex-1 flex-col">
             <HotWord
               variant="keyword"

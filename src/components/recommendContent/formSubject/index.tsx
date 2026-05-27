@@ -56,10 +56,10 @@ const FormSubject = ({ onSelect }: FormSubjectProps) => {
   };
 
   return (
-    <div className="flex w-250 py-14 px-8 flex-col justify-end items-center gap-10 rounded-xl bg-[#F5EFFF]">
+    <div className="flex w-250 flex-col items-center justify-end gap-10 rounded-xl bg-[#F5EFFF] px-8 py-14 max-md:w-full max-md:gap-6 max-md:px-3 max-md:py-8">
       <div
         ref={contentRef}
-        className="flex flex-col items-center collapse-panel gap-10 w-full"
+        className="collapse-panel flex w-full flex-col items-center gap-10 max-md:gap-6"
         style={
           {
             '--collapse-max-height': collapsed ? '0px' : `${contentHeight}px`,

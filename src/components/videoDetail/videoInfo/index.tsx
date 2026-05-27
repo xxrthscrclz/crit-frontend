@@ -62,8 +62,8 @@ const VideoInfo = () => {
   const showLoading = isLoading || !videoInfo;
 
   return (
-    <div className="flex w-full justify-center items-center px-8 py-6 gap-7 bg-white rounded-xl border-[0.1px] border-[#8257B4]">
-      <div className="w-107.5 shrink-0 aspect-video rounded-xl overflow-hidden">
+    <div className="flex w-full justify-center items-center px-8 py-6 gap-7 bg-white rounded-xl border-[0.1px] border-[#8257B4] max-md:flex-col max-md:px-4 max-md:py-5 max-md:gap-4">
+      <div className="w-107.5 shrink-0 aspect-video rounded-xl overflow-hidden max-md:w-full">
         {videoInfo?.thumbnailUrl ? (
           <img
             src={videoInfo.thumbnailUrl}
@@ -92,7 +92,7 @@ const VideoInfo = () => {
             className={`w-5 h-5 cursor-pointer shrink-0 ${shared ? 'text-[#6B4EFF]' : 'text-[#0000004D] active:text-[#6B4EFF]'}`}
           />
         </div>
-        <div className="flex w-full justify-start items-center gap-2.5">
+        <div className="flex w-full justify-start items-center gap-2.5 max-md:flex-wrap max-md:gap-x-2.5 max-md:gap-y-2">
           <div className="flex justify-center items-center gap-1">
             <ViewsIcon className="w-4 h-4" />
             <div className="text-black typo-body5">
@@ -158,9 +158,9 @@ const VideoInfo = () => {
             <div className="text-black typo-body4-semibold">종합 점수</div>
             <InfoIcon className="w-3.5 h-3.5" />
           </div>
-          <div className="flex w-full justify-center items-center gap-7">
+          <div className="flex w-full justify-center items-center gap-7 max-md:flex-col max-md:gap-4">
             <CircleProgress score={showLoading ? 0 : videoInfo.score.overall} />
-            <div className="w-0.5 h-40 bg-[#8257B433] self-stretch" />
+            <div className="w-0.5 h-40 bg-[#8257B433] self-stretch max-md:hidden" />
             <div className="flex flex-col w-full justify-center items-center gap-2">
               <div className="w-full justify-start items-center text-black typo-body4-semibold">
                 {showLoading ? (

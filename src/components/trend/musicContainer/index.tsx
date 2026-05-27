@@ -35,10 +35,10 @@ const MusicContainer = ({ rank, item }: MusicContainerProps) => {
   };
 
   return (
-    <div className="group flex w-full shrink-0 items-center justify-between gap-3 rounded-xl px-3 py-2.5 transition-colors duration-200 hover:bg-[#6B4EFF]/6">
-      <div className="flex min-w-0 flex-1 items-center gap-3">
+    <div className="group flex w-full min-w-0 shrink-0 items-center justify-between gap-3 rounded-xl px-3 py-2.5 transition-colors duration-200 hover:bg-[#6B4EFF]/6 max-md:gap-2 max-md:px-2 max-md:py-2">
+      <div className="flex min-w-0 flex-1 items-center gap-3 max-md:gap-2">
         <div
-          className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border typo-body-bold ${getTrendRankBadgeClass(rank)}`}
+          className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border typo-body-bold max-md:h-7 max-md:w-7 ${getTrendRankBadgeClass(rank)}`}
         >
           {rank}
         </div>
@@ -47,19 +47,19 @@ const MusicContainer = ({ rank, item }: MusicContainerProps) => {
           <div className="truncate text-[#6D6D6D] typo-body6">{item.artist}</div>
         </div>
       </div>
-      <div className="flex shrink-0 items-center gap-2 opacity-80 transition-opacity duration-200 group-hover:opacity-100">
+      <div className="flex shrink-0 items-center gap-2 opacity-80 transition-opacity duration-200 group-hover:opacity-100 max-md:gap-1">
         <button
           type="button"
           onClick={handlePlay}
-          className="flex h-8 w-8 cursor-pointer items-center justify-center rounded-lg text-[#6D6D6D] transition-colors hover:bg-[#6B4EFF]/10 hover:text-[#6B4EFF] active:text-[#6B4EFF]"
+          className="flex h-8 w-8 cursor-pointer items-center justify-center rounded-lg text-[#6D6D6D] transition-colors hover:bg-[#6B4EFF]/10 hover:text-[#6B4EFF] active:text-[#6B4EFF] max-md:h-7 max-md:w-7"
           aria-label={`${item.title} 재생`}
         >
-          <PlayIcon className="h-5 w-5" />
+          <PlayIcon className="h-5 w-5 max-md:h-4 max-md:w-4" />
         </button>
         <button
           type="button"
           onClick={handleShare}
-          className={`flex h-8 w-8 cursor-pointer items-center justify-center rounded-lg transition-colors hover:bg-[#6B4EFF]/10 ${
+          className={`flex h-8 w-8 cursor-pointer items-center justify-center rounded-lg transition-colors hover:bg-[#6B4EFF]/10 max-md:h-7 max-md:w-7 ${
             shared ? 'text-[#6B4EFF]' : 'text-[#6D6D6D] hover:text-[#6B4EFF] active:text-[#6B4EFF]'
           }`}
           aria-label={`${item.title} 공유`}

@@ -13,10 +13,10 @@ const VideoItem = ({ title, thumbnailUrl, score, description, onClick }: VideoIt
 
   return (
     <div
-      className="flex w-full px-7.5 py-6 gap-7.5 self-stretch rounded-xl bg-white border hover:bg-[#F3F0FF] active:bg-[#F3F0FF] border-[#A594F9] hover:border-[#6B42FF] active:border-[#6B42FF] cursor-pointer"
+      className="flex w-full px-7.5 py-6 gap-7.5 self-stretch rounded-xl bg-white border hover:bg-[#F3F0FF] active:bg-[#F3F0FF] border-[#A594F9] hover:border-[#6B42FF] active:border-[#6B42FF] cursor-pointer max-md:flex-col max-md:gap-3 max-md:px-3 max-md:py-3"
       onClick={onClick}
     >
-      <div className="w-76 shrink-0 aspect-video rounded-xl overflow-hidden">
+      <div className="w-76 shrink-0 aspect-video rounded-xl overflow-hidden max-md:w-full">
         {thumbnailUrl ? (
           <img src={thumbnailUrl} alt={title} className="w-full h-full object-cover" />
         ) : (
@@ -25,9 +25,11 @@ const VideoItem = ({ title, thumbnailUrl, score, description, onClick }: VideoIt
           </div>
         )}
       </div>
-      <div className="flex flex-col w-full py-3.5 gap-7.5 justify-center items-center">
-        <div className="flex w-full justify-start text-black typo-title1">{title}</div>
-        <div className="flex flex-col w-full gap-2.5 justify-center items-center">
+      <div className="flex flex-col w-full py-3.5 gap-7.5 justify-center items-center max-md:min-w-0 max-md:items-start max-md:gap-3 max-md:py-0">
+        <div className="flex w-full justify-start text-black typo-title1 max-md:line-clamp-2 max-md:text-left">
+          {title}
+        </div>
+        <div className="flex flex-col w-full gap-2.5 justify-center items-center max-md:items-start max-md:gap-2">
           <div className="flex w-full justify-start items-center gap-0.5">
             <div
               className="typo-title1 text-score-dynamic"

@@ -14,8 +14,8 @@ const CategoryVideo = ({ items, isLoading = false }: CategoryVideoProps) => {
   const sortedItems = sortByCategoryId(items);
 
   return (
-    <div className="flex flex-col w-full justify-center items-center gap-5">
-      <div className="flex w-full justify-start items-center gap-2.5">
+    <div className="flex w-full flex-col items-stretch gap-5">
+      <div className="flex w-full items-center gap-2.5">
         <SparkleIcon className="w-6 h-6" />
         <div className="text-[#6B4EFF] typo-body1-medium">카테고리별 인기 동영상</div>
       </div>
@@ -28,8 +28,8 @@ const CategoryVideo = ({ items, isLoading = false }: CategoryVideoProps) => {
           <div className="absolute -top-16 right-8 h-48 w-48 rounded-full bg-[#6B4EFF]/6 blur-3xl" />
           <div className="absolute -bottom-12 left-4 h-40 w-40 rounded-full bg-[#A594F9]/10 blur-2xl" />
         </div>
-        <div className="relative z-10 px-5 py-4">
-          <div className="flex flex-row justify-start items-start gap-5 overflow-x-auto script-scroll scroll-pl-2 scroll-pr-2 py-3">
+        <div className="relative z-10 px-5 py-4 max-md:px-4">
+          <div className="flex flex-row items-stretch gap-5 py-3 max-md:gap-3 max-md:overflow-x-auto max-md:py-2 max-md:script-scroll max-md:snap-x max-md:snap-mandatory">
             {sortedItems.length > 0 ? (
               sortedItems.map(item => <CategoryItem key={item.categoryId} item={item} />)
             ) : isLoading ? (

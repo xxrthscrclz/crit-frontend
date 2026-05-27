@@ -29,13 +29,13 @@ const ConfirmModal = ({
       onClick={onConfirm}
     >
       <div
-        className="flex flex-col items-center w-120 px-8 py-8 bg-white rounded-xl border-2 border-solid border-[#8257B4] shadow-[0_4px_20px_rgba(130,87,180,0.2)] animate-modal-in"
+        className="flex flex-col items-center w-120 px-8 py-8 bg-white rounded-xl border-2 border-solid border-[#8257B4] shadow-[0_4px_20px_rgba(130,87,180,0.2)] animate-modal-in max-md:mx-4 max-md:w-full max-md:max-w-120 max-md:px-5 max-md:py-6"
         onClick={e => e.stopPropagation()}
       >
         <p className="text-[#717171] typo-body1-medium text-center whitespace-pre-line">
           {message}
         </p>
-        <div className="flex justify-center items-center gap-2 mt-8">
+        <div className="flex justify-center items-center gap-2 mt-8 max-md:w-full max-md:flex-col">
           <button
             type="button"
             onClick={onConfirm}

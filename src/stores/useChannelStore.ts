@@ -31,6 +31,7 @@ interface Summary {
   avgWatchDurationChange: number | null;
   subscriberChange: number;
   subscriberChangePercent: number;
+  isFirstAnalysis?: boolean;
 }
 
 interface Guide {

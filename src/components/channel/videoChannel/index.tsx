@@ -19,12 +19,12 @@ const VideoChannel = ({ onVideoClick }: VideoChannelProps) => {
   return (
     <div className="flex flex-col w-full justify-center items-center">
       <div className="flex w-full justify-start">
-        <div className="flex px-16 py-3 justify-center typo-body1-medium rounded-t-xl border border-[#e4d3ff] bg-[#e4d3ff] border-b-2 border-b-white">
+        <div className="flex px-16 py-3 justify-center typo-body1-medium rounded-t-xl border border-[#e4d3ff] bg-[#e4d3ff] border-b-2 border-b-white max-md:px-5 max-md:py-2">
           내 영상
         </div>
       </div>
-      <div className="flex w-full h-266 px-6 py-11 justify-center items-center rounded-tr-xl rounded-b-xl bg-[#F5EFFF]">
-        <div className="flex flex-col w-full h-full overflow-y-auto gap-7.5 pr-4 script-scroll">
+      <div className="flex w-full h-266 px-6 py-11 justify-center items-center rounded-tr-xl rounded-b-xl bg-[#F5EFFF] max-md:min-h-48 max-md:px-3 max-md:py-4">
+        <div className="flex flex-col w-full h-full overflow-y-auto gap-7.5 pr-4 script-scroll max-md:h-full max-md:gap-4 max-md:pr-1">
           {videos.length > 0 ? (
             videos.map((v, i) => (
               <VideoItem
@@ -37,7 +37,7 @@ const VideoChannel = ({ onVideoClick }: VideoChannelProps) => {
               />
             ))
           ) : (
-            <div className="flex w-full h-full items-center justify-center text-gray-400 typo-body2 animate-loading-pulse">
+            <div className="flex w-full h-full items-center justify-center text-gray-400 typo-body2 animate-loading-pulse max-md:h-32">
               영상 데이터를 불러오는 중입니다...
             </div>
           )}

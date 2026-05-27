@@ -67,7 +67,7 @@ const ViewingTimeCard = () => {
   };
 
   return (
-    <div className="flex w-full h-full px-6 py-8 justify-center items-center gap-3.5 bg-white rounded-xl border-[0.1px] border-[#8257B4]">
+    <div className="flex w-full h-full px-6 py-8 justify-center items-center gap-3.5 bg-white rounded-xl border-[0.1px] border-[#8257B4] max-md:flex-col max-md:items-stretch max-md:px-3 max-md:py-4 max-md:gap-4">
       {/* 시청자 유지율 분석 영역 */}
       <div className="flex flex-col w-full h-full flex-1 justify-between items-center">
         <div className="flex w-full justify-start items-center gap-1 text-[#6452CE] typo-body4-semibold">
@@ -78,7 +78,7 @@ const ViewingTimeCard = () => {
         <div className="flex flex-col w-full gap-2">
           <div className="flex w-full">
             {/* Y축 라벨 */}
-            <div className="flex flex-col justify-between h-40 pr-2">
+            <div className="flex flex-col justify-between h-40 pr-2 max-md:h-48 max-md:pr-1.5">
               {[...yLabels].reverse().map((label, i) => (
                 <div key={i} className="text-black typo-graph text-right">
                   {label}
@@ -86,7 +86,7 @@ const ViewingTimeCard = () => {
               ))}
             </div>
             {/* 그래프 */}
-            <div className="flex-1 relative h-40">
+            <div className="flex-1 relative h-40 max-md:h-48">
               {showLoading ? (
                 <div className="flex w-full h-full items-center justify-center text-gray-400 animate-loading-pulse typo-body5">
                   유지율 데이터를 불러오는 중...
@@ -177,7 +177,7 @@ const ViewingTimeCard = () => {
             </div>
           </div>
           {/* X축 라벨 */}
-          <div className="flex w-full justify-between pl-8">
+          <div className="flex w-full justify-between pl-8 max-md:pl-6">
             {showLoading ? (
               <div className="text-gray-400 animate-loading-pulse typo-graph">
                 X축 라벨 대기중...
@@ -193,7 +193,7 @@ const ViewingTimeCard = () => {
         </div>
       </div>
       {/* 주요 이탈 구간 */}
-      <div className="flex flex-col w-52 shrink-0 justify-center items-center px-4.5 py-7 gap-4.5 bg-[#F5EFFF33] rounded-xl border-[0.1px] border-[#8257B4]">
+      <div className="flex flex-col w-52 shrink-0 justify-center items-center px-4.5 py-7 gap-4.5 bg-[#F5EFFF33] rounded-xl border-[0.1px] border-[#8257B4] max-md:w-full max-md:px-4 max-md:py-5 max-md:gap-3">
         <div className="w-full justify-start items-center text-black typo-body4-semibold">
           주요 이탈 구간
         </div>

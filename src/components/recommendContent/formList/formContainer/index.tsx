@@ -24,17 +24,19 @@ const FormContainer = ({
   const hasTitleActions = titleAddon || titleRight;
 
   return (
-    <div className="flex w-full h-21 flex-col items-start gap-2">
+    <div className="flex h-21 w-full flex-col items-start gap-2 max-md:h-auto">
       {hasTitleActions ? (
-        <div className="flex h-7 items-center justify-between self-stretch w-full">
-          <div className="flex items-center gap-2">
-            <div className="typo-body1-medium text-[#0A0A0A] whitespace-nowrap">{title}</div>
+        <div className="flex h-7 w-full items-center justify-between self-stretch max-md:h-auto max-md:flex-wrap max-md:gap-2">
+          <div className="flex items-center gap-2 max-md:min-w-0 max-md:gap-1.5">
+            <div className="typo-body1-medium text-[#0A0A0A] whitespace-nowrap max-md:whitespace-normal">
+              {title}
+            </div>
             {titleAddon}
           </div>
           {titleRight}
         </div>
       ) : (
-        <div className="flex h-7 items-center gap-2 shrink-0 self-stretch">
+        <div className="flex h-7 shrink-0 items-center gap-2 self-stretch max-md:h-auto">
           <div className="typo-body1-medium text-[#0A0A0A]">{title}</div>
         </div>
       )}
@@ -45,7 +47,7 @@ const FormContainer = ({
           value={value}
           onChange={e => onChange?.(e.target.value)}
           disabled={disabled}
-          className={`flex h-12 py-1 px-3 items-center shrink-0 self-stretch rounded-lg border border-transparent bg-[#FEF8FF] typo-body2 text-[#0A0A0A] placeholder:typo-body2 placeholder:text-[#0a0a0a89] outline-none ${disabled ? 'cursor-not-allowed opacity-70' : ''}`}
+          className={`flex h-12 shrink-0 items-center self-stretch rounded-lg border border-transparent bg-[#FEF8FF] px-3 py-1 typo-body2 text-[#0A0A0A] outline-none placeholder:typo-body2 placeholder:text-[#0a0a0a89] max-md:h-10 max-md:w-full ${disabled ? 'cursor-not-allowed opacity-70' : ''}`}
         />
       )}
     </div>

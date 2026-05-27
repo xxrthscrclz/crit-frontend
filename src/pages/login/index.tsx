@@ -93,11 +93,11 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen">
-      <div className="flex flex-col items-center gap-8">
-        <CritLogo className="w-[330px] h-[165px]" />
+    <div className="flex min-h-screen items-center justify-center max-md:px-4 max-md:py-8">
+      <div className="flex flex-col items-center gap-8 max-md:w-full max-md:max-w-[612px] max-md:gap-6">
+        <CritLogo className="h-[165px] w-[330px] max-md:h-auto max-md:w-full max-md:max-w-[280px]" />
 
-        <div className="flex w-[612px] flex-col items-start gap-8">
+        <div className="flex w-[612px] flex-col items-start gap-8 max-md:w-full max-md:gap-6">
           <div className="flex flex-col items-start gap-3 self-stretch">
             <div className="text-[#232323] typo-login-title">Sign in</div>
             <div className="text-[#969696] typo-login-body">구글 계정으로 로그인하세요.</div>
@@ -114,7 +114,7 @@ const LoginPage = () => {
             </div>
           </button>
 
-          <div className="flex w-full gap-3 self-stretch">
+          <div className="flex w-full gap-3 self-stretch max-md:flex-col">
             <button
               type="button"
               onClick={handleGuestBrowse}
