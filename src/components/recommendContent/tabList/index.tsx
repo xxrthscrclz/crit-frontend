@@ -28,9 +28,7 @@ const TabList = ({ tabs, defaultTab = 0, activeIndex, onChange }: TabListProps) 
           key={index}
           onClick={() => handleClick(index)}
           className={`relative z-10 flex h-15 w-73 cursor-pointer items-center justify-center rounded-xl transition-colors duration-300 ${
-            currentIndex === index
-              ? 'typo-title-bold text-brand'
-              : 'typo-body1-medium text-white'
+            currentIndex === index ? 'typo-title-bold text-brand' : 'typo-body1-medium text-white'
           }`}
         >
           {tab}

@@ -136,9 +136,7 @@ const FullScriptModal = ({ onClose }: FullScriptModalProps) => {
             onClick={handleCopy}
             disabled={!script || isLoading}
             className={`flex items-center gap-1.5 px-4 py-2 rounded-lg border border-brand-secondary bg-white typo-label transition-colors cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed ${
-              copied
-                ? 'text-brand'
-                : 'text-placeholder hover:text-brand active:text-brand'
+              copied ? 'text-brand' : 'text-placeholder hover:text-brand active:text-brand'
             }`}
           >
             {!copied && <CopyIcon className="w-4 h-4" />}

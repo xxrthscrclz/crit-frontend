@@ -24,7 +24,9 @@ const CheckBox = ({ label, checked: controlledChecked, onChange }: CheckBoxProps
     >
       <div
         className={`flex h-5 w-5 shrink-0 items-center justify-center rounded-sm shadow-sm max-md:h-4 max-md:w-4 ${
-          isChecked ? 'border border-brand-strong bg-brand-strong' : 'border border-black/10 bg-accent-soft'
+          isChecked
+            ? 'border border-brand-strong bg-brand-strong'
+            : 'border border-black/10 bg-accent-soft'
         }`}
       >
         {isChecked && <CheckIcon className="h-3 w-3 text-white max-md:h-2.5 max-md:w-2.5" />}
