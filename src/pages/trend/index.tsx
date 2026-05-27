@@ -45,7 +45,7 @@ const TrendPage = () => {
   return (
     <div>
       <Header />
-      <div className="flex flex-col items-center gap-10 px-24">
+      <div className="flex flex-col items-center gap-10 px-40">
         <div className="flex w-full flex-col justify-center items-center gap-5 animate-fade-in-up">
           <div className="flex w-full text-[#6B4EFF] typo-title2 mt-10">트렌드</div>
           <div className="flex w-full justify-between items-center">
