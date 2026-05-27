@@ -3,9 +3,10 @@ import AICommentIcon from '@/assets/icons/score-icons/video-detail/ai-comment-ic
 
 interface TodayTrendProps {
   aiSummary?: string;
+  isLoading?: boolean;
 }
 
-const TodayTrend = ({ aiSummary }: TodayTrendProps) => {
+const TodayTrend = ({ aiSummary, isLoading = false }: TodayTrendProps) => {
   return (
     <div className="flex w-full flex-col items-stretch gap-2.5">
       <div className="flex items-center gap-2.5">
@@ -27,7 +28,15 @@ const TodayTrend = ({ aiSummary }: TodayTrendProps) => {
               AI 생성 요약
             </span>
             <p className="text-[#2D2640] typo-body3-semibold leading-relaxed whitespace-pre-wrap">
-              {aiSummary ?? '요약을 불러오는 중입니다...'}
+              {aiSummary ? (
+                aiSummary
+              ) : isLoading ? (
+                <span className="text-gray-400 animate-loading-pulse">
+                  요약을 불러오는 중입니다...
+                </span>
+              ) : (
+                '요약 데이터가 없습니다.'
+              )}
             </p>
           </div>
           <div className="hidden shrink-0 items-center justify-center self-center rounded-2xl bg-[#6B4EFF]/6 p-5 sm:flex">

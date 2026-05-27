@@ -23,14 +23,18 @@ const formatUpdatedAt = (iso: string) => {
 
 const TrendPage = () => {
   const [data, setData] = useState<TrendingResponse | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const fetchTrending = async () => {
+      setIsLoading(true);
       try {
         const res = await getTrending();
         setData(res);
       } catch (err) {
         console.error('트렌드 데이터 요청 실패:', err);
+      } finally {
+        setIsLoading(false);
       }
     };
     fetchTrending();
@@ -42,7 +46,7 @@ const TrendPage = () => {
     <div>
       <Header />
       <div className="flex flex-col items-center gap-10 px-24">
-        <div className="flex w-full flex-col justify-center items-center gap-5">
+        <div className="flex w-full flex-col justify-center items-center gap-5 animate-fade-in-up">
           <div className="flex w-full text-[#6B4EFF] typo-title2 mt-10">트렌드</div>
           <div className="flex w-full justify-between items-center">
             <div className="text-black typo-body2">
@@ -54,9 +58,13 @@ const TrendPage = () => {
           </div>
           <div className="w-full h-px bg-[#A594F9]"></div>
         </div>
-        <TodayTrend aiSummary={data?.aiSummary} />
-        <PopularVideoSection videos={popularVideos} />
-        <div className="flex w-full items-start gap-5">
+        <div className="w-full animate-fade-in-up animate-delay-150">
+          <TodayTrend aiSummary={data?.aiSummary} isLoading={isLoading} />
+        </div>
+        <div className="w-full animate-fade-in-up animate-delay-300">
+          <PopularVideoSection videos={popularVideos} isLoading={isLoading} />
+        </div>
+        <div className="flex w-full items-start gap-5 animate-fade-in-up animate-delay-450">
           <div className="min-w-0 flex-1">
             <MusicChart
               title="실시간 인기 국내 차트 TOP 10"
@@ -64,6 +72,7 @@ const TrendPage = () => {
               dividerClassName="bg-[#6B4EFF]"
               listKeyPrefix="kr"
               accent="primary"
+              isLoading={isLoading}
             />
           </div>
           <div className="min-w-0 flex-1">
@@ -73,25 +82,30 @@ const TrendPage = () => {
               dividerClassName="bg-[#A594F9]"
               listKeyPrefix="global"
               accent="lavender"
+              isLoading={isLoading}
             />
           </div>
         </div>
-        <CategoryVideo items={data?.categoryTop1 ?? []} />
-        <div className="flex w-full flex-row items-stretch gap-5 overflow-visible">
-          <div className="flex min-h-0 min-w-0 flex-1 flex-col">
+        <div className="w-full animate-fade-in-up animate-delay-600">
+          <CategoryVideo items={data?.categoryTop1 ?? []} isLoading={isLoading} />
+        </div>
+        <div className="flex w-full flex-row items-start gap-5 animate-fade-in-up animate-delay-600">
+          <div className="flex min-w-0 flex-1 flex-col">
             <HotWord
               variant="keyword"
               title="핫 키워드 TOP 20"
               icon={HotKeywordIcon}
               items={data?.hotKeywords ?? []}
+              isLoading={isLoading}
             />
           </div>
-          <div className="flex min-h-0 min-w-0 flex-1 flex-col">
+          <div className="flex min-w-0 flex-1 flex-col">
             <HotWord
               variant="hashtag"
               title="핫 해시태그 TOP 20"
               icon={HotHashtagIcon}
               items={data?.hotHashtags ?? []}
+              isLoading={isLoading}
             />
           </div>
         </div>

@@ -8,6 +8,7 @@ interface MusicChartProps {
   dividerClassName?: string;
   listKeyPrefix: string;
   accent?: 'primary' | 'lavender';
+  isLoading?: boolean;
 }
 
 const MusicChart = ({
@@ -16,6 +17,7 @@ const MusicChart = ({
   dividerClassName = 'bg-[#6B4EFF]',
   listKeyPrefix,
   accent = 'primary',
+  isLoading = false,
 }: MusicChartProps) => {
   const glowClass = accent === 'primary' ? 'bg-[#6B4EFF]/6' : 'bg-[#A594F9]/10';
 
@@ -35,9 +37,15 @@ const MusicChart = ({
         </div>
         <div className="relative z-10 px-3 py-3">
           <div className="flex max-h-92 flex-col gap-1 overflow-y-auto script-scroll pr-1">
-            {items.map((item, index) => (
-              <MusicContainer key={`${listKeyPrefix}-${index}`} rank={index + 1} item={item} />
-            ))}
+            {items.length > 0 ? (
+              items.map((item, index) => (
+                <MusicContainer key={`${listKeyPrefix}-${index}`} rank={index + 1} item={item} />
+              ))
+            ) : isLoading ? (
+              <div className="flex items-center justify-center py-16 text-gray-400 animate-loading-pulse typo-body3">
+                차트를 불러오는 중입니다...
+              </div>
+            ) : null}
           </div>
         </div>
       </div>

@@ -38,8 +38,7 @@ const FullScriptModal = ({ onClose }: FullScriptModalProps) => {
   }, []);
 
   useEffect(() => {
-    const subject =
-      selectedSubjectIndex != null ? recommendations[selectedSubjectIndex] : null;
+    const subject = selectedSubjectIndex != null ? recommendations[selectedSubjectIndex] : null;
 
     const fetchFullScript = async () => {
       setIsLoading(true);
@@ -137,7 +136,9 @@ const FullScriptModal = ({ onClose }: FullScriptModalProps) => {
             onClick={handleCopy}
             disabled={!script || isLoading}
             className={`flex items-center gap-1.5 px-4 py-2 rounded-lg border border-[#A594F9] bg-white typo-label transition-colors cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed ${
-              copied ? 'text-[#6B4EFF]' : 'text-[#0a0a0a89] hover:text-[#6B4EFF] active:text-[#6B4EFF]'
+              copied
+                ? 'text-[#6B4EFF]'
+                : 'text-[#0a0a0a89] hover:text-[#6B4EFF] active:text-[#6B4EFF]'
             }`}
           >
             {!copied && <CopyIcon className="w-4 h-4" />}

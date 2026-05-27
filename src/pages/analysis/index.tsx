@@ -31,7 +31,18 @@ const AnalysisPage = () => {
   };
 
   useEffect(() => {
-    fetchData();
+    if (!channelURL) return;
+
+    const loadChannelAnalysis = async () => {
+      try {
+        const res = await getChannelAnalysis(channelURL, false);
+        setData(res);
+      } catch (err) {
+        console.error('채널 분석 요청 실패:', err);
+      }
+    };
+
+    loadChannelAnalysis();
   }, [setData, channelURL]);
 
   const handleRefresh = async () => {

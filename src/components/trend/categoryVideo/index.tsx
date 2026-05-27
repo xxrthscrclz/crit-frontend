@@ -4,12 +4,13 @@ import type { CategoryTop1Video } from '@/api/command';
 
 interface CategoryVideoProps {
   items: CategoryTop1Video[];
+  isLoading?: boolean;
 }
 
 const sortByCategoryId = (items: CategoryTop1Video[]) =>
   [...items].sort((a, b) => Number(a.categoryId) - Number(b.categoryId));
 
-const CategoryVideo = ({ items }: CategoryVideoProps) => {
+const CategoryVideo = ({ items, isLoading = false }: CategoryVideoProps) => {
   const sortedItems = sortByCategoryId(items);
 
   return (
@@ -29,9 +30,13 @@ const CategoryVideo = ({ items }: CategoryVideoProps) => {
         </div>
         <div className="relative z-10 px-5 py-4">
           <div className="flex flex-row justify-start items-start gap-5 overflow-x-auto script-scroll scroll-pl-2 scroll-pr-2 py-3">
-            {sortedItems.map(item => (
-              <CategoryItem key={item.categoryId} item={item} />
-            ))}
+            {sortedItems.length > 0 ? (
+              sortedItems.map(item => <CategoryItem key={item.categoryId} item={item} />)
+            ) : isLoading ? (
+              <div className="flex w-full items-center justify-center py-16 text-gray-400 animate-loading-pulse typo-body3">
+                카테고리별 동영상을 불러오는 중입니다...
+              </div>
+            ) : null}
           </div>
         </div>
       </div>

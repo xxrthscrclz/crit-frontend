@@ -25,9 +25,7 @@ const mockCategoryTop1: CategoryTop1Video[] = CATEGORY_NAMES.map((categoryName, 
     categoryName,
     videoId,
     title:
-      index === 0
-        ? '후배 놀리다가 역관광 당한 하석주'
-        : `${categoryName} 카테고리 인기 영상 ${id}`,
+      index === 0 ? '후배 놀리다가 역관광 당한 하석주' : `${categoryName} 카테고리 인기 영상 ${id}`,
     thumbnailUrl: `https://i.ytimg.com/vi/${videoId}/mqdefault.jpg`,
     videoUrl: `https://www.youtube.com/watch?v=${videoId}`,
     channelTitle: index === 0 ? '아는형님' : `${categoryName} 채널`,

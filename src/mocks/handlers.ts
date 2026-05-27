@@ -45,9 +45,7 @@ export const handlers = [
   // POST /ai_recommend - AI 추천 주제 요청
   http.post(`${SERVER_URL}/ai_recommend`, ({ request }) => {
     const response =
-      getVideoType(request) === 'short'
-        ? mockRecommendShortResponse
-        : mockRecommendLongResponse;
+      getVideoType(request) === 'short' ? mockRecommendShortResponse : mockRecommendLongResponse;
     return HttpResponse.json(response, { status: 200 });
   }),
 

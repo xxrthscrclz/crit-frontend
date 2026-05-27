@@ -4,9 +4,10 @@ import type { PopularVideo as PopularVideoItem } from '@/api/command';
 
 interface PopularVideoSectionProps {
   videos: PopularVideoItem[];
+  isLoading?: boolean;
 }
 
-const PopularVideoSection = ({ videos }: PopularVideoSectionProps) => {
+const PopularVideoSection = ({ videos, isLoading = false }: PopularVideoSectionProps) => {
   return (
     <div className="flex w-full flex-col items-stretch gap-2.5">
       <div className="flex items-center gap-2.5">
@@ -22,11 +23,17 @@ const PopularVideoSection = ({ videos }: PopularVideoSectionProps) => {
           <div className="absolute -top-12 right-16 h-40 w-40 rounded-full bg-[#6B4EFF]/5 blur-3xl" />
         </div>
         <div className="relative z-10 flex items-stretch gap-4 px-5 py-4">
-          {videos.map((video, index) => (
-            <div key={video.videoId} className="min-w-0 flex-1">
-              <VideoContainer video={video} rank={index + 1} className="h-full" />
+          {videos.length > 0 ? (
+            videos.map((video, index) => (
+              <div key={video.videoId} className="min-w-0 flex-1">
+                <VideoContainer video={video} rank={index + 1} className="h-full" />
+              </div>
+            ))
+          ) : isLoading ? (
+            <div className="flex w-full items-center justify-center py-16 text-gray-400 animate-loading-pulse typo-body3">
+              인기 동영상을 불러오는 중입니다...
             </div>
-          ))}
+          ) : null}
         </div>
       </div>
     </div>

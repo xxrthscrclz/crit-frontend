@@ -23,18 +23,23 @@ const VideoTitle = ({ title, isRegenerating = false, onRegenerate }: VideoTitleP
     prevTitleRef.current = title;
 
     if (!prevTitle && title) {
-      setDisplayTitle(title);
-      return;
+      const timer = window.setTimeout(() => {
+        setDisplayTitle(title);
+        setOpacity(1);
+      }, 0);
+      return () => window.clearTimeout(timer);
     }
 
-    setOpacity(0);
-
-    const timer = window.setTimeout(() => {
+    const fadeOutTimer = window.setTimeout(() => setOpacity(0), 0);
+    const fadeInTimer = window.setTimeout(() => {
       setDisplayTitle(title);
       requestAnimationFrame(() => setOpacity(1));
     }, FADE_DURATION_MS);
 
-    return () => window.clearTimeout(timer);
+    return () => {
+      window.clearTimeout(fadeOutTimer);
+      window.clearTimeout(fadeInTimer);
+    };
   }, [title]);
 
   const handleCopy = () => {

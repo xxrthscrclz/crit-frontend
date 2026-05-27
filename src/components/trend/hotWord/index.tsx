@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import type { ComponentType, SVGProps } from 'react';
 import { useNavigate } from 'react-router-dom';
 import WordItem from '@/components/trend/hotWord/wordItem';
@@ -6,12 +6,14 @@ import { getBubbleSizeScale } from '@/components/trend/hotWord/bubbleSize';
 import type { TrendHotWord } from '@/api/command';
 
 const HOT_WORD_LIMIT = 20;
+const SPREAD_VISIBLE_RATIO = 0.5;
 
 interface HotWordProps {
   title: string;
   icon: ComponentType<SVGProps<SVGSVGElement>>;
   items: TrendHotWord[];
   variant: 'keyword' | 'hashtag';
+  isLoading?: boolean;
 }
 
 const formatValue = (value: number) => {
@@ -21,28 +23,49 @@ const formatValue = (value: number) => {
   return value.toLocaleString();
 };
 
-const HotWord = ({ title, icon: Icon, items, variant }: HotWordProps) => {
+const getRankStats = (items: TrendHotWord[]) => {
+  const sliced = items.slice(0, HOT_WORD_LIMIT);
+  if (sliced.length === 0) {
+    return { minValue: 0, maxValue: 0, rankByText: new Map<string, number>() };
+  }
+  const values = sliced.map(item => item.value);
+  const sorted = [...sliced].sort((a, b) => b.value - a.value);
+  return {
+    minValue: Math.min(...values),
+    maxValue: Math.max(...values),
+    rankByText: new Map(sorted.map((item, index) => [item.text, index])),
+  };
+};
+
+const HotWord = ({ title, icon: Icon, items, variant, isLoading = false }: HotWordProps) => {
   const navigate = useNavigate();
   const [selected, setSelected] = useState<TrendHotWord | null>(null);
-  const [bubbleScale, setBubbleScale] = useState(1);
-  const bubblePanelRef = useRef<HTMLDivElement>(null);
-  const bubblesRef = useRef<HTMLDivElement>(null);
+  const panelRef = useRef<HTMLDivElement>(null);
   const isHashtag = variant === 'hashtag';
   const displayItems = items.slice(0, HOT_WORD_LIMIT);
+  const itemsKey = displayItems.map(item => `${item.text}:${item.value}`).join('|');
+  const { minValue, maxValue, rankByText } = getRankStats(items);
+  const [spreadState, setSpreadState] = useState({ key: '', active: false });
+  const shouldSpread = spreadState.key === itemsKey && spreadState.active;
   const valueLabel = isHashtag ? '태그 사용량' : '검색량';
 
-  const { minValue, maxValue, rankByText } = useMemo(() => {
-    if (displayItems.length === 0) {
-      return { minValue: 0, maxValue: 0, rankByText: new Map<string, number>() };
-    }
-    const values = displayItems.map(item => item.value);
-    const sorted = [...displayItems].sort((a, b) => b.value - a.value);
-    return {
-      minValue: Math.min(...values),
-      maxValue: Math.max(...values),
-      rankByText: new Map(sorted.map((item, index) => [item.text, index])),
-    };
-  }, [displayItems]);
+  useEffect(() => {
+    const panel = panelRef.current;
+    if (!panel || displayItems.length === 0) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && entry.intersectionRatio >= SPREAD_VISIBLE_RATIO) {
+          setSpreadState({ key: itemsKey, active: true });
+          observer.disconnect();
+        }
+      },
+      { threshold: [0, 0.5, 0.6] },
+    );
+
+    observer.observe(panel);
+    return () => observer.disconnect();
+  }, [itemsKey, displayItems.length]);
 
   const handleRecommend = () => {
     if (!selected) return;
@@ -60,36 +83,9 @@ const HotWord = ({ title, icon: Icon, items, variant }: HotWordProps) => {
     setSelected(prev => (prev?.text === item.text ? null : item));
   };
 
-  useEffect(() => {
-    const panel = bubblePanelRef.current;
-    const bubbles = bubblesRef.current;
-    if (!panel || !bubbles) return;
-
-    const updateScale = () => {
-      const styles = getComputedStyle(panel);
-      const paddingY = parseFloat(styles.paddingTop) + parseFloat(styles.paddingBottom);
-      const available = panel.clientHeight - paddingY;
-      const needed = bubbles.scrollHeight;
-      if (available <= 0 || needed <= 0) {
-        setBubbleScale(1);
-        return;
-      }
-      const next = Math.max(0.88, Math.min(1, available / needed));
-      setBubbleScale(prev => (Math.abs(prev - next) < 0.01 ? prev : next));
-    };
-
-    const runUpdate = () => requestAnimationFrame(updateScale);
-    const observer = new ResizeObserver(runUpdate);
-    observer.observe(panel);
-    observer.observe(bubbles);
-    runUpdate();
-
-    return () => observer.disconnect();
-  }, [displayItems, selected]);
-
   return (
-    <div className="relative flex h-full min-h-0 w-full flex-col">
-      <div className="flex h-full w-full flex-col items-stretch gap-2.5">
+    <div className="relative flex w-full flex-col">
+      <div className="flex w-full flex-col items-stretch gap-2.5">
         <div className="flex w-full items-center gap-2.5">
           <Icon className="h-8 w-8 shrink-0 text-[#6B4EFF]" />
           <div className="text-[#6B4EFF] typo-body1-medium">{title}</div>
@@ -99,40 +95,50 @@ const HotWord = ({ title, icon: Icon, items, variant }: HotWordProps) => {
             selected ? 'w-full' : 'w-[60%]'
           }`}
         />
-        <div
-          ref={bubblePanelRef}
-          className="relative box-border flex h-92 w-[60%] shrink-0 flex-col overflow-visible rounded-xl border border-[#A594F9] bg-white py-3 pl-3 pr-4"
-        >
-          <div className="flex min-h-0 flex-1 items-center justify-center overflow-visible pt-1">
-            <div
-              ref={bubblesRef}
-              className="flex w-full flex-wrap content-start items-center justify-center gap-2 transition-transform duration-300 ease-out"
-              style={{
-                transform: `scale(${bubbleScale})`,
-                transformOrigin: 'top center',
-              }}
-            >
-              {displayItems.map(item => (
-                <WordItem
-                  key={item.text}
-                  item={item}
-                  isHashtag={isHashtag}
-                  isSelected={selected?.text === item.text}
-                  sizeScale={getBubbleSizeScale(
-                    item.value,
-                    minValue,
-                    maxValue,
-                    rankByText.get(item.text) ?? 0,
-                    displayItems.length,
-                  )}
-                  onClick={() => handleWordClick(item)}
-                />
-              ))}
+        <div className="relative w-[60%] shrink-0">
+          <div
+            ref={panelRef}
+            className="box-border flex h-92 flex-col overflow-hidden rounded-xl border border-[#A594F9] bg-white py-3 pl-3 pr-2"
+          >
+            <div className="min-h-0 flex-1 overflow-y-auto script-scroll pr-1 pt-1">
+              {displayItems.length > 0 ? (
+                <div
+                  key={itemsKey}
+                  className={`flex min-h-full w-full flex-wrap content-center items-center justify-center gap-2 ${
+                    shouldSpread ? 'animate-hotword-spread' : 'hotword-spread-idle'
+                  }`}
+                >
+                  {displayItems.map(item => (
+                    <WordItem
+                      key={item.text}
+                      item={item}
+                      isHashtag={isHashtag}
+                      isSelected={selected?.text === item.text}
+                      sizeScale={getBubbleSizeScale(
+                        item.value,
+                        minValue,
+                        maxValue,
+                        rankByText.get(item.text) ?? 0,
+                        displayItems.length,
+                      )}
+                      onClick={() => handleWordClick(item)}
+                    />
+                  ))}
+                </div>
+              ) : isLoading ? (
+                <div className="flex min-h-full items-center justify-center">
+                  <span className="text-gray-400 animate-loading-pulse typo-body3">
+                    {isHashtag
+                      ? '핫 해시태그를 불러오는 중입니다...'
+                      : '핫 키워드를 불러오는 중입니다...'}
+                  </span>
+                </div>
+              ) : null}
             </div>
           </div>
 
           <div
-            className={`absolute top-1/2 right-0 z-20 h-[80%] -translate-y-1/2 transition-all duration-600 ease-out ${
+            className={`absolute top-1/2 right-0 z-30 h-[80%] -translate-y-1/2 transition-all duration-600 ease-out ${
               selected
                 ? 'w-72 translate-x-full animate-slide-in-right-slow'
                 : 'w-3 translate-x-[calc(100%-6px)]'
