@@ -1,15 +1,7 @@
 #!/bin/bash
-# crit-frontend 시작 스크립트
-# 현재 EC2 IP를 감지하여 .env 업데이트 후 프론트 실행
-
-TOKEN=$(curl -s -X PUT "http://169.254.169.254/latest/api/token" -H "X-aws-ec2-metadata-token-ttl-seconds: 21600")
-IP=$(curl -s -H "X-aws-ec2-metadata-token: $TOKEN" http://169.254.169.254/latest/meta-data/public-ipv4)
-echo "현재 EC2 IP: $IP"
-
-# .env 업데이트
-sed -i "s|http://[0-9.]*\.nip\.io:8080|http://${IP}.nip.io:8080|" .env
-sed -i "s|VITE_SERVER_URL=http://[0-9.]*:8080|VITE_SERVER_URL=http://${IP}:8080|" .env
-
-echo "설정 업데이트 완료"
-echo "프론트 시작..."
+cat > .env << 'EOF'
+VITE_SERVER_URL=https://crit.today
+VITE_USE_MOCK=false
+EOF
+echo "설정 완료 (https://crit.today)"
 npx vite --host

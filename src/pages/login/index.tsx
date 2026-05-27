@@ -2,6 +2,7 @@ import { useCallback, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import CritLogo from '@/assets/icons/critLogo.svg?react';
 import GoogleIcon from '@/assets/icons/google-icon.svg?react';
+import { SERVER_URL } from '@/api/axios';
 import { postGuestLogin, postTestLogin, type MemberLoginResponse } from '@/api/command';
 import TestAccountSelectModal from '@/pages/testAccountSelectModal';
 import useUserStore from '@/stores/useUserStore';
@@ -56,7 +57,7 @@ const LoginPage = () => {
   }, [navigate, setUser]);
 
   const handleGoogleLogin = () => {
-    window.location.href = `${import.meta.env.VITE_AUTH_URL}/oauth2/authorization/google`;
+    window.location.href = `${SERVER_URL}/oauth2/authorization/google`;
   };
 
   const handleGuestBrowse = async () => {
