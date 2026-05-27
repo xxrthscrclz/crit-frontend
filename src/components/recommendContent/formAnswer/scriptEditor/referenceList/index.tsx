@@ -7,7 +7,7 @@ const CommendList = () => {
   const creators = (data?.similarCreators ?? []).slice(0, 2);
 
   return (
-    <div className="flex w-full h-full px-3 py-4 flex-col gap-3 rounded-xl bg-[#FAFAFA] border border-[#A594F9] leading-6">
+    <div className="flex w-full h-full px-3 py-4 flex-col gap-3 rounded-xl bg-surface-raised border border-brand-secondary leading-6">
       <div className="flex w-full gap-1.5 flex-col">
         <div className="flex w-full typo-body-bold text-black">영상 추천</div>
         <div className="flex w-full gap-1.5 flex-col">

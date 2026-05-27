@@ -22,11 +22,11 @@ const UserInfoModalItem = ({ type, value }: UserInfoModalItemProps) => {
   return (
     <div className="flex w-full px-7.5 py-4 justify-between items-center">
       <div className="flex justify-center items-center gap-7.5">
-        <Icon className="w-6 h-6" />
+        <Icon className="crit-icon-muted w-6 h-6 shrink-0" />
         <div className="text-black typo-body1-medium">{label}</div>
       </div>
       {type === 'accountType' ? (
-        <div className="px-3 py-0.5 justify-center items-center rounded-lg bg-[#E9D3F8] text-[#5A36EA] typo-body4-semibold">
+        <div className="px-3 py-0.5 justify-center items-center rounded-lg bg-accent-muted text-brand-text-alt typo-body4-semibold">
           {value}
         </div>
       ) : (

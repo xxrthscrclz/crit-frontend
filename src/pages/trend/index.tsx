@@ -47,16 +47,16 @@ const TrendPage = () => {
       <Header />
       <div className="flex flex-col items-center gap-10 px-45 max-md:px-4">
         <div className="flex w-full flex-col items-center justify-center gap-5 animate-fade-in-up">
-          <div className="mt-10 flex w-full text-[#6B4EFF] typo-title2 max-md:mt-6">트렌드</div>
+          <div className="mt-10 flex w-full text-brand typo-title2 max-md:mt-6">트렌드</div>
           <div className="flex w-full items-center justify-between max-md:flex-col max-md:items-start max-md:gap-2">
             <div className="text-black typo-body2">
               실시간으로 급상승 중인 주제와 카테고리를 한눈에 확인해보세요.
             </div>
-            <div className="shrink-0 text-[#6D6D6D] typo-body2">
+            <div className="shrink-0 text-muted typo-body2">
               {data ? `데이터 기준 ${formatUpdatedAt(data.updatedAt)}` : '데이터 기준 —'}
             </div>
           </div>
-          <div className="h-px w-full bg-[#A594F9]" />
+          <div className="h-px w-full bg-brand-secondary" />
         </div>
         <div className="w-full animate-fade-in-up animate-delay-150">
           <TodayTrend aiSummary={data?.aiSummary} isLoading={isLoading} />
@@ -69,7 +69,7 @@ const TrendPage = () => {
             <MusicChart
               title="실시간 인기 국내 차트 TOP 10"
               items={data?.musicChartKR ?? []}
-              dividerClassName="bg-[#6B4EFF]"
+              dividerClassName="bg-brand"
               listKeyPrefix="kr"
               accent="primary"
               isLoading={isLoading}
@@ -79,7 +79,7 @@ const TrendPage = () => {
             <MusicChart
               title="실시간 인기 글로벌 차트 TOP 10"
               items={data?.musicChartGlobal ?? []}
-              dividerClassName="bg-[#A594F9]"
+              dividerClassName="bg-brand-secondary"
               listKeyPrefix="global"
               accent="lavender"
               isLoading={isLoading}

@@ -9,7 +9,7 @@ const AlgorithmScore = () => {
   const factors = score?.factors ?? [];
 
   return (
-    <div className="flex w-full px-2 py-6 flex-col justify-start items-center gap-2 rounded-xl border border-[#A594F9] self-stretch">
+    <div className="flex w-full px-2 py-6 flex-col justify-start items-center gap-2 rounded-xl border border-brand-secondary self-stretch">
       <div className="flex w-full h-7 px-3 typo-body1-medium text-black">알고리즘 점수</div>
       <div className="flex w-full h-full items-center gap-4 self-stretch max-md:flex-col max-md:items-center">
         <div className="flex items-center justify-center p-3 max-md:p-2">
@@ -36,8 +36,8 @@ const AlgorithmScore = () => {
               </div>
             )}
           </div>
-          <div className="flex w-full px-4 py-2 gap-2.5 items-center self-stretch rounded-xl border border-[#A594F9]">
-            <BulbIcon />
+          <div className="flex w-full px-4 py-2 gap-2.5 items-center self-stretch rounded-xl border border-brand-secondary">
+            <BulbIcon className="crit-icon-brand shrink-0" />
             <div className="flex flex-col">
               <div className="typo-body4-semibold text-black">
                 {score?.comment ?? (

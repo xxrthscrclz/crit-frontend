@@ -50,9 +50,9 @@ const SummaryContainer = ({
   const Icon = iconMap[label];
 
   return (
-    <div className="flex w-full h-full px-4 py-4.5 gap-4 rounded-xl bg-[#F5EFFF]">
+    <div className="flex w-full h-full px-4 py-4.5 gap-4 rounded-xl bg-accent-soft">
       <div className="flex flex-col items-center justify-start">
-        {Icon && <Icon className="w-8 h-8" />}
+        {Icon && <Icon className="crit-icon-secondary w-8 h-8" />}
       </div>
       <div className="flex flex-1 flex-col justify-center items-start gap-2.5">
         <div className="flex w-full text-black text-sm font-medium leading-[140%] tracking-wide">
@@ -63,16 +63,16 @@ const SummaryContainer = ({
             {isFirstAnalysis && label === '구독자 증가수' ? '첫 분석' : formatValue(label, value)}
           </div>
           <div
-            className={`flex px-2 py-1 w-13 gap-0.5 justify-center items-center rounded-xl ${isFirstAnalysis && label === '구독자 증가수' ? 'bg-[#E8E0FF]' : isUp ? 'bg-[#DEF3E195]' : isDown ? 'bg-[#FFEFEF]' : 'bg-[#FFFCEF]'}`}
+            className={`flex px-2 py-1 w-13 gap-0.5 justify-center items-center rounded-xl ${isFirstAnalysis && label === '구독자 증가수' ? 'bg-accent-muted' : isUp ? 'bg-success-soft' : isDown ? 'bg-danger-soft' : 'bg-warning-soft'}`}
           >
             {isFirstAnalysis && label === '구독자 증가수'
               ? null
-              : isUp && <TriangleIcon className="w-2.5 h-2.5 text-[#5AC467]" />}
+              : isUp && <TriangleIcon className="w-2.5 h-2.5 text-success" />}
             {isFirstAnalysis && label === '구독자 증가수'
               ? null
-              : isDown && <TriangleIcon className="w-2.5 h-2.5 text-[#FF0000] rotate-180" />}
+              : isDown && <TriangleIcon className="w-2.5 h-2.5 text-danger rotate-180" />}
             <div
-              className={`text-xs font-semibold ${isFirstAnalysis && label === '구독자 증가수' ? 'text-[#7C5CFF]' : isUp ? 'text-[#5AC467]' : isDown ? 'text-[#FF0000]' : 'text-[#FF9D00]'}`}
+              className={`text-xs font-semibold ${isFirstAnalysis && label === '구독자 증가수' ? 'text-brand-strong' : isUp ? 'text-success' : isDown ? 'text-danger' : 'text-warning'}`}
             >
               {isFirstAnalysis && label === '구독자 증가수'
                 ? 'NEW'

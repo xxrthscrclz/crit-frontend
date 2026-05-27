@@ -127,10 +127,10 @@ const RecommendContent = () => {
   };
 
   return (
-    <div className="flex flex-col w-full px-6 py-7 justify-center items-start gap-3.5 bg-white rounded-xl border-[0.1px] border-[#8257B4]">
+    <div className="flex flex-col w-full px-6 py-7 justify-center items-start gap-3.5 bg-white rounded-xl border-[0.1px] border-accent">
       <div className="flex w-full justify-between items-center">
-        <div className="flex items-center gap-1 text-[#6452CE] typo-body4-semibold">
-          <SparkIcon className="w-4 h-4" />
+        <div className="flex items-center gap-1 text-brand-deep typo-body4-semibold">
+          <SparkIcon className="crit-icon-brand w-4 h-4 shrink-0" />
           이어서 만들면 좋은 콘텐츠
         </div>
         {!showForm && (
@@ -139,7 +139,7 @@ const RecommendContent = () => {
             className={`px-3 py-1 rounded-md text-white typo-body6 transition-colors ${
               isSearching
                 ? 'bg-gray-400 cursor-not-allowed'
-                : 'bg-[#7C5CFF] hover:bg-[#C4B8FF] active:bg-[#C4B8FF] hover:text-[#6452CE] active:text-[#6452CE] cursor-pointer'
+                : 'bg-brand-strong hover:bg-accent-muted active:bg-accent-muted hover:text-brand-deep active:text-brand-deep cursor-pointer'
             }`}
           >
             {isSearching ? '검색 중...' : '다시 검색'}
@@ -156,20 +156,20 @@ const RecommendContent = () => {
                 데이터를 불러오는 중...
               </div>
             ) : (
-              <div className="flex flex-col w-full gap-5 p-5 rounded-xl border-[0.1px] border-[#8257B4]">
+              <div className="flex flex-col w-full gap-5 p-5 rounded-xl border-[0.1px] border-accent">
                 <div className="flex w-full items-start justify-between gap-6 max-md:flex-col max-md:gap-5">
                   {/* 키워드 (고정) */}
                   <div className="flex flex-col w-[30%] gap-2 max-md:w-full">
                     <div className="flex items-center gap-1.5 text-black typo-body4-semibold">
                       Keyword
                       <div className="relative group">
-                        <InfoIcon className="w-4 h-4 text-[#8257B4] cursor-pointer" />
-                        <div className="absolute left-0 bottom-full mb-2 px-3 py-2 bg-white/85 backdrop-blur-[27px] text-black typo-body6 rounded-xl border border-[#6B42FF] whitespace-nowrap opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-10">
+                        <InfoIcon className="w-4 h-4 text-brand-tertiary cursor-pointer" />
+                        <div className="absolute left-0 bottom-full mb-2 px-3 py-2 bg-white/85 backdrop-blur-[27px] text-black typo-body6 rounded-xl border border-brand whitespace-nowrap opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-10">
                           해당 영상의 키워드를 기반으로 AI가 콘텐츠를 추천합니다.
                         </div>
                       </div>
                     </div>
-                    <div className="px-4 py-2.5 rounded-lg bg-[#F5EFFF] border border-[#8257B4] text-[#6452CE] typo-body5">
+                    <div className="px-4 py-2.5 rounded-lg bg-accent-soft border border-accent text-brand-deep typo-body5">
                       {keywords || '키워드 없음'}
                     </div>
                   </div>
@@ -179,14 +179,14 @@ const RecommendContent = () => {
                     <div className="flex items-center gap-1.5 text-black typo-body4-semibold">
                       Category
                       <div className="relative group">
-                        <InfoIcon className="w-4 h-4 text-[#8257B4] cursor-pointer" />
-                        <div className="absolute left-0 bottom-full mb-2 px-3 py-2 bg-white/85 backdrop-blur-[27px] text-black typo-body6 rounded-xl border border-[#6B42FF] whitespace-nowrap opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-10">
+                        <InfoIcon className="w-4 h-4 text-brand-tertiary cursor-pointer" />
+                        <div className="absolute left-0 bottom-full mb-2 px-3 py-2 bg-white/85 backdrop-blur-[27px] text-black typo-body6 rounded-xl border border-brand whitespace-nowrap opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-10">
                           해당 영상의 카테고리를 기반으로 AI가 콘텐츠를 추천합니다.
                         </div>
                       </div>
                     </div>
                     <div
-                      className="px-4 py-2.5 rounded-lg bg-[#F5EFFF] border border-[#8257B4] text-[#6452CE] typo-body5 truncate"
+                      className="px-4 py-2.5 rounded-lg bg-accent-soft border border-accent text-brand-deep typo-body5 truncate"
                       title={categoryList.length > 0 ? categoryList.join(', ') : undefined}
                     >
                       {categoryList.length > 0 ? categoryList.join(', ') : '카테고리 없음'}
@@ -216,7 +216,7 @@ const RecommendContent = () => {
                     className={`flex py-2 px-8 mx-auto justify-center items-center rounded-lg typo-body4-semibold text-white transition-colors ${
                       isSearching
                         ? 'bg-gray-400 cursor-not-allowed'
-                        : 'bg-[#7C5CFF] hover:bg-[#6344DD] active:bg-[#8B6FFF] cursor-pointer'
+                        : 'bg-brand-strong hover:bg-brand-deep active:bg-brand-hover cursor-pointer'
                     }`}
                   >
                     {isSearching ? '검색 중...' : '콘텐츠 추천 받기'}

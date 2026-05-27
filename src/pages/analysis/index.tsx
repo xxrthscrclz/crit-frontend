@@ -66,7 +66,7 @@ const AnalysisPage = () => {
 
   return (
     <div
-      className={`min-h-screen flex flex-col justify-center items-center ${showDetail ? 'bg-[#F5EFFF]' : 'bg-white'}`}
+      className={`min-h-screen flex flex-col justify-center items-center ${showDetail ? 'bg-accent-soft' : 'bg-white'}`}
     >
       <Header />
       {!showDetail ? (
@@ -76,7 +76,7 @@ const AnalysisPage = () => {
         >
           <div className="flex w-full flex-col items-center justify-center gap-7 pb-2.5 animate-fade-in-up">
             <UserProfile onRefresh={handleRefresh} isRefreshing={isRefreshing} />
-            <div className="h-0.25 w-full bg-[#A594F9]" />
+            <div className="h-0.25 w-full bg-brand-secondary" />
           </div>
           <div className="flex w-full items-center justify-center gap-2 pb-2.5 animate-fade-in-up animate-delay-150 max-md:flex-col">
             <AlgorithmScore />

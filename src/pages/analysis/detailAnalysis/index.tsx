@@ -50,7 +50,7 @@ const DetailAnalysis = ({ onBack }: DetailAnalysisProps) => {
   return (
     <div className="flex flex-col w-300 items-center gap-6 px-10 py-10 animate-slide-in-right max-md:w-full max-md:px-4 max-md:py-6">
       <div
-        className="flex w-full justify-start items-center gap-2 cursor-pointer text-black/50 hover:text-[#6B4EFF] transition-colors"
+        className="flex w-full justify-start items-center gap-2 cursor-pointer text-black/50 hover:text-brand transition-colors"
         onClick={onBack}
       >
         <ArrowLeftIcon className="w-5 h-5" />

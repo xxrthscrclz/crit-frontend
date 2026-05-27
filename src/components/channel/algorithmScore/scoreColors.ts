@@ -1,5 +1,18 @@
 export const getScoreColors = (score: number) => {
-  if (score <= 30) return { fill: '#FF0000', track: '#FFEFEF' };
-  if (score <= 70) return { fill: '#FF9D00', track: '#FFFCEF' };
-  return { fill: '#5AC467', track: '#5AC46733' };
+  if (score <= 30) {
+    return {
+      fill: 'var(--color-danger)',
+      track: 'var(--color-danger-soft)',
+    };
+  }
+  if (score <= 70) {
+    return {
+      fill: 'var(--color-warning)',
+      track: 'var(--color-warning-soft)',
+    };
+  }
+  return {
+    fill: 'var(--color-success)',
+    track: 'var(--color-success-track-alpha)',
+  };
 };

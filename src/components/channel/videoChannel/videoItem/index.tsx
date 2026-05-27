@@ -13,7 +13,7 @@ const VideoItem = ({ title, thumbnailUrl, score, description, onClick }: VideoIt
 
   return (
     <div
-      className="flex w-full px-7.5 py-6 gap-7.5 self-stretch rounded-xl bg-white border hover:bg-[#F3F0FF] active:bg-[#F3F0FF] border-[#A594F9] hover:border-[#6B42FF] active:border-[#6B42FF] cursor-pointer max-md:flex-col max-md:gap-3 max-md:px-3 max-md:py-3"
+      className="flex w-full px-7.5 py-6 gap-7.5 self-stretch rounded-xl bg-white border hover:bg-input-highlight active:bg-input-highlight border-brand-secondary hover:border-brand active:border-brand cursor-pointer max-md:flex-col max-md:gap-3 max-md:px-3 max-md:py-3"
       onClick={onClick}
     >
       <div className="w-76 shrink-0 aspect-video rounded-xl overflow-hidden max-md:w-full">

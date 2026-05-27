@@ -1,8 +1,11 @@
 import ReactDOM from 'react-dom/client';
 
 import Router from '@/routes/routes';
+import { initTheme } from '@/utils/theme';
 
 import './index.css';
+
+initTheme();
 
 const enableMocking = async () => {
   if (import.meta.env.VITE_USE_MOCK === 'true') {

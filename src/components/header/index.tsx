@@ -6,6 +6,7 @@ import CritLogo from '@/assets/icons/critLogo.svg?react';
 import useUserStore from '@/stores/useUserStore';
 import UserInfoModal from '@/pages/userInfoModal';
 import ConfirmModal from '@/components/confirmModal';
+import ThemeToggle from '@/components/header/ThemeToggle';
 import { clearAuth, isMember } from '@/utils/auth';
 
 const navItems = [
@@ -52,7 +53,7 @@ const Header = () => {
   const isActive = (path: string) => currentPath === path;
 
   return (
-    <div className="sticky top-0 z-50 w-full border-b border-[#dad9d9]/30 bg-white/70 backdrop-blur-md">
+    <div className="sticky top-0 z-50 w-full border-b border-default bg-white/70 backdrop-blur-md">
       <div className="relative flex h-20 items-center justify-between gap-3 px-5 max-md:h-16 max-md:px-4">
         <CritLogo
           className="w-38 h-11 shrink-0 cursor-pointer max-md:h-8 max-md:w-24"
@@ -71,9 +72,7 @@ const Header = () => {
                 handleNavClick(item.path, 'requiresLogin' in item && item.requiresLogin)
               }
             >
-              <div className={isActive(item.path) ? 'text-[#6B4EFF]' : 'text-black'}>
-                {item.label}
-              </div>
+              <div className={isActive(item.path) ? 'text-brand' : 'text-black'}>{item.label}</div>
             </div>
           ))}
         </div>
@@ -81,12 +80,12 @@ const Header = () => {
         <div className="flex h-9 min-w-0 items-center justify-center whitespace-nowrap max-md:hidden">
           {isLoggedIn ? (
             <>
-              <div className="truncate text-[#6B4EFF] typo-body2">{channelName}</div>
+              <div className="truncate text-brand typo-body2">{channelName}</div>
               <div className="text-black typo-body2">&nbsp;님 어서오세요!</div>
             </>
           ) : (
             <div
-              className="cursor-pointer text-[#6B4EFF] typo-body2 hover:underline"
+              className="cursor-pointer text-brand typo-body2 hover:underline"
               onClick={handleGoToLogin}
             >
               로그인 하러 가기
@@ -129,20 +128,27 @@ const Header = () => {
               </svg>
             )}
           </button>
-          <LogoutIcon className="h-6 w-6 cursor-pointer" onClick={handleGoToLogin} />
-          <PersonIcon className="h-6 w-6 cursor-pointer" onClick={() => setShowModal(true)} />
+          <LogoutIcon
+            className="crit-icon-muted h-6 w-6 cursor-pointer hover:text-brand"
+            onClick={handleGoToLogin}
+          />
+          <PersonIcon
+            className="crit-icon-muted h-6 w-6 cursor-pointer hover:text-brand"
+            onClick={() => setShowModal(true)}
+          />
+          <ThemeToggle />
         </div>
       </div>
 
       {menuOpen && (
-        <div className="hidden border-t border-[#dad9d9]/30 bg-white px-4 py-4 max-md:block">
+        <div className="hidden border-t border-default bg-white px-4 py-4 max-md:block">
           <div className="mb-4">
             {isLoggedIn ? (
               <div className="text-black typo-body2">
-                <span className="text-[#6B4EFF]">{channelName}</span>님 어서오세요!
+                <span className="text-brand">{channelName}</span>님 어서오세요!
               </div>
             ) : (
-              <button type="button" className="text-[#6B4EFF] typo-body2" onClick={handleGoToLogin}>
+              <button type="button" className="text-brand typo-body2" onClick={handleGoToLogin}>
                 로그인 하러 가기
               </button>
             )}
@@ -153,7 +159,7 @@ const Header = () => {
                 key={item.path}
                 type="button"
                 className={`rounded-lg px-4 py-3 text-left typo-body2 ${
-                  isActive(item.path) ? 'bg-[#F5EFFF] text-[#6B4EFF]' : 'text-black'
+                  isActive(item.path) ? 'bg-accent-soft text-brand' : 'text-black'
                 }`}
                 onClick={() =>
                   handleNavClick(item.path, 'requiresLogin' in item && item.requiresLogin)

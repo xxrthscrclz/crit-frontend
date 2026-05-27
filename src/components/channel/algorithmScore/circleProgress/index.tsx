@@ -25,6 +25,7 @@ const CircleProgress = ({ score, maxScore = 100, rank }: CircleProgressProps) =>
           fill="none"
           stroke={track}
           strokeWidth={strokeWidth}
+          className="score-ring-track"
         />
         <circle
           cx={size / 2}

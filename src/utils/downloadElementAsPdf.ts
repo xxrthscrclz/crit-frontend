@@ -1,11 +1,12 @@
 import html2canvas from 'html2canvas';
 import { jsPDF } from 'jspdf';
+import { pdfExportBackground } from '@/constants/colors';
 
 /** 화면에 보이는 스타일 그대로 PDF 파일로 바로 저장 */
 export const downloadElementAsPdf = async (element: HTMLElement, filename: string) => {
   const canvas = await html2canvas(element, {
     scale: 2,
-    backgroundColor: '#ffffff',
+    backgroundColor: pdfExportBackground,
     useCORS: true,
     logging: false,
   });

@@ -29,17 +29,15 @@ const ConfirmModal = ({
       onClick={onConfirm}
     >
       <div
-        className="flex flex-col items-center w-120 px-8 py-8 bg-white rounded-xl border-2 border-solid border-[#8257B4] shadow-[0_4px_20px_rgba(130,87,180,0.2)] animate-modal-in max-md:mx-4 max-md:w-full max-md:max-w-120 max-md:px-5 max-md:py-6"
+        className="flex flex-col items-center w-120 px-8 py-8 bg-white rounded-xl border-2 border-solid border-accent shadow-[0_4px_20px_rgba(130,87,180,0.2)] animate-modal-in max-md:mx-4 max-md:w-full max-md:max-w-120 max-md:px-5 max-md:py-6"
         onClick={e => e.stopPropagation()}
       >
-        <p className="text-[#717171] typo-body1-medium text-center whitespace-pre-line">
-          {message}
-        </p>
+        <p className="text-muted typo-body1-medium text-center whitespace-pre-line">{message}</p>
         <div className="flex justify-center items-center gap-2 mt-8 max-md:w-full max-md:flex-col">
           <button
             type="button"
             onClick={onConfirm}
-            className="flex py-2.5 px-5 justify-center items-center rounded-lg bg-[#7C5CFF] active:bg-[#6344DD] typo-body1-medium text-white cursor-pointer"
+            className="flex py-2.5 px-5 justify-center items-center rounded-lg bg-brand-strong active:bg-brand-deep typo-body1-medium text-white cursor-pointer"
           >
             {confirmLabel}
           </button>
@@ -47,7 +45,7 @@ const ConfirmModal = ({
             <button
               type="button"
               onClick={onSecondary}
-              className="flex py-2.5 px-5 justify-center items-center rounded-lg border-2 border-[#7C5CFF] bg-transparent text-[#7C5CFF] active:bg-[#7C5CFF]/10 typo-body1-medium cursor-pointer"
+              className="flex py-2.5 px-5 justify-center items-center rounded-lg border-2 border-brand-strong bg-transparent text-brand-strong active:bg-brand-soft/10 typo-body1-medium cursor-pointer"
             >
               {secondaryLabel}
             </button>

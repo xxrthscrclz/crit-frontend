@@ -44,9 +44,9 @@ const VideoContainer = ({
       href={video.videoUrl}
       target="_blank"
       rel="noopener noreferrer"
-      className={`relative flex h-full min-h-0 w-full flex-col overflow-hidden rounded-xl border border-[#E8E2FF] bg-white shadow-[0_4px_16px_rgba(107,78,255,0.08)] transition-all duration-300 ease-out hover:-translate-y-0.5 hover:border-[#A594F9] hover:shadow-[0_10px_28px_rgba(107,78,255,0.14)] active:translate-y-0 active:shadow-[0_6px_20px_rgba(107,78,255,0.12)] ${className}`}
+      className={`relative flex h-full min-h-0 w-full flex-col overflow-hidden rounded-xl border border-accent-muted bg-white shadow-[0_4px_16px_rgba(107,78,255,0.08)] transition-all duration-300 ease-out hover:-translate-y-0.5 hover:border-brand-secondary hover:shadow-[0_10px_28px_rgba(107,78,255,0.14)] active:translate-y-0 active:shadow-[0_6px_20px_rgba(107,78,255,0.12)] ${className}`}
     >
-      <div className="relative aspect-video w-full shrink-0 overflow-hidden bg-[#1a1a1a]">
+      <div className="relative aspect-video w-full shrink-0 overflow-hidden bg-placeholder-dark">
         <img src={video.thumbnailUrl} alt={video.title} className="h-full w-full object-cover" />
         {rank != null && (
           <div
@@ -66,16 +66,16 @@ const VideoContainer = ({
         }`}
       >
         <div
-          className={`flex h-8 w-full shrink-0 items-center justify-start truncate text-black typo-body6 ${
+          className={`flex h-8 w-full shrink-0 items-center justify-start truncate text-black typo-body-bold ${
             compactMobile ? 'max-md:h-6' : ''
           }`}
         >
           {video.title}
         </div>
-        <div className="flex w-full shrink-0 items-center justify-start truncate text-[#6D6D6D] typo-body6">
+        <div className="flex w-full shrink-0 items-center justify-start truncate text-muted typo-body6">
           {video.channelTitle}
         </div>
-        <div className="flex h-5 w-full shrink-0 items-center justify-start gap-1 truncate text-[#6765FF] typo-body6">
+        <div className="flex h-5 w-full shrink-0 items-center justify-start gap-1 truncate text-brand-indigo typo-body6">
           {tags.length > 0 ? (
             tags.map(tag => (
               <span key={tag} className="shrink-0">
@@ -96,14 +96,12 @@ const VideoContainer = ({
         <div className="min-h-0 flex-1" aria-hidden />
         <div className="flex w-full shrink-0 items-center justify-between">
           <div className="flex items-center justify-center gap-1">
-            <EyeIcon className="h-4 w-4 shrink-0" />
+            <EyeIcon className="crit-icon-muted h-4 w-4 shrink-0" />
             <div className="text-black typo-body6">{formatViewCount(video.views)}</div>
           </div>
           <div className="flex items-center justify-center gap-1">
-            <UploadIcon className="h-4 w-4 shrink-0" />
-            <div className="text-[#6D6D6D] typo-body6">
-              {formatPublishedDate(video.publishedAt)}
-            </div>
+            <UploadIcon className="crit-icon-muted h-4 w-4 shrink-0" />
+            <div className="text-muted typo-body6">{formatPublishedDate(video.publishedAt)}</div>
           </div>
         </div>
       </div>

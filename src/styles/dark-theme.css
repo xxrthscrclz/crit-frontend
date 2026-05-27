@@ -1,0 +1,920 @@
+/* ===== CRIT Dark Theme =====
+ * 다크 모드 토큰 + (마이그레이션 잔여) hex 클래스 폴백 오버라이드.
+ * 신규 코드는 theme-utilities 시맨틱 클래스 사용 권장.
+ */
+
+[data-theme='dark'] {
+  color-scheme: dark;
+
+  /* --- Page & Surface --- */
+  --color-bg-page: #0b0c12;
+  --color-bg-surface: #13141e;
+  --color-bg-surface-raised: #1a1b27;
+  --color-bg-surface-overlay: #212233;
+  --color-bg-overlay: rgb(11 12 18 / 0.92);
+
+  /* --- Accent Surfaces --- */
+  --color-bg-accent-soft: #1c1d2b;
+  --color-bg-accent-muted: #242536;
+  --color-bg-input: #1a1b28;
+  --color-bg-input-highlight: #252638;
+  --color-bg-muted: #1e1f2c;
+
+  /* --- Text (가독성 우선 — muted도 충분히 밝게) --- */
+  --color-text-primary: #f2f1f7;
+  --color-text-secondary: #c9c8d6;
+  --color-text-muted: #a4a3b5;
+  --color-text-subtle: #848396;
+  --color-text-on-brand: #ffffff;
+
+  /* --- Brand --- */
+  --color-brand-primary: #b4a6ff;
+  --color-brand-primary-strong: #9f8cff;
+  --color-brand-secondary: #d4cbff;
+  --color-brand-tertiary: #c4b5fd;
+  --color-brand-deep: #8b7cf7;
+  --color-brand-darker: #9f8cff;
+  --color-brand-hover: #8b7cf7;
+  --color-brand-active: #9f8cff;
+  --color-brand-indigo: #b4a6ff;
+  --color-brand-violet: #9f8cff;
+  --color-brand-text-deep: #b4a6ff;
+  --color-brand-text-purple: #b4a6ff;
+  --color-brand-text-alt: #b4a6ff;
+
+  /* --- Border --- */
+  --color-border-default: #343548;
+  --color-border-subtle: rgb(255 255 255 / 0.08);
+  --color-border-accent: #4a4068;
+  --color-border-accent-muted: #4a4068;
+  --color-border-accent-strong: #7c6bb8;
+  --color-border-brand-secondary: #4a4068;
+  --color-border-brand-soft: #4a4068;
+  --color-border-brand-faint: rgb(74 64 104 / 0.35);
+  --color-border-neutral: rgb(255 255 255 / 0.08);
+  --color-border-accent-muted-80: rgb(74 64 104 / 0.8);
+
+  /* --- Text (추가) --- */
+  --color-text-placeholder: rgb(242 241 247 / 0.45);
+  --color-text-disabled: rgb(242 241 247 / 0.45);
+
+  /* --- Body copy --- */
+  --color-body-deep: #c9c8d6;
+  --color-body-gray: #c9c8d6;
+  --color-body-light-gray: #a4a3b5;
+  --color-body-mid-gray: #a4a3b5;
+
+  /* --- Chart --- */
+  --color-chart-grid: #343548;
+  --color-chart-accent: #9f8cff;
+  --color-chart-accent-soft: rgb(159 140 255 / 0.2);
+
+  /* --- Interactive (추가) --- */
+  --color-hover-brand-medium: rgb(159 140 255 / 0.14);
+  --color-hover-brand-light: rgb(159 140 255 / 0.14);
+  --color-active-brand-medium: rgb(159 140 255 / 0.14);
+  --color-brand-soft-5: rgb(159 140 255 / 0.08);
+  --color-brand-secondary-10: rgb(159 140 255 / 0.14);
+  --color-brand-secondary-12: rgb(159 140 255 / 0.14);
+  --color-brand-tertiary-10: rgb(159 140 255 / 0.14);
+  --color-shadow-brand-sm: rgb(0 0 0 / 0.35);
+  --color-shadow-brand-md: rgb(0 0 0 / 0.4);
+  --color-shadow-brand-lg: rgb(0 0 0 / 0.45);
+
+  /* --- Semantic track --- */
+  --color-success-track: rgb(110 231 160 / 0.2);
+
+  /* --- Semantic (점수/상태) --- */
+  --color-success: #6ee7a0;
+  --color-success-soft: rgb(110 231 160 / 0.14);
+  --color-success-track-alpha: rgb(110 231 160 / 0.2);
+  --color-warning: #fbbf24;
+  --color-warning-soft: rgb(251 191 36 / 0.14);
+  --color-danger: #f87171;
+  --color-danger-soft: rgb(248 113 113 / 0.14);
+
+  /* --- Interactive --- */
+  --color-hover-brand-soft: rgb(159 140 255 / 0.14);
+  --color-active-brand-soft: rgb(159 140 255 / 0.22);
+  --color-shadow-brand: rgb(107 78 255 / 0.28);
+  --color-progress-track: rgb(255 255 255 / 0.1);
+  --color-progress-track-accent: rgb(159 140 255 / 0.18);
+
+  --slider-fill: var(--color-brand-primary-strong);
+  --slider-track: var(--color-progress-track-accent);
+
+  /* --- Gradient surfaces (dark flat equivalents) --- */
+  --color-gradient-card-from: var(--color-bg-accent-soft);
+  --color-gradient-card-via: var(--color-bg-accent-muted);
+  --color-gradient-card-to: var(--color-bg-accent-muted);
+  --color-gradient-card-hover-from: var(--color-bg-accent-soft);
+  --color-gradient-card-hover-via: var(--color-bg-accent-muted);
+  --color-gradient-card-hover-to: var(--color-bg-surface-overlay);
+  --color-gradient-card-active-from: var(--color-bg-accent-muted);
+  --color-gradient-card-active-via: var(--color-bg-surface-overlay);
+  --color-gradient-card-active-to: var(--color-bg-surface-overlay);
+  --color-gradient-card-selected-from: var(--color-bg-accent-soft);
+  --color-gradient-card-selected-via: var(--color-bg-accent-muted);
+  --color-gradient-card-selected-to: var(--color-bg-surface-overlay);
+
+  --color-gradient-pill-from: var(--color-bg-accent-soft);
+  --color-gradient-pill-via: var(--color-bg-accent-muted);
+  --color-gradient-pill-to: var(--color-bg-surface-overlay);
+
+  --color-gradient-panel-from: var(--color-bg-accent-soft);
+  --color-gradient-panel-via: var(--color-bg-surface);
+  --color-gradient-panel-to: var(--color-bg-accent-muted);
+
+  --color-gradient-page-from: var(--color-bg-accent-soft);
+  --color-gradient-page-via: var(--color-bg-page);
+  --color-gradient-page-to: var(--color-bg-page);
+
+  --color-gradient-accent-soft: rgb(159 140 255 / 0.08);
+
+  /* --- Glass / overlay --- */
+  --color-glass-bg: rgb(26 27 39 / 0.92);
+  --color-glass-bg-muted: rgb(26 27 39 / 0.88);
+  --color-tooltip-bg: rgb(26 27 39 / 0.95);
+
+  /* --- Destructive / reset --- */
+  --color-reset: #e85555;
+  --color-reset-hover: #ff6b6b;
+  --color-reset-active: #ff9999;
+
+  /* --- Scrollbar --- */
+  --color-scrollbar-thumb: var(--color-border-accent);
+
+  /* --- Icon --- */
+  --color-icon-muted: var(--color-text-muted);
+  --color-icon-brand: var(--color-brand-primary);
+  --color-icon-secondary: var(--color-brand-primary);
+
+  /* --- Misc --- */
+  --color-analysis-tab: var(--color-bg-accent-muted);
+  --color-border-overlay: rgb(255 255 255 / 0.16);
+  --color-meta-theme: #0f1017;
+  --color-star-active: #ffd700;
+
+  --color-decorative-teal: #4ecdc4;
+  --color-decorative-yellow: #ffeaa7;
+
+  --shadow-brand-card: 0 10px 28px rgb(0 0 0 / 0.35);
+  --shadow-brand-card-hover: 0 10px 28px rgb(0 0 0 / 0.4);
+  --shadow-brand-card-active: 0 6px 20px rgb(0 0 0 / 0.45);
+  --shadow-brand-bubble: 0 2px 10px rgb(0 0 0 / 0.3), inset 0 1px 0 rgb(255 255 255 / 0.08);
+  --shadow-brand-bubble-hover: 0 8px 22px rgb(0 0 0 / 0.35), inset 0 1px 0 rgb(255 255 255 / 0.1);
+  --shadow-brand-bubble-selected:
+    0 10px 26px rgb(0 0 0 / 0.4), inset 0 1px 0 rgb(255 255 255 / 0.12);
+
+  --color-rank-gold-from: #3a3218;
+  --color-rank-gold-to: #5a4518;
+  --color-rank-gold-border: #c9a832;
+  --color-rank-gold-text: #f5d76e;
+  --color-rank-silver-from: #2a2a32;
+  --color-rank-silver-to: #3a3a44;
+  --color-rank-silver-border: #6a6a78;
+  --color-rank-silver-text: #d4d4dc;
+  --color-rank-bronze-from: #3a2818;
+  --color-rank-bronze-to: #5a3818;
+  --color-rank-bronze-border: #c47840;
+  --color-rank-bronze-text: #ffb080;
+}
+
+/* --- Base --- */
+[data-theme='dark'] body {
+  background-color: var(--color-bg-page);
+  color: var(--color-text-primary);
+}
+
+/* --- Standard Tailwind utilities --- */
+[data-theme='dark'] .bg-white {
+  background-color: var(--color-bg-surface) !important;
+}
+
+[data-theme='dark'] .bg-white\/70,
+[data-theme='dark'] .bg-white\/80,
+[data-theme='dark'] .bg-white\/85,
+[data-theme='dark'] .bg-white\/90 {
+  background-color: var(--color-bg-overlay) !important;
+}
+
+[data-theme='dark'] .bg-gray-100 {
+  background-color: var(--color-bg-muted) !important;
+}
+
+[data-theme='dark'] .bg-gray-200,
+[data-theme='dark'] .bg-gray-300 {
+  background-color: var(--color-bg-surface-overlay) !important;
+}
+
+[data-theme='dark'] .text-black {
+  color: var(--color-text-primary) !important;
+}
+
+[data-theme='dark'] .text-black\/50,
+[data-theme='dark'] .text-\[\#0000004D\] {
+  color: rgb(242 241 247 / 0.45) !important;
+}
+
+[data-theme='dark'] .text-white {
+  color: var(--color-text-on-brand) !important;
+}
+
+[data-theme='dark'] .text-gray-300 {
+  color: var(--color-text-subtle) !important;
+}
+
+[data-theme='dark'] .text-gray-400,
+[data-theme='dark'] .text-gray-500,
+[data-theme='dark'] .text-gray-600 {
+  color: var(--color-text-muted) !important;
+}
+
+[data-theme='dark'] .hover\:text-gray-600:hover {
+  color: var(--color-text-secondary) !important;
+}
+
+/* --- Brand text --- */
+[data-theme='dark'] .text-\[\#6B4EFF\],
+[data-theme='dark'] .text-\[\#6765FF\],
+[data-theme='dark'] .text-\[\#6452CE\],
+[data-theme='dark'] .text-\[\#634DCB\],
+[data-theme='dark'] .text-\[\#7C5CFF\],
+[data-theme='dark'] .text-\[\#8257B4\],
+[data-theme='dark'] .text-\[\#3D2E9E\],
+[data-theme='dark'] .text-\[\#4F378A\] {
+  color: var(--color-brand-primary) !important;
+}
+
+/* --- Body text --- */
+[data-theme='dark'] .text-\[\#232323\],
+[data-theme='dark'] .text-\[\#0A0A0A\],
+[data-theme='dark'] .text-\[\#0a0a0a89\],
+[data-theme='dark'] .text-\[\#2D2640\],
+[data-theme='dark'] .text-\[\#555\] {
+  color: var(--color-text-secondary) !important;
+}
+
+[data-theme='dark'] .text-\[\#717171\],
+[data-theme='dark'] .text-\[\#6D6D6D\],
+[data-theme='dark'] .text-\[\#969696\],
+[data-theme='dark'] .text-\[\#929292\],
+[data-theme='dark'] .text-\[\#999\],
+[data-theme='dark'] .text-\[\#8B8484\] {
+  color: var(--color-text-muted) !important;
+}
+
+[data-theme='dark'] .text-\[\#5A36EA\] {
+  color: var(--color-brand-primary) !important;
+}
+
+/* --- Semantic text --- */
+[data-theme='dark'] .text-\[\#5AC467\] {
+  color: var(--color-success) !important;
+}
+
+[data-theme='dark'] .text-\[\#FF9D00\] {
+  color: var(--color-warning) !important;
+}
+
+[data-theme='dark'] .text-\[\#FF0000\] {
+  color: var(--color-danger) !important;
+}
+
+/* --- Accent backgrounds --- */
+[data-theme='dark'] .bg-\[\#F5EFFF\],
+[data-theme='dark'] .bg-\[\#FEF8FF\],
+[data-theme='dark'] .bg-\[\#FAF8FF\],
+[data-theme='dark'] .bg-\[\#F8F6FF\],
+[data-theme='dark'] .bg-\[\#FAFAFA\],
+[data-theme='dark'] .bg-\[\#FAFAFE\],
+[data-theme='dark'] .bg-\[\#F4F4F4\],
+[data-theme='dark'] .bg-\[\#F3EEFF\],
+[data-theme='dark'] .bg-\[\#F3F0FF\],
+[data-theme='dark'] .bg-\[\#F5EFFF33\] {
+  background-color: var(--color-bg-accent-soft) !important;
+}
+
+[data-theme='dark'] .bg-\[\#fff\],
+[data-theme='dark'] .bg-\[\#FFF\] {
+  background-color: var(--color-bg-surface) !important;
+}
+
+[data-theme='dark'] .bg-\[\#DEF3E195\] {
+  background-color: var(--color-success-soft) !important;
+}
+
+[data-theme='dark'] .bg-\[\#FFFCEF\] {
+  background-color: var(--color-warning-soft) !important;
+}
+
+[data-theme='dark'] .bg-\[\#FFEFEF\] {
+  background-color: var(--color-danger-soft) !important;
+}
+
+[data-theme='dark'] .bg-\[\#D9D2FF\],
+[data-theme='dark'] .bg-\[\#CDC1FF\],
+[data-theme='dark'] .bg-\[\#E8E0FF\],
+[data-theme='dark'] .bg-\[\#E9D3F8\],
+[data-theme='dark'] .bg-\[\#C4B8FF\] {
+  background-color: var(--color-bg-accent-muted) !important;
+}
+
+[data-theme='dark'] .bg-\[\#D9D9D9\] {
+  background-color: var(--color-border-default) !important;
+}
+
+[data-theme='dark'] .bg-\[\#A594F9\],
+[data-theme='dark'] .bg-\[\#8257B4\],
+[data-theme='dark'] .bg-\[\#8257B433\] {
+  background-color: var(--color-border-accent) !important;
+}
+
+[data-theme='dark'] .bg-\[\#A594F9\]\/90 {
+  background-color: rgb(26 27 39 / 0.95) !important;
+}
+
+[data-theme='dark'] .bg-\[\#00000033\] {
+  background-color: rgb(255 255 255 / 0.16) !important;
+}
+
+[data-theme='dark'] .bg-\[\#6B4EFF\],
+[data-theme='dark'] .bg-\[\#7C5CFF\] {
+  background-color: var(--color-brand-primary-strong) !important;
+}
+
+[data-theme='dark'] .bg-\[\#1a1a1a\] {
+  background-color: var(--color-bg-page) !important;
+}
+
+[data-theme='dark'] .h-px.bg-\[\#A594F9\],
+[data-theme='dark'] .h-px.bg-\[\#8257B4\],
+[data-theme='dark'] .h-px.bg-\[\#6B4EFF\],
+[data-theme='dark'] .bg-\[\#A594F9\].h-px,
+[data-theme='dark'] .bg-\[\#8257B4\].h-px {
+  background-color: var(--color-brand-tertiary) !important;
+}
+
+/* --- Opacity brand surfaces --- */
+[data-theme='dark'] .bg-\[\#6B4EFF\]\/5,
+[data-theme='dark'] .bg-\[\#6B4EFF\]\/6,
+[data-theme='dark'] .bg-\[\#6B4EFF\]\/8,
+[data-theme='dark'] .bg-\[\#6B4EFF\]\/10,
+[data-theme='dark'] .bg-\[\#A594F9\]\/10,
+[data-theme='dark'] .bg-\[\#A594F9\]\/12,
+[data-theme='dark'] .hover\:bg-\[\#6B4EFF\]\/10:hover,
+[data-theme='dark'] .hover\:bg-\[\#8257B410\]:hover {
+  background-color: var(--color-hover-brand-soft) !important;
+}
+
+/* --- Borders --- */
+[data-theme='dark'] .border-\[\#dad9d9\],
+[data-theme='dark'] .border-\[\#dad9d9\]\/30,
+[data-theme='dark'] .border-\[\#E6E8E7\],
+[data-theme='dark'] .border-black\/10,
+[data-theme='dark'] .border-gray-400 {
+  border-color: var(--color-border-subtle) !important;
+}
+
+[data-theme='dark'] .border-\[\#E8E2FF\],
+[data-theme='dark'] .border-\[\#A594F9\],
+[data-theme='dark'] .border-\[\#CDC1FF\],
+[data-theme='dark'] .border-\[\#8257B4\],
+[data-theme='dark'] .border-\[\#8257B480\],
+[data-theme='dark'] .border-\[\#8257B4\]\/30,
+[data-theme='dark'] .border-\[\#E8E0FF\],
+[data-theme='dark'] .border-\[\#7C5CFF\],
+[data-theme='dark'] .border-\[\#6B4EFF\],
+[data-theme='dark'] .border-\[\#6B42FF\] {
+  border-color: var(--color-border-accent) !important;
+}
+
+[data-theme='dark'] .border-l-\[\#6B4EFF\] {
+  border-left-color: var(--color-brand-primary-strong) !important;
+}
+
+/* --- Hover / Active --- */
+[data-theme='dark'] .hover\:bg-\[\#6B4EFF\]\/8:hover {
+  background-color: var(--color-hover-brand-soft) !important;
+}
+
+[data-theme='dark'] .hover\:bg-\[\#6B4EFF\]\/6:hover,
+[data-theme='dark'] .hover\:bg-\[\#FAFAFE\]:hover,
+[data-theme='dark'] .hover\:bg-\[\#F5EFFF\]:hover {
+  background-color: var(--color-hover-brand-soft) !important;
+}
+
+[data-theme='dark'] .hover\:text-\[\#6B4EFF\]:hover,
+[data-theme='dark'] .hover\:text-\[\#6452CE\]:hover,
+[data-theme='dark'] .hover\:text-\[\#CDC1FF\]:hover {
+  color: var(--color-brand-primary) !important;
+}
+
+[data-theme='dark'] .hover\:border-\[\#CDC1FF\]:hover,
+[data-theme='dark'] .hover\:border-\[\#6B42FF\]:hover,
+[data-theme='dark'] .hover\:border-\[\#6B4EFF\]:hover,
+[data-theme='dark'] .hover\:border-\[\#A594F9\]:hover {
+  border-color: var(--color-brand-primary) !important;
+}
+
+[data-theme='dark'] .active\:text-\[\#6B4EFF\]:active {
+  color: var(--color-brand-primary) !important;
+}
+
+[data-theme='dark'] .active\:bg-\[\#F8F6FF\]:active,
+[data-theme='dark'] .hover\:bg-\[\#D9D2FF\]:hover,
+[data-theme='dark'] .hover\:bg-\[\#C4B8FF\]:hover,
+[data-theme='dark'] .active\:bg-\[\#C4B8FF\]:active {
+  background-color: var(--color-bg-accent-muted) !important;
+}
+
+[data-theme='dark'] .active\:bg-\[\#7C5CFF\]\/10:active {
+  background-color: var(--color-hover-brand-soft) !important;
+}
+
+[data-theme='dark'] .active\:border-\[\#6B42FF\]:active {
+  border-color: var(--color-brand-primary) !important;
+}
+
+[data-theme='dark'] .hover\:bg-\[\#6344DD\]:hover,
+[data-theme='dark'] .active\:bg-\[\#6344DD\]:active {
+  background-color: var(--color-brand-primary-strong) !important;
+}
+
+[data-theme='dark'] .hover\:bg-\[\#8B6FFF\]:hover,
+[data-theme='dark'] .active\:bg-\[\#8B6FFF\]:active {
+  background-color: var(--color-brand-deep) !important;
+}
+
+[data-theme='dark'] .hover\:bg-\[\#6B42FF\]:hover {
+  background-color: var(--color-brand-primary-strong) !important;
+}
+
+/* --- Page gradients --- */
+[data-theme='dark'] .from-white,
+[data-theme='dark'] .from-\[\#F5EFFF\] {
+  --tw-gradient-from: var(--color-bg-accent-soft);
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
+}
+
+[data-theme='dark'] .via-white {
+  --tw-gradient-via: var(--color-bg-surface);
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-via), var(--tw-gradient-to);
+}
+
+[data-theme='dark'] .to-\[\#E8F4F8\],
+[data-theme='dark'] .to-\[\#F5F0FF\] {
+  --tw-gradient-to: var(--color-bg-page);
+}
+
+[data-theme='dark'] .to-\[\#F8F6FF\],
+[data-theme='dark'] .to-\[\#FAF8FF\],
+[data-theme='dark'] .to-\[\#E6DCFF\],
+[data-theme='dark'] .to-\[\#EDE8FF\],
+[data-theme='dark'] .to-\[\#DDD0FF\],
+[data-theme='dark'] .to-\[\#D4C9FF\] {
+  --tw-gradient-to: var(--color-bg-accent-muted);
+}
+
+[data-theme='dark'] .from-\[\#FAF8FF\],
+[data-theme='dark'] .from-\[\#F5F0FF\],
+[data-theme='dark'] .from-\[\#F0EBFF\],
+[data-theme='dark'] .from-\[\#F8F6FF\],
+[data-theme='dark'] .from-\[\#F3EEFF\],
+[data-theme='dark'] .from-\[\#F2EBFF\],
+[data-theme='dark'] .from-\[\#EDE8FF\] {
+  --tw-gradient-from: var(--color-bg-accent-soft);
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
+}
+
+[data-theme='dark'] .via-\[\#F2EBFF\],
+[data-theme='dark'] .via-\[\#EBE3FF\],
+[data-theme='dark'] .via-\[\#E0D4FF\],
+[data-theme='dark'] .via-\[\#F3EEFF\],
+[data-theme='dark'] .via-\[\#E4DAFF\],
+[data-theme='dark'] .via-\[\#FDFCFF\],
+[data-theme='dark'] .via-\[\#F8F6FF\] {
+  --tw-gradient-via: var(--color-bg-accent-muted);
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-via), var(--tw-gradient-to);
+}
+
+/* --- Gradient card / bubble flat fallback (라이트 전용 그라데이션만) --- */
+[data-theme='dark'] [class*='from-[#FAF8FF]'],
+[data-theme='dark'] [class*='from-[#F5F0FF]'],
+[data-theme='dark'] [class*='from-white via'] {
+  background-image: linear-gradient(
+    145deg,
+    var(--color-bg-accent-soft),
+    var(--color-bg-accent-muted)
+  ) !important;
+}
+
+/* --- Rank badges --- */
+[data-theme='dark'] .from-\[\#FFF8E7\] {
+  --tw-gradient-from: #3a3218;
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
+}
+
+[data-theme='dark'] .to-\[\#FFE9A8\] {
+  --tw-gradient-to: #5a4518;
+}
+
+[data-theme='dark'] .border-\[\#F5D76E\] {
+  border-color: #c9a832 !important;
+}
+
+[data-theme='dark'] .text-\[\#9A7209\] {
+  color: #f5d76e !important;
+}
+
+[data-theme='dark'] .from-\[\#F8F8F8\] {
+  --tw-gradient-from: #2a2a32;
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
+}
+
+[data-theme='dark'] .to-\[\#ECECEC\] {
+  --tw-gradient-to: #3a3a44;
+}
+
+[data-theme='dark'] .border-\[\#D0D0D0\] {
+  border-color: #6a6a78 !important;
+}
+
+[data-theme='dark'] .text-\[\#5C5C5C\] {
+  color: #d4d4dc !important;
+}
+
+[data-theme='dark'] .from-\[\#FFF0E8\] {
+  --tw-gradient-from: #3a2818;
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
+}
+
+[data-theme='dark'] .to-\[\#FFD4B8\] {
+  --tw-gradient-to: #5a3818;
+}
+
+[data-theme='dark'] .border-\[\#E8B49A\] {
+  border-color: #c47840 !important;
+}
+
+[data-theme='dark'] .text-\[\#B85C20\] {
+  color: #ffb080 !important;
+}
+
+/* --- Analysis 탭 / 카드 --- */
+[data-theme='dark'] .bg-\[\#e4d3ff\],
+[data-theme='dark'] .border-\[\#e4d3ff\] {
+  background-color: var(--color-bg-accent-muted) !important;
+  border-color: var(--color-border-accent) !important;
+}
+
+[data-theme='dark'] .border-b-white {
+  border-bottom-color: var(--color-bg-surface) !important;
+}
+
+[data-theme='dark'] .hover\:bg-\[\#F3F0FF\]:hover,
+[data-theme='dark'] .active\:bg-\[\#F3F0FF\]:active {
+  background-color: var(--color-hover-brand-soft) !important;
+}
+
+/* --- Main hero glow (다크 배경에서도 잘 보이게) --- */
+[data-theme='dark'] .animate-crit-glow {
+  animation: critGlowDark 3s ease-in-out infinite;
+}
+
+@keyframes critGlowDark {
+  0%,
+  100% {
+    opacity: 0.85;
+    color: #b4a6ff;
+    text-shadow: 0 0 12px rgb(180 166 255 / 0.35);
+  }
+  50% {
+    opacity: 1;
+    color: #d4cbff;
+    text-shadow: 0 0 20px rgb(212 203 255 / 0.5);
+  }
+}
+
+/* --- Hot word bubble text (그라데이션 버튼 위 가독성) --- */
+[data-theme='dark'] button.rounded-full.border-2.font-semibold span {
+  color: var(--color-brand-secondary) !important;
+}
+
+/* --- Scrollbar --- */
+[data-theme='dark'] .script-scroll::-webkit-scrollbar-thumb {
+  background: var(--color-border-accent);
+}
+
+[data-theme='dark'] .script-scroll::-webkit-scrollbar-thumb:hover {
+  background: var(--color-brand-tertiary);
+}
+
+/* --- Modal backdrop --- */
+[data-theme='dark'] .bg-black\/50 {
+  background-color: rgb(0 0 0 / 0.72) !important;
+}
+
+/* --- Card shadow (다크에서 과한 흰 그림자 완화) --- */
+[data-theme='dark'] [class*='shadow-[0_4px'] {
+  box-shadow: 0 4px 24px rgb(0 0 0 / 0.35) !important;
+}
+
+[data-theme='dark'] [class*='shadow-[0_10px'],
+[data-theme='dark'] [class*='shadow-[0_12px'],
+[data-theme='dark'] .shadow-lg,
+[data-theme='dark'] .shadow-md,
+[data-theme='dark'] .shadow-sm {
+  box-shadow: 0 12px 32px rgb(0 0 0 / 0.45) !important;
+}
+
+[data-theme='dark'] [class*='shadow-[0_1px'] {
+  box-shadow: 0 1px 4px rgb(0 0 0 / 0.35) !important;
+}
+
+/* --- Glass tooltips / backdrop blur panels --- */
+[data-theme='dark'] .glass-tooltip,
+[data-theme='dark'] .glass-tooltip-muted {
+  background: rgb(26 27 39 / 0.92) !important;
+  backdrop-filter: blur(27px);
+}
+
+[data-theme='dark'] .backdrop-blur-md,
+[data-theme='dark'] .backdrop-blur-\[27px\] {
+  backdrop-filter: blur(16px);
+}
+
+/* --- Form placeholder --- */
+[data-theme='dark'] .placeholder\:text-\[\#0a0a0a89\]::placeholder {
+  color: var(--color-text-subtle) !important;
+}
+
+/* --- Footer & links --- */
+[data-theme='dark'] .text-\[\#929292\] a,
+[data-theme='dark'] .text-\[\#929292\] a u {
+  color: var(--color-brand-primary);
+}
+
+[data-theme='dark'] .text-\[\#929292\] a:hover {
+  color: var(--color-brand-secondary);
+}
+
+/* --- Chart accents (inline class targets) --- */
+[data-theme='dark'] .bg-\[\#9F8CFF\] {
+  background-color: var(--color-brand-primary-strong) !important;
+}
+
+/* --- Recommend reset / semantic buttons (유지하되 다크 톤) --- */
+[data-theme='dark'] .bg-\[\#FF6B6B\] {
+  background-color: #e85555 !important;
+}
+
+[data-theme='dark'] .hover\:bg-\[\#FF4757\]:hover {
+  background-color: #ff6b6b !important;
+}
+
+[data-theme='dark'] .active\:bg-\[\#FF8787\]:active {
+  background-color: #ff9999 !important;
+}
+
+/* --- Transparent secondary buttons --- */
+[data-theme='dark'] .bg-transparent {
+  background-color: transparent !important;
+}
+
+/* --- Header mobile menu --- */
+[data-theme='dark'] .max-md\:block.bg-white {
+  background-color: var(--color-bg-surface) !important;
+}
+
+[data-theme='dark'] .max-md\:block .bg-\[\#F5EFFF\] {
+  background-color: var(--color-bg-accent-muted) !important;
+}
+
+/* --- Theme toggle --- */
+.theme-toggle {
+  position: relative;
+  display: inline-flex;
+  height: 1.75rem;
+  width: 3rem;
+  shrink: 0;
+  cursor: pointer;
+  align-items: center;
+  border-radius: 9999px;
+  border: 1px solid var(--color-border-subtle, rgb(218 217 217 / 0.3));
+  background-color: var(--color-bg-muted, rgb(244 244 244));
+  padding: 0.125rem;
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+[data-theme='dark'] .theme-toggle {
+  border-color: var(--color-border-default);
+  background-color: var(--color-bg-surface-raised);
+}
+
+.theme-toggle__thumb {
+  display: flex;
+  height: 1.375rem;
+  width: 1.375rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  background-color: var(--color-bg-surface, #ffffff);
+  color: var(--color-brand-primary-strong, #6b4eff);
+  box-shadow: 0 1px 3px rgb(0 0 0 / 0.12);
+  transition: transform 0.2s ease;
+}
+
+[data-theme='dark'] .theme-toggle__thumb {
+  transform: translateX(1.25rem);
+  background-color: var(--color-brand-primary-strong);
+  color: var(--color-text-on-brand);
+}
+
+/* --- Semantic utility overrides (hex 마이그레이션 전 다크 매핑과 동일) --- */
+
+/* Brand text → 통일된 라벤더 */
+[data-theme='dark'] .text-brand,
+[data-theme='dark'] .text-brand-strong,
+[data-theme='dark'] .text-brand-secondary,
+[data-theme='dark'] .text-brand-tertiary,
+[data-theme='dark'] .text-brand-deep,
+[data-theme='dark'] .text-brand-violet,
+[data-theme='dark'] .text-brand-indigo,
+[data-theme='dark'] .text-brand-text-deep,
+[data-theme='dark'] .text-brand-text-purple,
+[data-theme='dark'] .text-brand-text-alt,
+[data-theme='dark'] .hover\:text-brand:hover,
+[data-theme='dark'] .hover\:text-brand-deep:hover,
+[data-theme='dark'] .hover\:text-brand-secondary:hover,
+[data-theme='dark'] .active\:text-brand:active {
+  color: var(--color-brand-primary) !important;
+}
+
+[data-theme='dark'] .text-body-deep,
+[data-theme='dark'] .text-body-gray {
+  color: var(--color-text-secondary) !important;
+}
+
+[data-theme='dark'] .text-body-light {
+  color: var(--color-text-muted) !important;
+}
+
+[data-theme='dark'] .text-placeholder,
+[data-theme='dark'] .placeholder\:text-placeholder::placeholder {
+  color: var(--color-text-subtle) !important;
+}
+
+/* Brand bg → 버튼/칩은 strong, 보조 bg는 border-accent 톤 */
+[data-theme='dark'] .bg-brand,
+[data-theme='dark'] .bg-brand-strong,
+[data-theme='dark'] .bg-brand-violet,
+[data-theme='dark'] .bg-brand-active,
+[data-theme='dark'] .hover\:bg-brand-strong:hover,
+[data-theme='dark'] .active\:bg-brand-strong:active {
+  background-color: var(--color-brand-primary-strong) !important;
+}
+
+[data-theme='dark'] .bg-brand-secondary,
+[data-theme='dark'] .bg-brand-tertiary {
+  background-color: var(--color-border-accent) !important;
+}
+
+[data-theme='dark'] .bg-brand-secondary\/80 {
+  background-color: rgb(26 27 39 / 0.95) !important;
+}
+
+[data-theme='dark'] .bg-brand-soft\/5,
+[data-theme='dark'] .bg-brand-soft\/6,
+[data-theme='dark'] .bg-brand-soft\/8,
+[data-theme='dark'] .bg-brand-soft\/10,
+[data-theme='dark'] .bg-brand-secondary\/10,
+[data-theme='dark'] .bg-brand-secondary\/12,
+[data-theme='dark'] .bg-brand-tertiary\/10,
+[data-theme='dark'] .hover\:bg-brand-soft\/10:hover,
+[data-theme='dark'] .active\:bg-brand-soft\/10:active {
+  background-color: var(--color-hover-brand-soft) !important;
+}
+
+[data-theme='dark'] .hover\:bg-brand-deep:hover,
+[data-theme='dark'] .active\:bg-brand-deep:active,
+[data-theme='dark'] .hover\:bg-brand-strong:hover {
+  background-color: var(--color-brand-primary-strong) !important;
+}
+
+[data-theme='dark'] .hover\:bg-brand-hover:hover,
+[data-theme='dark'] .active\:bg-brand-hover:active {
+  background-color: var(--color-brand-deep) !important;
+}
+
+[data-theme='dark'] .hover\:bg-accent-soft:hover,
+[data-theme='dark'] .hover\:bg-input-highlight:hover {
+  background-color: var(--color-hover-brand-soft) !important;
+}
+
+[data-theme='dark'] .hover\:bg-accent-muted:hover,
+[data-theme='dark'] .active\:bg-accent-muted:active {
+  background-color: var(--color-bg-accent-muted) !important;
+}
+
+[data-theme='dark'] .bg-reset {
+  background-color: #e85555 !important;
+}
+
+[data-theme='dark'] .hover\:bg-reset-hover:hover {
+  background-color: #ff6b6b !important;
+}
+
+[data-theme='dark'] .active\:bg-reset-active:active {
+  background-color: #ff9999 !important;
+}
+
+[data-theme='dark'] .bg-overlay {
+  background-color: rgb(255 255 255 / 0.16) !important;
+}
+
+[data-theme='dark'] .bg-body-mid {
+  background-color: var(--color-body-mid-gray) !important;
+}
+
+/* Borders → accent 라인 */
+[data-theme='dark'] .border-accent,
+[data-theme='dark'] .border-brand-secondary,
+[data-theme='dark'] .border-accent-muted,
+[data-theme='dark'] .border-accent-muted\/80,
+[data-theme='dark'] .border-brand-soft,
+[data-theme='dark'] .border-brand-faint,
+[data-theme='dark'] .border-brand,
+[data-theme='dark'] .border-brand-strong,
+[data-theme='dark'] .border-analysis-tab {
+  border-color: var(--color-border-accent) !important;
+}
+
+[data-theme='dark'] .border-l-brand {
+  border-left-color: var(--color-brand-primary-strong) !important;
+}
+
+[data-theme='dark'] .hover\:border-brand-secondary:hover,
+[data-theme='dark'] .hover\:border-brand:hover,
+[data-theme='dark'] .hover\:border-accent-muted:hover,
+[data-theme='dark'] .active\:border-brand:active {
+  border-color: var(--color-brand-primary) !important;
+}
+
+[data-theme='dark'] .bg-analysis-tab {
+  background-color: var(--color-bg-accent-muted) !important;
+}
+
+/* Gradient cards → flat dark surface */
+[data-theme='dark'] .bg-gradient-card,
+[data-theme='dark'] .bg-gradient-pill,
+[data-theme='dark'] .bg-gradient-panel-br,
+[data-theme='dark'] .bg-gradient-panel-b,
+[data-theme='dark'] .bg-gradient-page,
+[data-theme='dark'] .interactive-gradient-card,
+[data-theme='dark'] .hover\:bg-gradient-card-hover:hover,
+[data-theme='dark'] .active\:bg-gradient-card-active:active,
+[data-theme='dark'] .bg-gradient-card-selected {
+  background-image: linear-gradient(
+    145deg,
+    var(--color-bg-accent-soft),
+    var(--color-bg-accent-muted)
+  ) !important;
+}
+
+[data-theme='dark'] .interactive-gradient-card:has(a:hover),
+[data-theme='dark'] .interactive-gradient-card:hover,
+[data-theme='dark'] .interactive-gradient-card:has(a:active),
+[data-theme='dark'] .interactive-gradient-card:active {
+  background-image: linear-gradient(
+    145deg,
+    var(--color-bg-accent-soft),
+    var(--color-bg-surface-overlay)
+  ) !important;
+}
+
+/* --- Progress / slider unfilled tracks --- */
+[data-theme='dark'] .progress-bar-track {
+  background-color: var(--color-progress-track) !important;
+}
+
+[data-theme='dark'] .score-ring-track {
+  stroke: var(--color-progress-track) !important;
+}
+
+[data-theme='dark'] .score-badge-dynamic {
+  background-color: rgb(255 255 255 / 0.08) !important;
+}
+
+[data-theme='dark'] .benchmark-progress-track {
+  background-color: var(--color-progress-track) !important;
+}
+
+[data-theme='dark'] .crit-time-slider {
+  --slider-fill: var(--color-brand-primary-strong);
+  --slider-track: var(--color-progress-track-accent);
+}
+
+/* Legacy hex overrides kept for unmigrated classes — prefer theme-utilities */

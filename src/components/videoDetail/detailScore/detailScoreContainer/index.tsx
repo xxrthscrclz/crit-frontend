@@ -9,6 +9,8 @@ interface ScoreContainerProps {
   factorName: string;
 }
 
+import { cssVar } from '@/constants/colors';
+
 const titleConfig: Record<
   string,
   {
@@ -23,31 +25,31 @@ const titleConfig: Record<
 > = {
   도달률: {
     Icon: ClickIcon,
-    bgColor: 'bg-[#DEF3E195]',
-    badgeBg: 'bg-[#DEF3E195]',
-    textColor: 'text-[#5AC467]',
-    barFill: '#5AC467',
-    barTrack: '#DEF3E1',
+    bgColor: 'bg-success-soft',
+    badgeBg: 'bg-success-soft',
+    textColor: 'text-success',
+    barFill: cssVar.success,
+    barTrack: cssVar.successTrack,
     definition:
       '영상이 얼마나 많은 시청자에게 노출되었는지를 나타내며, 콘텐츠의 확산력을 측정하는 지표입니다.',
   },
   '시청 지속 시간': {
     Icon: AlarmIcon,
-    bgColor: 'bg-[#FFFCEF]',
-    badgeBg: 'bg-[#FFFCEF]',
-    textColor: 'text-[#FF9D00]',
-    barFill: '#FF9D00',
-    barTrack: '#FFFCEF',
+    bgColor: 'bg-warning-soft',
+    badgeBg: 'bg-warning-soft',
+    textColor: 'text-warning',
+    barFill: cssVar.warning,
+    barTrack: cssVar.warningSoft,
     definition:
       '시청자가 영상을 얼마나 오래 시청했는지를 나타내며, 콘텐츠의 몰입도를 측정하는 핵심 지표입니다.',
   },
   '추천 확장성': {
     Icon: StarIcon,
-    bgColor: 'bg-[#FFEFEF]',
-    badgeBg: 'bg-[#FFEFEF]',
-    textColor: 'text-[#FF0000]',
-    barFill: '#FF0000',
-    barTrack: '#FFEFEF',
+    bgColor: 'bg-danger-soft',
+    badgeBg: 'bg-danger-soft',
+    textColor: 'text-danger',
+    barFill: cssVar.danger,
+    barTrack: cssVar.dangerSoft,
     definition:
       '유튜브 알고리즘이 이 영상을 다른 시청자에게 추천할 가능성을 나타내는 종합 지표입니다.',
   },
@@ -75,7 +77,7 @@ const DetailScoreContainer = ({ factorName }: ScoreContainerProps) => {
   const content = factor?.description ?? '';
 
   return (
-    <div className="flex flex-col w-full px-8 py-7 gap-4 justify-start items-center rounded-xl bg-white border-[0.1px] border-[#8257B4]">
+    <div className="flex flex-col w-full px-8 py-7 gap-4 justify-start items-center rounded-xl bg-white border-[0.1px] border-accent">
       <div className="flex w-full justify-start items-start gap-2 rounded-xl">
         <div className={`flex justify-center items-center p-3 rounded-xl ${config.bgColor}`}>
           <Icon className="w-7 h-7" />
@@ -88,9 +90,9 @@ const DetailScoreContainer = ({ factorName }: ScoreContainerProps) => {
               onMouseEnter={() => setShowTooltip(true)}
               onMouseLeave={() => setShowTooltip(false)}
             >
-              <InfoIcon className="w-3.5 h-3.5 cursor-pointer" />
+              <InfoIcon className="crit-icon-muted w-3.5 h-3.5 cursor-pointer" />
               {showTooltip && (
-                <div className="absolute left-full top-1/2 -translate-y-1/2 ml-2 w-60 px-3 py-2 rounded-lg bg-white border border-[#8257B4] shadow-lg z-10 typo-body5 text-black">
+                <div className="absolute left-full top-1/2 -translate-y-1/2 ml-2 w-60 px-3 py-2 rounded-lg bg-white border border-accent shadow-lg z-10 typo-body5 text-black">
                   {config.definition}
                 </div>
               )}

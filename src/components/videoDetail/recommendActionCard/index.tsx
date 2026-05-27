@@ -10,10 +10,10 @@ const RecommendActionCard = () => {
   const showLoading = isLoading || !recommendedActions;
 
   return (
-    <div className="flex flex-col w-full px-6 py-5 gap-4.5 justify-center items-center bg-white rounded-xl border-[0.1px] border-[#8257B4]">
+    <div className="flex flex-col w-full px-6 py-5 gap-4.5 justify-center items-center bg-white rounded-xl border-[0.1px] border-accent">
       <div className="flex w-full justify-start items-center gap-1">
-        <BoltIcon className="w-6 h-6" />
-        <div className="text-[#6452CE] typo-body4-semibold">추천 액션</div>
+        <BoltIcon className="crit-icon-brand w-6 h-6 shrink-0" />
+        <div className="text-brand-deep typo-body4-semibold">추천 액션</div>
       </div>
       <div className="flex flex-col w-full justify-center items-center gap-5">
         {showLoading ? (

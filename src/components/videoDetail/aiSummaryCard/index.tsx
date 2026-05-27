@@ -10,11 +10,11 @@ const AISummaryCard = () => {
   const showLoading = isLoading || !insight;
 
   return (
-    <div className="flex w-full px-6 py-6 justify-center items-start gap-1 bg-white rounded-xl border-[0.1px] border-[#8257B4]">
-      <SparkIcon className="w-4 h-4" />
+    <div className="flex w-full px-6 py-6 justify-center items-start gap-1 bg-white rounded-xl border-[0.1px] border-accent">
+      <SparkIcon className="crit-icon-brand w-4 h-4 shrink-0" />
       <div className="flex w-full justify-center items-start gap-28">
         <div className="flex flex-col w-full justify-center items-start gap-6">
-          <div className="w-full justify-start items-center text-[#6452CE] typo-body4-semibold">
+          <div className="w-full justify-start items-center text-brand-deep typo-body4-semibold">
             AI 한 줄 분석
           </div>
           <div className="w-full justify-start items-start text-black typo-body4-semibold">

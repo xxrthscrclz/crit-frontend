@@ -126,7 +126,7 @@ const FormList = ({ onSearch, initialKeyword = '' }: FormListProps) => {
   };
 
   return (
-    <div className="flex w-full flex-col items-center justify-end gap-10 rounded-xl bg-[#F5EFFF] px-8 pb-12 pt-18 max-md:w-full max-md:gap-6 max-md:px-3 max-md:pb-8 max-md:pt-12">
+    <div className="flex w-full flex-col items-center justify-end gap-10 rounded-xl bg-accent-soft px-8 pb-12 pt-18 max-md:w-full max-md:gap-6 max-md:px-3 max-md:pb-8 max-md:pt-12">
       <div
         ref={contentRef}
         className={`flex flex-col w-full collapse-panel gap-4 ${!collapsed ? 'is-open' : ''}`}
@@ -137,7 +137,7 @@ const FormList = ({ onSearch, initialKeyword = '' }: FormListProps) => {
           } as React.CSSProperties
         }
       >
-        <div className="flex w-full justify-center whitespace-pre-line text-center typo-body1-medium text-[#717171] max-md:text-[12px] max-md:leading-[18px]">
+        <div className="flex w-full justify-center whitespace-pre-line text-center typo-body1-medium text-muted max-md:text-[12px] max-md:leading-[18px]">
           {
             '원하는 키워드와 채널 정보를 입력하면\nAI가 트렌드와 채널 데이터를 분석해 맞춤 콘텐츠 아이디어를 추천합니다.'
           }
@@ -158,8 +158,8 @@ const FormList = ({ onSearch, initialKeyword = '' }: FormListProps) => {
                   title="채널 스타일 분석"
                   titleAddon={
                     <div className="relative group overflow-visible">
-                      <InfoIcon className="h-4 w-4 shrink-0 cursor-pointer text-[#8257B4]" />
-                      <div className="absolute bottom-full left-1/2 z-50 mb-2 invisible -translate-x-1/2 rounded-xl border border-[#6B42FF] bg-white/85 px-3 py-2 text-black opacity-0 typo-body6 whitespace-nowrap backdrop-blur-[27px] transition-all group-hover:visible group-hover:opacity-100">
+                      <InfoIcon className="h-4 w-4 shrink-0 cursor-pointer text-brand-tertiary" />
+                      <div className="absolute bottom-full left-1/2 z-50 mb-2 invisible -translate-x-1/2 rounded-xl border border-brand bg-white/85 px-3 py-2 text-black opacity-0 typo-body6 whitespace-nowrap backdrop-blur-[27px] transition-all group-hover:visible group-hover:opacity-100">
                         {isLoggedIn
                           ? '내 채널의 콘텐츠 성향을 분석해 추천 결과에 반영합니다.'
                           : '로그인 후 내 채널 데이터를 분석해 맞춤형 주제를 추천할 수 있습니다.'}
@@ -174,7 +174,7 @@ const FormList = ({ onSearch, initialKeyword = '' }: FormListProps) => {
                     />
                   }
                 >
-                  <div className="flex h-12 items-center self-stretch truncate rounded-lg border border-transparent bg-[#FEF8FF] px-3 py-1 typo-body2 text-[#717171] max-md:h-10">
+                  <div className="flex h-12 items-center self-stretch truncate rounded-lg border border-transparent bg-accent-soft px-3 py-1 typo-body2 text-muted max-md:h-10">
                     {!isLoggedIn
                       ? '로그인 후 사용 가능'
                       : useChannelData
@@ -185,7 +185,7 @@ const FormList = ({ onSearch, initialKeyword = '' }: FormListProps) => {
               </div>
             </div>
             <div className="flex w-196 flex-col items-start gap-4 max-md:w-full max-md:gap-3">
-              <div className="typo-body1-medium text-[#0A0A0A]">Category</div>
+              <div className="typo-body1-medium text-primary">Category</div>
               <div className="grid h-78 grid-cols-3 content-start gap-4 self-stretch max-md:h-auto max-md:grid-cols-1 max-md:gap-2">
                 {categories.map((category, index) => (
                   <div
@@ -206,7 +206,7 @@ const FormList = ({ onSearch, initialKeyword = '' }: FormListProps) => {
                 <button
                   type="button"
                   onClick={() => setCategoryExpanded(prev => !prev)}
-                  className="hidden items-center gap-1 text-[#0a0a0a89] typo-label active:text-[#6B4EFF] max-md:flex"
+                  className="hidden items-center gap-1 text-placeholder typo-label active:text-brand max-md:flex"
                 >
                   <svg
                     className={`h-4 w-4 transition-transform duration-300 ${categoryExpanded ? 'rotate-180' : 'rotate-0'}`}
@@ -227,14 +227,14 @@ const FormList = ({ onSearch, initialKeyword = '' }: FormListProps) => {
             </div>
             {formInput.videoType === 'long' && (
               <div className="flex w-196 flex-col items-start gap-4 max-md:w-full max-md:gap-3">
-                <div className="typo-body1-medium text-[#0A0A0A]">Time</div>
+                <div className="typo-body1-medium text-primary">Time</div>
                 <TimeSlider value={time} onChange={setTime} />
               </div>
             )}
             <div className="flex w-196 justify-end max-md:w-full">
               <div
                 onClick={handleReset}
-                className="flex cursor-pointer items-center justify-center rounded-md bg-[#FF6B6B] px-3 py-1.5 typo-label text-white transition-colors hover:bg-[#FF4757] active:bg-[#FF8787]"
+                className="flex cursor-pointer items-center justify-center rounded-md bg-reset px-3 py-1.5 typo-label text-white transition-colors hover:bg-reset-hover active:bg-reset-active"
               >
                 초기화
               </div>
@@ -250,14 +250,14 @@ const FormList = ({ onSearch, initialKeyword = '' }: FormListProps) => {
         )}
         <div
           onClick={handleSearch}
-          className="mx-auto flex cursor-pointer items-center justify-center gap-2.5 rounded-lg bg-[#7C5CFF] px-5 py-2.5 text-center text-white typo-body1-medium tracking-widest active:bg-[#6344DD] max-md:px-4 max-md:py-2 max-md:tracking-wide"
+          className="mx-auto flex cursor-pointer items-center justify-center gap-2.5 rounded-lg bg-brand-strong px-5 py-2.5 text-center text-white typo-body1-medium tracking-widest active:bg-brand-deep max-md:px-4 max-md:py-2 max-md:tracking-wide"
         >
           {searched ? '다시 검색' : '검색'}
         </div>
         {searched && (
           <div
             onClick={() => setCollapsed(!collapsed)}
-            className="absolute right-0 flex cursor-pointer items-center gap-1 text-[#0a0a0a89] typo-label active:text-[#6B4EFF] max-md:static max-md:justify-center"
+            className="absolute right-0 flex cursor-pointer items-center gap-1 text-placeholder typo-label active:text-brand max-md:static max-md:justify-center"
           >
             <svg
               className={`h-4 w-4 transition-transform duration-300 ${collapsed ? 'rotate-0' : 'rotate-180'}`}
