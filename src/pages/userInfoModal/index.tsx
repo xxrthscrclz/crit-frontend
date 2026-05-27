@@ -27,15 +27,15 @@ const UserInfoModal = ({ onClose }: UserInfoModalProps) => {
       onClick={onClose}
     >
       <div
-        className="flex flex-col w-212 px-15 py-12 justify-center items-center gap-7.5 bg-white rounded-xl animate-modal-in"
+        className="flex flex-col w-212 px-15 py-12 justify-center items-center gap-7.5 bg-white rounded-xl animate-modal-in max-md:mx-4 max-md:w-full max-md:max-w-212 max-md:px-5 max-md:py-8 max-md:gap-6"
         onClick={e => e.stopPropagation()}
       >
         <div className="flex w-full justify-between items-center">
           <div className="text-black typo-title2">마이페이지</div>
           <CloseIcon className="w-7.5 h-7.5 cursor-pointer" onClick={onClose} />
         </div>
-        <div className="flex w-full justify-between items-center px-15 py-14 bg-[#F5EFFF] rounded-xl">
-          <div className="flex flex-col w-full justify-center items-start gap-5">
+        <div className="flex w-full justify-between items-center px-15 py-14 bg-[#F5EFFF] rounded-xl max-md:flex-col max-md:items-start max-md:gap-5 max-md:px-5 max-md:py-8">
+          <div className="flex flex-col w-full justify-center items-start gap-5 max-md:gap-4">
             <div className="w-full justify-start items-center typo-title1">
               안녕하세요, <span className="text-[#6B4EFF]">{channelName}</span>님!
             </div>
@@ -43,7 +43,7 @@ const UserInfoModal = ({ onClose }: UserInfoModalProps) => {
               CRiT과 함께 더 성장하는 크리에이터가 되어보세요.
             </div>
           </div>
-          <RocketIcon className="w-19 h-19" />
+          <RocketIcon className="w-19 h-19 shrink-0 max-md:hidden" />
         </div>
         <div className="flex flex-col w-full justify-center items-center gap-8">
           <div className="w-full justify-start items-center text-black typo-title1">

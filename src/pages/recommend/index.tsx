@@ -61,9 +61,9 @@ const RecommendPage = () => {
   return (
     <div>
       <Header />
-      <div className="flex flex-col items-center px-10 gap-10">
-        <div className="flex flex-col items-center mt-20 w-full mx-auto animate-fade-in-up">
-          <div className="relative z-10 mb-[-32px]">
+      <div className="flex flex-col items-center gap-10 px-10 max-md:gap-6 max-md:px-4">
+        <div className="mx-auto mt-20 flex w-full max-w-250 flex-col items-center animate-fade-in-up max-md:mt-8">
+          <div className="relative z-10 mb-[-32px] flex w-full justify-center">
             <TabList
               tabs={['롱폼', '숏폼']}
               activeIndex={videoType === 'long' ? 0 : 1}
@@ -73,12 +73,12 @@ const RecommendPage = () => {
           <FormList onSearch={handleSearch} initialKeyword={initialKeyword} />
         </div>
         {showSubject && (
-          <div className="animate-fade-in-up">
+          <div className="w-full max-w-250 animate-fade-in-up">
             <FormSubject onSelect={handleSelectSubject} />
           </div>
         )}
         {showAnswer && (
-          <div className="flex flex-col items-center self-stretch w-full mx-auto animate-fade-in-up">
+          <div className="mx-auto flex w-full max-w-250 flex-col items-center self-stretch animate-fade-in-up">
             <FormAnswer />
           </div>
         )}

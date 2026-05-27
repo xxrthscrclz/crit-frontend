@@ -32,7 +32,7 @@ const TestAccountSelectModal = ({ onClose, onLogin }: TestAccountSelectModalProp
       onClick={onClose}
     >
       <div
-        className="flex flex-col w-200 px-8 py-8 gap-6 bg-white rounded-xl border-2 border-[#8257B4] shadow-[0_4px_20px_rgba(130,87,180,0.2)] animate-modal-in"
+        className="flex flex-col w-200 px-8 py-8 gap-6 bg-white rounded-xl border-2 border-[#8257B4] shadow-[0_4px_20px_rgba(130,87,180,0.2)] animate-modal-in max-md:mx-4 max-md:w-full max-md:max-w-200 max-md:px-5 max-md:py-6 max-md:gap-5"
         onClick={e => e.stopPropagation()}
       >
         <div className="flex w-full justify-between items-center">
@@ -40,7 +40,7 @@ const TestAccountSelectModal = ({ onClose, onLogin }: TestAccountSelectModalProp
           <CloseIcon className="w-6 h-6 cursor-pointer" onClick={onClose} />
         </div>
 
-        <div className="flex w-full gap-3">
+        <div className="flex w-full gap-3 max-md:flex-col">
           {testAccounts.map((account, index) => {
             const isSelected = selectedIndex === index;
 

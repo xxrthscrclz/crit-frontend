@@ -29,14 +29,14 @@ const MusicChart = ({
         </div>
         <div className="min-w-0 text-[#6B4EFF] typo-body1-medium">{title}</div>
       </div>
-      <div className={`h-px w-[60%] ${dividerClassName}`} />
-      <div className="relative max-h-100 overflow-hidden rounded-2xl border border-[#E8E2FF] shadow-[0_4px_20px_rgba(107,78,255,0.05)]">
+      <div className={`h-px w-[60%] max-md:w-full ${dividerClassName}`} />
+      <div className="relative max-h-100 overflow-hidden rounded-2xl border border-[#E8E2FF] shadow-[0_4px_20px_rgba(107,78,255,0.05)] max-md:max-h-none">
         <div className="pointer-events-none absolute inset-0" aria-hidden>
           <div className="absolute inset-0 bg-linear-to-b from-white to-[#FAF8FF]" />
           <div className={`absolute -right-6 top-0 h-32 w-32 rounded-full blur-2xl ${glowClass}`} />
         </div>
-        <div className="relative z-10 px-3 py-3">
-          <div className="flex max-h-92 flex-col gap-1 overflow-y-auto script-scroll pr-1">
+        <div className="relative z-10 px-3 py-3 max-md:px-2 max-md:py-2">
+          <div className="flex max-h-92 flex-col gap-1 overflow-y-auto script-scroll pr-1 max-md:max-h-none max-md:gap-0.5 max-md:pr-0">
             {items.length > 0 ? (
               items.map((item, index) => (
                 <MusicContainer key={`${listKeyPrefix}-${index}`} rank={index + 1} item={item} />

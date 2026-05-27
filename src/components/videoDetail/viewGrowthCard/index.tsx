@@ -66,13 +66,13 @@ const ViewGrowthCard = () => {
   };
 
   return (
-    <div className="flex w-full px-6 py-6 justify-center items-start gap-4 bg-white rounded-xl border-[0.1px] border-[#8257B4]">
+    <div className="flex w-full px-6 py-6 justify-center items-start gap-4 bg-white rounded-xl border-[0.1px] border-[#8257B4] max-md:flex-col max-md:px-3 max-md:py-4">
       <div className="flex flex-col w-full h-full justify-center items-center gap-4">
         <div className="flex w-full justify-start items-center gap-1 text-[#6452CE] typo-body4-semibold">
           <SparkIcon className="w-4 h-4" />
           점수 산정 근거
         </div>
-        <div className="flex flex-col w-full h-full justify-between py-5 items-center gap-2.5">
+        <div className="flex flex-col w-full h-full justify-between py-5 items-center gap-2.5 max-md:py-2 max-md:gap-2">
           {showLoading || !scoreBasis ? (
             <>
               <ReasonContainer isLoading />
@@ -86,13 +86,13 @@ const ViewGrowthCard = () => {
           )}
         </div>
       </div>
-      <div className="w-0.25 h-full bg-[#8257B433]" />
-      <div className="flex flex-col w-full justify-center items-center gap-6">
+      <div className="w-0.25 h-full bg-[#8257B433] max-md:hidden" />
+      <div className="flex flex-col w-full justify-center items-center gap-6 max-md:gap-4">
         <div className="flex w-full justify-start items-center gap-1">
           <div className="text-black typo-body4-semibold">조회수 성장 추이</div>
           <div className="text-[#8B8484] typo-body5">(업로드 후 7일)</div>
         </div>
-        <div className="flex flex-col w-full gap-2.5">
+        <div className="flex flex-col w-full gap-2.5 max-md:gap-2">
           <div className="flex w-full justify-center items-center gap-4">
             <div className="flex items-center gap-1">
               <div className="w-3 h-0.5 bg-[#9F8CFF]" />
@@ -105,7 +105,7 @@ const ViewGrowthCard = () => {
           </div>
           <div className="flex w-full">
             {/* Y축 라벨 */}
-            <div className="flex flex-col justify-between h-32 pr-2">
+            <div className="flex flex-col justify-between h-32 pr-2 max-md:h-44 max-md:pr-1.5">
               {[...yLabels].reverse().map((value, i) => (
                 <div key={i} className="text-black typo-graph text-right">
                   {formatLabel(value)}
@@ -113,7 +113,7 @@ const ViewGrowthCard = () => {
               ))}
             </div>
             {/* 그래프 영역 */}
-            <div className="flex-1 relative h-32">
+            <div className="flex-1 relative h-32 max-md:h-44">
               {showLoading ? (
                 <div className="flex w-full h-full items-center justify-center text-gray-400 animate-loading-pulse typo-body5">
                   그래프 데이터를 불러오는 중...
@@ -238,7 +238,7 @@ const ViewGrowthCard = () => {
             </div>
           </div>
           {/* X축 라벨 */}
-          <div className="flex w-full justify-between pl-8">
+          <div className="flex w-full justify-between pl-8 max-md:pl-6">
             {showLoading
               ? ['1일', '2일', '3일', '4일', '5일', '6일', '7일'].map((day, i) => (
                   <div key={i} className="text-black typo-graph">

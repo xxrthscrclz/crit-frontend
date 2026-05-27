@@ -37,6 +37,71 @@ const getRankStats = (items: TrendHotWord[]) => {
   };
 };
 
+const DetailPanel = ({
+  selected,
+  isHashtag,
+  valueLabel,
+  onClose,
+  onRecommend,
+  onYoutubeSearch,
+}: {
+  selected: TrendHotWord;
+  isHashtag: boolean;
+  valueLabel: string;
+  onClose: () => void;
+  onRecommend: () => void;
+  onYoutubeSearch: () => void;
+}) => (
+  <>
+    <button
+      type="button"
+      onClick={onClose}
+      className="absolute top-3 right-3 flex h-6 w-6 items-center justify-center text-gray-400 transition-colors hover:text-gray-600"
+      aria-label="닫기"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="16"
+        height="16"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
+        <line x1="18" y1="6" x2="6" y2="18" />
+        <line x1="6" y1="6" x2="18" y2="18" />
+      </svg>
+    </button>
+    <div className="pr-6 text-[#6B4EFF] typo-title1 break-keep">
+      {isHashtag ? `#${selected.text}` : selected.text}
+    </div>
+    <div className="flex flex-col gap-2">
+      <div className="text-gray-500 typo-body5">{valueLabel}</div>
+      <div className="text-black typo-title2">{formatValue(selected.value)}</div>
+    </div>
+    <div className="flex w-full flex-col gap-2">
+      <button
+        type="button"
+        onClick={onRecommend}
+        className="w-[80%] rounded-xl bg-[#6B4EFF] py-2 text-white typo-body6 transition-all duration-200 hover:opacity-90 active:scale-[0.98] max-md:w-full"
+      >
+        {isHashtag ? '이 해시태그로 영상 추천받기' : '이 키워드로 영상 추천받기'}
+      </button>
+      <button
+        type="button"
+        onClick={onYoutubeSearch}
+        className="w-full rounded-xl border border-[#6B4EFF] bg-white py-2 text-[#6B4EFF] typo-body6 transition-all duration-200 hover:bg-[#6B4EFF]/8 active:scale-[0.98]"
+      >
+        {isHashtag
+          ? '이 해시태그 관련 유튜브 영상 탐색하기'
+          : '이 키워드 관련 유튜브 영상 탐색하기'}
+      </button>
+    </div>
+  </>
+);
+
 const HotWord = ({ title, icon: Icon, items, variant, isLoading = false }: HotWordProps) => {
   const navigate = useNavigate();
   const [selected, setSelected] = useState<TrendHotWord | null>(null);
@@ -92,13 +157,13 @@ const HotWord = ({ title, icon: Icon, items, variant, isLoading = false }: HotWo
         </div>
         <div
           className={`h-px bg-[#A594F9] transition-all duration-600 ease-out ${
-            selected ? 'w-full' : 'w-[60%]'
+            selected ? 'w-full' : 'w-[60%] max-md:w-full'
           }`}
         />
-        <div className="relative w-[60%] shrink-0">
+        <div className="relative w-[60%] shrink-0 max-md:w-full">
           <div
             ref={panelRef}
-            className="box-border flex h-92 flex-col overflow-hidden rounded-xl border border-[#A594F9] bg-white py-3 pl-3 pr-2"
+            className="box-border flex h-92 flex-col overflow-hidden rounded-xl border border-[#A594F9] bg-white py-3 pl-3 pr-2 max-md:h-72"
           >
             <div className="min-h-0 flex-1 overflow-y-auto script-scroll pr-1 pt-1">
               {displayItems.length > 0 ? (
@@ -137,8 +202,21 @@ const HotWord = ({ title, icon: Icon, items, variant, isLoading = false }: HotWo
             </div>
           </div>
 
+          {selected && (
+            <div className="relative mt-3 hidden flex-col gap-4 rounded-r-2xl border border-[#A594F9] border-l-[6px] border-l-[#6B4EFF] bg-white px-5 py-5 shadow-[0_12px_32px_rgba(107,78,255,0.18)] max-md:flex">
+              <DetailPanel
+                selected={selected}
+                isHashtag={isHashtag}
+                valueLabel={valueLabel}
+                onClose={() => setSelected(null)}
+                onRecommend={handleRecommend}
+                onYoutubeSearch={handleYoutubeSearch}
+              />
+            </div>
+          )}
+
           <div
-            className={`absolute top-1/2 right-0 z-30 h-[80%] -translate-y-1/2 transition-all duration-600 ease-out ${
+            className={`absolute top-1/2 right-0 z-30 h-[80%] -translate-y-1/2 transition-all duration-600 ease-out max-md:hidden ${
               selected
                 ? 'w-72 translate-x-full animate-slide-in-right-slow'
                 : 'w-3 translate-x-[calc(100%-6px)]'
@@ -150,54 +228,14 @@ const HotWord = ({ title, icon: Icon, items, variant, isLoading = false }: HotWo
               }`}
             >
               {selected && (
-                <>
-                  <button
-                    type="button"
-                    onClick={() => setSelected(null)}
-                    className="absolute top-3 right-3 flex h-6 w-6 items-center justify-center text-gray-400 transition-colors hover:text-gray-600"
-                    aria-label="닫기"
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="16"
-                      height="16"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    >
-                      <line x1="18" y1="6" x2="6" y2="18" />
-                      <line x1="6" y1="6" x2="18" y2="18" />
-                    </svg>
-                  </button>
-                  <div className="pr-6 text-[#6B4EFF] typo-title1 break-keep">
-                    {isHashtag ? `#${selected.text}` : selected.text}
-                  </div>
-                  <div className="flex flex-col gap-2">
-                    <div className="text-gray-500 typo-body5">{valueLabel}</div>
-                    <div className="text-black typo-title2">{formatValue(selected.value)}</div>
-                  </div>
-                  <div className="flex w-full flex-col gap-2">
-                    <button
-                      type="button"
-                      onClick={handleRecommend}
-                      className="w-[80%] rounded-xl bg-[#6B4EFF] py-2 text-white typo-body6 transition-all duration-200 hover:opacity-90 active:scale-[0.98]"
-                    >
-                      {isHashtag ? '이 해시태그로 영상 추천받기' : '이 키워드로 영상 추천받기'}
-                    </button>
-                    <button
-                      type="button"
-                      onClick={handleYoutubeSearch}
-                      className="w-full rounded-xl border border-[#6B4EFF] bg-white py-2 text-[#6B4EFF] typo-body6 transition-all duration-200 hover:bg-[#6B4EFF]/8 active:scale-[0.98]"
-                    >
-                      {isHashtag
-                        ? '이 해시태그 관련 유튜브 영상 탐색하기'
-                        : '이 키워드 관련 유튜브 영상 탐색하기'}
-                    </button>
-                  </div>
-                </>
+                <DetailPanel
+                  selected={selected}
+                  isHashtag={isHashtag}
+                  valueLabel={valueLabel}
+                  onClose={() => setSelected(null)}
+                  onRecommend={handleRecommend}
+                  onYoutubeSearch={handleYoutubeSearch}
+                />
               )}
             </div>
           </div>

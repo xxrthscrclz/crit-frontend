@@ -26,6 +26,8 @@ const categories = [
   '과학 / 기술',
 ];
 
+const MOBILE_CATEGORY_PREVIEW = 5;
+
 interface FormListProps {
   onSearch?: () => void;
   initialKeyword?: string;
@@ -64,12 +66,13 @@ const FormList = ({ onSearch, initialKeyword = '' }: FormListProps) => {
     return [];
   });
   const [time, setTime] = useState(formInput.time || 0);
+  const [categoryExpanded, setCategoryExpanded] = useState(false);
 
   useEffect(() => {
     if (contentRef.current) {
       setContentHeight(contentRef.current.scrollHeight);
     }
-  }, [formInput.videoType]);
+  }, [formInput.videoType, categoryExpanded]);
 
   const handleCategoryToggle = (category: string, checked: boolean) => {
     setSelectedCategories(prev =>
@@ -123,7 +126,7 @@ const FormList = ({ onSearch, initialKeyword = '' }: FormListProps) => {
   };
 
   return (
-    <div className="flex w-250 pt-18 pb-12 px-8 flex-col justify-end items-center gap-10 rounded-xl bg-[#F5EFFF]">
+    <div className="flex w-250 flex-col items-center justify-end gap-10 rounded-xl bg-[#F5EFFF] px-8 pb-12 pt-18 max-md:w-full max-md:gap-6 max-md:px-3 max-md:pb-8 max-md:pt-12">
       <div
         ref={contentRef}
         className={`flex flex-col collapse-panel gap-4 ${!collapsed ? 'is-open' : ''}`}
@@ -134,15 +137,15 @@ const FormList = ({ onSearch, initialKeyword = '' }: FormListProps) => {
           } as React.CSSProperties
         }
       >
-        <div className="flex justify-center w-full typo-body1-medium text-[#717171] text-center whitespace-pre-line">
+        <div className="flex w-full justify-center whitespace-pre-line text-center typo-body1-medium text-[#717171] max-md:text-[12px] max-md:leading-[18px]">
           {
             '원하는 키워드와 채널 정보를 입력하면\nAI가 트렌드와 채널 데이터를 분석해 맞춤 콘텐츠 아이디어를 추천합니다.'
           }
         </div>
-        <div className="flex w-234 py-9 px-8 flex-col justify-center items-center gap-6 rounded-xl border border-black/10 bg-white overflow-visible">
-          <div className="flex w-full pb-14 pl-6 pr-4 flex-col items-start gap-12 overflow-visible">
-            <div className="flex w-full items-start gap-6 overflow-visible">
-              <div className="flex-1 min-w-0">
+        <div className="flex w-234 flex-col items-center justify-center gap-6 overflow-visible rounded-xl border border-black/10 bg-white px-8 py-9 max-md:w-full max-md:gap-4 max-md:px-3 max-md:py-5">
+          <div className="flex w-full flex-col items-start gap-12 overflow-visible pb-14 pl-6 pr-4 max-md:gap-6 max-md:pb-6 max-md:pl-0 max-md:pr-0">
+            <div className="flex w-full items-start gap-6 overflow-visible max-md:flex-col max-md:gap-4">
+              <div className="min-w-0 w-full flex-1">
                 <FormContainer
                   title="Keyword"
                   placeholder="예) 여행브이로그 / 다이어트 식단"
@@ -150,13 +153,13 @@ const FormList = ({ onSearch, initialKeyword = '' }: FormListProps) => {
                   onChange={setKeyword}
                 />
               </div>
-              <div className="flex-1 min-w-0">
+              <div className="min-w-0 w-full flex-1">
                 <FormContainer
                   title="채널 스타일 분석"
                   titleAddon={
                     <div className="relative group overflow-visible">
-                      <InfoIcon className="w-4 h-4 text-[#8257B4] cursor-pointer shrink-0" />
-                      <div className="absolute left-1/2 bottom-full mb-2 -translate-x-1/2 px-3 py-2 bg-white/85 backdrop-blur-[27px] text-black typo-body6 rounded-xl border border-[#6B42FF] whitespace-nowrap opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-50">
+                      <InfoIcon className="h-4 w-4 shrink-0 cursor-pointer text-[#8257B4]" />
+                      <div className="absolute bottom-full left-1/2 z-50 mb-2 invisible -translate-x-1/2 rounded-xl border border-[#6B42FF] bg-white/85 px-3 py-2 text-black opacity-0 typo-body6 whitespace-nowrap backdrop-blur-[27px] transition-all group-hover:visible group-hover:opacity-100">
                         {isLoggedIn
                           ? '내 채널의 콘텐츠 성향을 분석해 추천 결과에 반영합니다.'
                           : '로그인 후 내 채널 데이터를 분석해 맞춤형 주제를 추천할 수 있습니다.'}
@@ -171,7 +174,7 @@ const FormList = ({ onSearch, initialKeyword = '' }: FormListProps) => {
                     />
                   }
                 >
-                  <div className="flex h-12 py-1 px-3 items-center self-stretch rounded-lg border border-transparent bg-[#FEF8FF] typo-body2 text-[#717171] truncate">
+                  <div className="flex h-12 items-center self-stretch truncate rounded-lg border border-transparent bg-[#FEF8FF] px-3 py-1 typo-body2 text-[#717171] max-md:h-10">
                     {!isLoggedIn
                       ? '로그인 후 사용 가능'
                       : useChannelData
@@ -181,29 +184,57 @@ const FormList = ({ onSearch, initialKeyword = '' }: FormListProps) => {
                 </FormContainer>
               </div>
             </div>
-            <div className="flex w-196 flex-col items-start gap-4">
+            <div className="flex w-196 flex-col items-start gap-4 max-md:w-full max-md:gap-3">
               <div className="typo-body1-medium text-[#0A0A0A]">Category</div>
-              <div className="h-78 self-stretch grid grid-cols-3 gap-4 content-start">
-                {categories.map(category => (
-                  <CheckBox
+              <div className="grid h-78 grid-cols-3 content-start gap-4 self-stretch max-md:h-auto max-md:grid-cols-1 max-md:gap-2">
+                {categories.map((category, index) => (
+                  <div
                     key={category}
-                    label={category}
-                    checked={selectedCategories.includes(category)}
-                    onChange={checked => handleCategoryToggle(category, checked)}
-                  />
+                    className={`w-full ${
+                      !categoryExpanded && index >= MOBILE_CATEGORY_PREVIEW ? 'max-md:hidden' : ''
+                    }`}
+                  >
+                    <CheckBox
+                      label={category}
+                      checked={selectedCategories.includes(category)}
+                      onChange={checked => handleCategoryToggle(category, checked)}
+                    />
+                  </div>
                 ))}
               </div>
+              {categories.length > MOBILE_CATEGORY_PREVIEW && (
+                <button
+                  type="button"
+                  onClick={() => setCategoryExpanded(prev => !prev)}
+                  className="hidden items-center gap-1 text-[#0a0a0a89] typo-label active:text-[#6B4EFF] max-md:flex"
+                >
+                  <svg
+                    className={`h-4 w-4 transition-transform duration-300 ${categoryExpanded ? 'rotate-180' : 'rotate-0'}`}
+                    viewBox="0 0 16 16"
+                  >
+                    <path
+                      d="M4 6l4 4 4-4"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                  {categoryExpanded ? '접기' : '펼치기'}
+                </button>
+              )}
             </div>
             {formInput.videoType === 'long' && (
-              <div className="flex w-196 flex-col items-start gap-4">
+              <div className="flex w-196 flex-col items-start gap-4 max-md:w-full max-md:gap-3">
                 <div className="typo-body1-medium text-[#0A0A0A]">Time</div>
                 <TimeSlider value={time} onChange={setTime} />
               </div>
             )}
-            <div className="flex w-196 justify-end">
+            <div className="flex w-196 justify-end max-md:w-full">
               <div
                 onClick={handleReset}
-                className="flex py-1.5 px-3 justify-center items-center rounded-md bg-[#FF6B6B] hover:bg-[#FF4757] active:bg-[#FF8787] typo-label text-white cursor-pointer transition-colors"
+                className="flex cursor-pointer items-center justify-center rounded-md bg-[#FF6B6B] px-3 py-1.5 typo-label text-white transition-colors hover:bg-[#FF4757] active:bg-[#FF8787]"
               >
                 초기화
               </div>
@@ -211,21 +242,25 @@ const FormList = ({ onSearch, initialKeyword = '' }: FormListProps) => {
           </div>
         </div>
       </div>
-      <div className="flex w-full items-center relative">
-        {errorMsg && <div className="absolute left-0 text-sm text-red-500">{errorMsg}</div>}
+      <div className="relative flex w-full items-center max-md:flex-col max-md:gap-3 max-md:pt-1">
+        {errorMsg && (
+          <div className="absolute left-0 text-sm text-red-500 max-md:static max-md:text-center max-md:text-xs">
+            {errorMsg}
+          </div>
+        )}
         <div
           onClick={handleSearch}
-          className="flex py-2.5 px-5 mx-auto justify-center items-center gap-2.5 rounded-lg bg-[#7C5CFF] active:bg-[#6344DD] typo-body1-medium text-white text-center tracking-widest cursor-pointer"
+          className="mx-auto flex cursor-pointer items-center justify-center gap-2.5 rounded-lg bg-[#7C5CFF] px-5 py-2.5 text-center text-white typo-body1-medium tracking-widest active:bg-[#6344DD] max-md:px-4 max-md:py-2 max-md:tracking-wide"
         >
           {searched ? '다시 검색' : '검색'}
         </div>
         {searched && (
           <div
             onClick={() => setCollapsed(!collapsed)}
-            className="absolute right-0 flex items-center gap-1 cursor-pointer text-[#0a0a0a89] active:text-[#6B4EFF] typo-label"
+            className="absolute right-0 flex cursor-pointer items-center gap-1 text-[#0a0a0a89] typo-label active:text-[#6B4EFF] max-md:static max-md:justify-center"
           >
             <svg
-              className={`w-4 h-4 transition-transform duration-300 ${collapsed ? 'rotate-0' : 'rotate-180'}`}
+              className={`h-4 w-4 transition-transform duration-300 ${collapsed ? 'rotate-0' : 'rotate-180'}`}
               viewBox="0 0 16 16"
             >
               <path

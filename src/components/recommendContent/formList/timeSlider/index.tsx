@@ -32,7 +32,7 @@ const TimeSlider = ({
   const percent = (value / 30) * 100;
 
   return (
-    <div className={`relative flex flex-col ${compact ? 'w-full' : 'w-120'}`}>
+    <div className={`relative flex flex-col ${compact ? 'w-full' : 'w-full max-w-120'}`}>
       <div
         className={`absolute -top-8 px-3 py-1 rounded-md bg-[#A594F9]/80 text-white text-xs font-semibold transition-all duration-200 whitespace-nowrap slider-value-tooltip ${dragging ? 'opacity-100 scale-100' : 'opacity-0 scale-90'}`}
         style={{ '--slider-percent': percent } as React.CSSProperties}

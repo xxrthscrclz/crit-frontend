@@ -157,9 +157,9 @@ const RecommendContent = () => {
               </div>
             ) : (
               <div className="flex flex-col w-full gap-5 p-5 rounded-xl border-[0.1px] border-[#8257B4]">
-                <div className="flex w-full items-start justify-between gap-6">
+                <div className="flex w-full items-start justify-between gap-6 max-md:flex-col max-md:gap-5">
                   {/* 키워드 (고정) */}
-                  <div className="flex flex-col w-[30%] gap-2">
+                  <div className="flex flex-col w-[30%] gap-2 max-md:w-full">
                     <div className="flex items-center gap-1.5 text-black typo-body4-semibold">
                       Keyword
                       <div className="relative group">
@@ -175,7 +175,7 @@ const RecommendContent = () => {
                   </div>
 
                   {/* 카테고리 (고정) */}
-                  <div className="flex flex-col w-[30%] min-w-0 gap-2">
+                  <div className="flex flex-col w-[30%] min-w-0 gap-2 max-md:w-full">
                     <div className="flex items-center gap-1.5 text-black typo-body4-semibold">
                       Category
                       <div className="relative group">
@@ -194,7 +194,7 @@ const RecommendContent = () => {
                   </div>
 
                   {/* 시간 설정 */}
-                  <div className="flex flex-col w-[30%] gap-6">
+                  <div className="flex flex-col w-[30%] gap-6 max-md:w-full">
                     <div className="text-black typo-body4-semibold">Time</div>
                     {isShortForm ? (
                       <div className="text-gray-400 animate-loading-pulse typo-body5">
@@ -230,7 +230,7 @@ const RecommendContent = () => {
         {/* 추천 결과 */}
         {!showForm && (
           <div
-            className="flex w-full justify-center items-stretch gap-5 py-4 transition-opacity ease-in-out"
+            className="flex w-full justify-center items-stretch gap-5 py-4 transition-opacity ease-in-out max-md:flex-col max-md:gap-4 max-md:overflow-x-auto max-md:script-scroll"
             style={{ opacity: resultsOpacity, transitionDuration: `${FADE_DURATION_MS}ms` }}
           >
             {recommendations.length > 0 ? (

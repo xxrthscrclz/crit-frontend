@@ -22,12 +22,12 @@ const TodayTrend = ({ aiSummary, isLoading = false }: TodayTrendProps) => {
           <div className="absolute -right-8 -top-10 h-44 w-44 rounded-full bg-[#6B4EFF]/8 blur-3xl" />
           <div className="absolute -bottom-8 left-12 h-36 w-36 rounded-full bg-[#A594F9]/12 blur-2xl" />
         </div>
-        <div className="relative z-10 flex gap-6 border-l-4 border-l-[#6B4EFF] px-6 py-5">
-          <div className="flex min-w-0 flex-1 flex-col gap-3">
-            <span className="inline-flex w-fit items-center rounded-full border border-[#E8E2FF] bg-[#6B4EFF]/8 px-3 py-1 text-[#6B4EFF] typo-body6">
+        <div className="relative z-10 flex gap-6 border-l-4 border-l-[#6B4EFF] px-6 py-5 max-md:gap-4 max-md:px-4 max-md:py-4">
+          <div className="flex min-w-0 flex-1 flex-col gap-3 max-md:gap-2">
+            <span className="inline-flex w-fit items-center rounded-full border border-[#E8E2FF] bg-[#6B4EFF]/8 px-3 py-1 text-[#6B4EFF] typo-body6 max-md:px-2.5 max-md:py-0.5">
               AI 생성 요약
             </span>
-            <p className="text-[#2D2640] typo-body3-semibold leading-relaxed whitespace-pre-wrap">
+            <p className="whitespace-pre-wrap text-[#2D2640] typo-body3-semibold leading-relaxed max-md:text-[12px] max-md:leading-[18px]">
               {aiSummary ? (
                 aiSummary
               ) : isLoading ? (
@@ -39,7 +39,7 @@ const TodayTrend = ({ aiSummary, isLoading = false }: TodayTrendProps) => {
               )}
             </p>
           </div>
-          <div className="hidden shrink-0 items-center justify-center self-center rounded-2xl bg-[#6B4EFF]/6 p-5 sm:flex">
+          <div className="flex shrink-0 items-center justify-center self-center rounded-2xl bg-[#6B4EFF]/6 p-5 max-md:hidden">
             <AICommentIcon className="h-20 w-20 text-[#6B4EFF]/70" />
           </div>
         </div>

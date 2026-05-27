@@ -11,7 +11,7 @@ const DetailScore = () => {
   // 로딩 중이거나 데이터 없으면 기본 3개 표시
   if (showLoading || factors.length === 0) {
     return (
-      <div className="flex w-full gap-7 justify-center items-stretch">
+      <div className="flex w-full gap-7 justify-center items-stretch max-md:flex-col max-md:gap-4">
         <DetailScoreContainer factorName="도달률" />
         <DetailScoreContainer factorName="시청 지속 시간" />
         <DetailScoreContainer factorName="추천 확장성" />
@@ -20,7 +20,7 @@ const DetailScore = () => {
   }
 
   return (
-    <div className="flex w-full gap-7 justify-center items-stretch">
+    <div className="flex w-full gap-7 justify-center items-stretch max-md:flex-col max-md:gap-4">
       <DetailScoreContainer factorName="도달률" />
       <DetailScoreContainer factorName="시청 지속 시간" />
       <DetailScoreContainer factorName="추천 확장성" />

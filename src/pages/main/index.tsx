@@ -14,7 +14,6 @@ const Main = () => {
   const setLoading = useTrendKeywordsStore(s => s.setLoading);
   const [animationKey, setAnimationKey] = useState(0);
 
-  // 페이지 진입 시 선택된 키워드 초기화 + 트렌드 키워드 API 호출
   useEffect(() => {
     setSelectedKeyword(null);
 
@@ -32,7 +31,6 @@ const Main = () => {
     fetchKeywords();
   }, [setSelectedKeyword, setKeywords, setLoading]);
 
-  // 키워드가 바뀔 때마다 애니메이션 키 증가 (재실행용)
   useEffect(() => {
     if (selectedKeyword) {
       setAnimationKey(prev => prev + 1);
@@ -40,30 +38,29 @@ const Main = () => {
   }, [selectedKeyword]);
 
   return (
-    <div className="min-h-screen flex flex-col bg-linear-to-br from-[#F5EFFF] via-white to-[#E8F4F8] relative">
-      {/* 배경 장식 요소들 */}
-      <div className="absolute top-20 left-10 w-72 h-72 bg-[#9F8CFF] rounded-full opacity-10 blur-3xl pointer-events-none" />
-      <div className="absolute top-40 right-20 w-96 h-96 bg-[#4ECDC4] rounded-full opacity-10 blur-3xl pointer-events-none" />
-      <div className="absolute bottom-40 left-1/4 w-80 h-80 bg-[#FF6B6B] rounded-full opacity-10 blur-3xl pointer-events-none" />
-      <div className="absolute bottom-20 right-10 w-64 h-64 bg-[#FFEAA7] rounded-full opacity-15 blur-3xl pointer-events-none" />
+    <div className="relative flex min-h-screen flex-col bg-linear-to-br from-[#F5EFFF] via-white to-[#E8F4F8]">
+      <div className="pointer-events-none absolute top-20 left-10 h-72 w-72 rounded-full bg-[#9F8CFF] opacity-10 blur-3xl max-md:hidden" />
+      <div className="pointer-events-none absolute top-40 right-20 h-96 w-96 rounded-full bg-[#4ECDC4] opacity-10 blur-3xl max-md:hidden" />
+      <div className="pointer-events-none absolute bottom-40 left-1/4 h-80 w-80 rounded-full bg-[#FF6B6B] opacity-10 blur-3xl max-md:hidden" />
+      <div className="pointer-events-none absolute bottom-20 right-10 h-64 w-64 rounded-full bg-[#FFEAA7] opacity-15 blur-3xl max-md:hidden" />
 
       <Header />
-      <div className="flex-1 flex flex-col w-full p-10 justify-center items-center relative z-10 gap-4 px-8">
+      <div className="relative z-10 flex flex-1 flex-col items-center justify-center gap-4 p-10 px-8 max-md:px-4 max-md:py-8">
         <div className="flex flex-col items-center text-center">
           <div className="typo-title1">
             <span className="text-gray-500">트렌드를 읽고, 콘텐츠를 만들다 </span>
             <span className="animate-crit-glow">단 하나의 시작, CRiT</span>
           </div>
-          <div className="text-gray-600 typo-body4 mt-2">
+          <div className="mt-2 text-gray-600 typo-body4">
             지금 뜨는 키워드로 주제를 추천받으세요.
           </div>
         </div>
-        <div className="flex w-full justify-center items-center gap-8">
-          <div className="transition-all duration-500">
+        <div className="flex w-full items-center justify-center gap-8 max-md:flex-col max-md:gap-6">
+          <div className="transition-all duration-500 max-md:w-full">
             <Keywords isShifted={!!selectedKeyword} />
           </div>
           {selectedKeyword && (
-            <div className="flex items-center justify-center shrink-0">
+            <div className="flex shrink-0 items-center justify-center max-md:w-full">
               <KeywordCard animationKey={animationKey} />
             </div>
           )}

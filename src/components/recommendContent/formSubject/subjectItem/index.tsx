@@ -9,7 +9,7 @@ const SubjectItem = ({ subject, subjectContent, selected, onClick }: SubjectItem
   return (
     <div
       onClick={onClick}
-      className={`flex w-234 py-6 px-8 flex-col items-start gap-3 rounded-xl border cursor-pointer transition-all duration-200
+      className={`flex w-234 cursor-pointer flex-col items-start gap-3 rounded-xl border px-8 py-6 transition-all duration-200 max-md:w-full max-md:gap-2 max-md:px-4 max-md:py-4
         ${
           selected
             ? 'border-[#6B4EFF] bg-[#F3F0FF] shadow-md'

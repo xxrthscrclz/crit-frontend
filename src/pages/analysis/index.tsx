@@ -72,13 +72,13 @@ const AnalysisPage = () => {
       {!showDetail ? (
         <div
           key="list"
-          className={`flex flex-col w-300 items-center pt-10 px-10 overflow-hidden ${slideDirection === 'left' ? 'animate-slide-in-left' : ''}`}
+          className={`flex w-300 flex-col items-center overflow-hidden px-10 pt-10 max-md:w-full max-md:px-4 max-md:pt-6 ${slideDirection === 'left' ? 'animate-slide-in-left' : ''}`}
         >
-          <div className="flex flex-col w-full justify-center items-center gap-7 pb-2.5 animate-fade-in-up">
+          <div className="flex w-full flex-col items-center justify-center gap-7 pb-2.5 animate-fade-in-up">
             <UserProfile onRefresh={handleRefresh} isRefreshing={isRefreshing} />
-            <div className="w-full h-0.25 bg-[#A594F9]" />
+            <div className="h-0.25 w-full bg-[#A594F9]" />
           </div>
-          <div className="flex w-full justify-center items-center gap-2 pb-2.5 animate-fade-in-up animate-delay-150">
+          <div className="flex w-full items-center justify-center gap-2 pb-2.5 animate-fade-in-up animate-delay-150 max-md:flex-col">
             <AlgorithmScore />
             <SummaryChannel />
           </div>

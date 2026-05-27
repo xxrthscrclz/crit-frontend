@@ -24,22 +24,22 @@ const ScriptEditor = () => {
 
   return (
     <>
-      <div className="inline-flex w-full h-102 py-6 pl-6 pr-5 gap-5 rounded-xl bg-[#fff] border border-[#A594F9]">
-        <div className="flex flex-1 flex-col gap-4 animate-fade-in-up">
-          <div className="flex w-full justify-between items-center gap-4">
+      <div className="inline-flex h-102 w-full flex-row gap-5 rounded-xl border border-[#A594F9] bg-[#fff] py-6 pl-6 pr-5 max-md:h-full max-md:flex-col max-md:gap-4 max-md:py-4 max-md:pl-4 max-md:pr-3">
+        <div className="flex flex-1 flex-col gap-4 animate-fade-in-up max-md:min-h-48 max-md:gap-3">
+          <div className="flex w-full items-center justify-between gap-4 max-md:flex-col max-md:items-start max-md:gap-2">
             <div className="typo-title-bold text-[#0A0A0A]">AI 대본 초안</div>
             <button
               type="button"
               onClick={() => setShowFullScriptModal(true)}
               disabled={!canGenerateFullScript}
-              className="shrink-0 px-4 py-1.5 rounded-lg bg-[#7C5CFF] text-white typo-body6 transition-colors hover:bg-[#C4B8FF] hover:text-[#6452CE] active:bg-[#C4B8FF] active:text-[#6452CE] disabled:bg-gray-300 disabled:text-white disabled:cursor-not-allowed cursor-pointer"
+              className="shrink-0 cursor-pointer rounded-lg bg-[#7C5CFF] px-4 py-1.5 text-white typo-body6 transition-colors hover:bg-[#C4B8FF] hover:text-[#6452CE] active:bg-[#C4B8FF] active:text-[#6452CE] disabled:cursor-not-allowed disabled:bg-gray-300 disabled:text-white max-md:px-3"
             >
               풀버전 대본 생성
             </button>
           </div>
-          <div className="relative group w-full flex-1 min-h-0">
-            <div className="h-full rounded-xl bg-[#FAFAFA] border border-[#A594F9] py-4 px-3">
-              <div className="h-full overflow-y-auto script-scroll">
+          <div className="group relative min-h-0 w-full flex-1 max-md:min-h-40">
+            <div className="h-full rounded-xl border border-[#A594F9] bg-[#FAFAFA] px-3 py-4 max-md:min-h-40 max-md:py-3">
+              <div className="h-full overflow-y-auto script-scroll max-md:max-h-64">
                 {draftScript ? (
                   <ScriptBlockContent raw={draftScript} />
                 ) : (
@@ -53,16 +53,16 @@ const ScriptEditor = () => {
               <button
                 type="button"
                 onClick={handleCopy}
-                className={`absolute bottom-3 right-3 flex items-center gap-1.5 rounded-lg border border-[#A594F9] bg-white/90 px-2 py-1 shadow-sm opacity-0 transition-opacity group-hover:opacity-100 group-focus-within:opacity-100 cursor-pointer ${copied ? 'text-[#6B4EFF]' : 'text-[#0a0a0a89] active:text-[#6B4EFF]'}`}
+                className={`absolute bottom-3 right-3 flex cursor-pointer items-center gap-1.5 rounded-lg border border-[#A594F9] bg-white/90 px-2 py-1 opacity-0 shadow-sm transition-opacity group-hover:opacity-100 group-focus-within:opacity-100 max-md:opacity-100 ${copied ? 'text-[#6B4EFF]' : 'text-[#0a0a0a89] active:text-[#6B4EFF]'}`}
               >
-                {!copied && <CopyIcon className="w-4 h-4" />}
+                {!copied && <CopyIcon className="h-4 w-4" />}
                 <span className="typo-label">{copied ? '복사완료' : '복사'}</span>
               </button>
             )}
           </div>
         </div>
-        <div className="flex w-70 shrink-0 flex-col gap-4 animate-fade-in-up animate-delay-150">
-          <div className="flex w-full typo-title-bold text-[#0A0A0A] items-stretch">
+        <div className="flex w-70 shrink-0 flex-col gap-4 animate-fade-in-up animate-delay-150 max-md:w-full max-md:gap-3">
+          <div className="flex w-full items-stretch typo-title-bold text-[#0A0A0A]">
             참고 영상 및 크리에이터 추천
           </div>
           <ReferenceList />
