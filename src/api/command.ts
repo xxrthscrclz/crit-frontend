@@ -221,3 +221,54 @@ export const getKeywords = async (): Promise<{ text: string; value: number }[]> 
   const response = await api.get('/keywords');
   return response.data;
 };
+
+// ===== Trending =====
+
+export interface TrendVideo {
+  videoId: string;
+  title: string;
+  thumbnailUrl: string;
+  videoUrl: string;
+  channelTitle: string;
+  hashtags: string[];
+  aiAnalysis: string;
+  views: number;
+  publishedAt: string;
+}
+
+export interface PopularVideo extends TrendVideo {
+  rank: number;
+}
+
+export interface CategoryTop1Video extends TrendVideo {
+  categoryId: string;
+  categoryName: string;
+}
+
+export interface MusicChartItem {
+  title: string;
+  artist: string;
+  videoUrl: string;
+}
+
+export interface TrendHotWord {
+  text: string;
+  value: number;
+}
+
+export interface TrendingResponse {
+  updatedAt: string;
+  aiSummary: string;
+  popularVideos: PopularVideo[];
+  musicChartKR: MusicChartItem[];
+  musicChartGlobal: MusicChartItem[];
+  categoryTop1: CategoryTop1Video[];
+  hotKeywords: TrendHotWord[];
+  hotHashtags: TrendHotWord[];
+}
+
+// GET /trending - 트렌드 페이지 전체 데이터
+export const getTrending = async (): Promise<TrendingResponse> => {
+  const response = await api.get('/trending');
+  return response.data;
+};

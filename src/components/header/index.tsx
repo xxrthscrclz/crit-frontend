@@ -52,8 +52,11 @@ const Header = () => {
             채널분석
           </div>
         </div>
-        <div className="flex w-24 h-9 flex-col justify-center text-center cursor-not-allowed typo-body2 opacity-40">
-          <div className="text-black">트렌드</div>
+        <div
+          className="flex w-24 h-9 flex-col justify-center text-center cursor-pointer typo-body2"
+          onClick={() => navigate('/trend')}
+        >
+          <div className={currentPath === '/trend' ? 'text-[#6B4EFF]' : 'text-black'}>트렌드</div>
         </div>
       </div>
       <div className="flex h-9 justify-center items-center whitespace-nowrap">

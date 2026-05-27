@@ -3,6 +3,7 @@ import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 
 import RecommendPage from '@/pages/recommend';
 import AnalysisPage from '@/pages/analysis';
+import TrendPage from '@/pages/trend';
 import LoginPage from '@/pages/login';
 import MainPage from '@/pages/main';
 import PrivateRoute from '@/routes/privateRoute';
@@ -20,6 +21,7 @@ const Router = () => {
           <Route element={<PrivateRoute />}>
             <Route index element={<MainPage />} />
             <Route path="recommend" element={<RecommendPage />} />
+            <Route path="trend" element={<TrendPage />} />
             <Route path="analysis" element={<MemberRoute />}>
               <Route index element={<AnalysisPage />} />
             </Route>
