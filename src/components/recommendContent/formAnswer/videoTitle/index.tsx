@@ -45,8 +45,8 @@ const VideoTitle = () => {
   };
 
   return (
-    <div className="inline-flex w-full flex-col items-start gap-5 rounded-xl border border-[#A594F9] bg-[#fff] py-6 pl-6 pr-5 max-md:gap-4 max-md:px-3 max-md:py-4">
-      <div className="flex w-full typo-title-bold text-[#0A0A0A] items-stretch">AI 추천 제목</div>
+    <div className="inline-flex w-full flex-col items-start gap-5 rounded-xl border border-brand-secondary bg-surface py-6 pl-6 pr-5 max-md:gap-4 max-md:px-3 max-md:py-4">
+      <div className="flex w-full typo-title-bold text-primary items-stretch">AI 추천 제목</div>
       {titles.length > 0
         ? titles.map((title, i) => (
             <VideoTitleItem

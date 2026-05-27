@@ -62,7 +62,7 @@ const VideoInfo = () => {
   const showLoading = isLoading || !videoInfo;
 
   return (
-    <div className="flex w-full justify-center items-center px-8 py-6 gap-7 bg-white rounded-xl border-[0.1px] border-[#8257B4] max-md:flex-col max-md:px-4 max-md:py-5 max-md:gap-4">
+    <div className="flex w-full justify-center items-center px-8 py-6 gap-7 bg-white rounded-xl border-[0.1px] border-accent max-md:flex-col max-md:px-4 max-md:py-5 max-md:gap-4">
       <div className="w-107.5 shrink-0 aspect-video rounded-xl overflow-hidden max-md:w-full">
         {videoInfo?.thumbnailUrl ? (
           <img
@@ -89,12 +89,12 @@ const VideoInfo = () => {
           </div>
           <ShareIcon
             onClick={handleShare}
-            className={`w-5 h-5 cursor-pointer shrink-0 ${shared ? 'text-[#6B4EFF]' : 'text-[#0000004D] active:text-[#6B4EFF]'}`}
+            className={`w-5 h-5 cursor-pointer shrink-0 ${shared ? 'text-brand' : 'text-disabled active:text-brand'}`}
           />
         </div>
         <div className="flex w-full justify-start items-center gap-2.5 max-md:flex-wrap max-md:gap-x-2.5 max-md:gap-y-2">
           <div className="flex justify-center items-center gap-1">
-            <ViewsIcon className="w-4 h-4" />
+            <ViewsIcon className="crit-icon-muted w-4 h-4" />
             <div className="text-black typo-body5">
               {showLoading ? (
                 <span className="animate-loading-pulse">조회수 ---회</span>
@@ -105,7 +105,7 @@ const VideoInfo = () => {
           </div>
           <ColumnLine />
           <div className="flex justify-center items-center gap-1">
-            <UploadIcon className="w-4 h-4" />
+            <UploadIcon className="crit-icon-muted w-4 h-4" />
             <div className="text-black typo-body5">
               {showLoading ? (
                 <span className="animate-loading-pulse">----.--.-- 업로드</span>
@@ -116,7 +116,7 @@ const VideoInfo = () => {
           </div>
           <ColumnLine />
           <div className="flex justify-center items-center gap-1">
-            <CategoryIcon className="w-4 h-4" />
+            <CategoryIcon className="crit-icon-muted w-4 h-4" />
             <div className="text-black typo-body5">
               {showLoading ? (
                 <span className="animate-loading-pulse">카테고리</span>
@@ -129,7 +129,7 @@ const VideoInfo = () => {
           </div>
           <ColumnLine />
           <div className="flex justify-center items-center gap-1">
-            <TimeIcon className="w-4 h-4" />
+            <TimeIcon className="crit-icon-muted w-4 h-4" />
             <div className="text-black typo-body5">
               {showLoading ? (
                 <span className="animate-loading-pulse">--:--</span>
@@ -140,9 +140,9 @@ const VideoInfo = () => {
           </div>
         </div>
         <div className="flex w-full justify-start items-center gap-1.5">
-          <div className="flex justify-center items-center gap-1 py-1 px-2 rounded-xl bg-[#F5EFFF]">
-            <BarGraphIcon />
-            <div className="text-[#634DCB] typo-body6">분석 기준</div>
+          <div className="flex justify-center items-center gap-1 py-1 px-2 rounded-xl bg-accent-soft">
+            <BarGraphIcon className="crit-icon-secondary" />
+            <div className="text-brand-deep typo-body6">분석 기준</div>
           </div>
           <div className="text-black typo-body5">
             {showLoading ? (
@@ -151,16 +151,16 @@ const VideoInfo = () => {
               `${formatUploadDate(videoInfo.uploadDate)} ~ 현재`
             )}
           </div>
-          <RightIcon className="w-3 h-3" />
+          <RightIcon className="crit-icon-muted w-3 h-3" />
         </div>
-        <div className="flex flex-col w-full px-4 py-3.5 justify-center items-center gap-1.5 self-stretch rounded-xl border-[0.5px] border-[#8257B4]">
+        <div className="flex flex-col w-full px-4 py-3.5 justify-center items-center gap-1.5 self-stretch rounded-xl border-[0.5px] border-accent">
           <div className="flex w-full justify-start items-center gap-1">
             <div className="text-black typo-body4-semibold">종합 점수</div>
-            <InfoIcon className="w-3.5 h-3.5" />
+            <InfoIcon className="crit-icon-muted w-3.5 h-3.5" />
           </div>
           <div className="flex w-full justify-center items-center gap-7 max-md:flex-col max-md:gap-4">
             <CircleProgress score={showLoading ? 0 : videoInfo.score.overall} />
-            <div className="w-0.5 h-40 bg-[#8257B433] self-stretch max-md:hidden" />
+            <div className="w-0.5 h-40 bg-brand-tertiary/10 self-stretch max-md:hidden" />
             <div className="flex flex-col w-full justify-center items-center gap-2">
               <div className="w-full justify-start items-center text-black typo-body4-semibold">
                 {showLoading ? (

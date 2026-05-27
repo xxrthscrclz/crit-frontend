@@ -34,7 +34,7 @@ const TimeSlider = ({
   return (
     <div className={`relative flex flex-col ${compact ? 'w-full' : 'w-full max-w-120'}`}>
       <div
-        className={`absolute -top-8 px-3 py-1 rounded-md bg-[#A594F9]/80 text-white text-xs font-semibold transition-all duration-200 whitespace-nowrap slider-value-tooltip ${dragging ? 'opacity-100 scale-100' : 'opacity-0 scale-90'}`}
+        className={`absolute -top-8 px-3 py-1 rounded-md bg-brand-secondary/80 text-white text-xs font-semibold transition-all duration-200 whitespace-nowrap slider-value-tooltip ${dragging ? 'opacity-100 scale-100' : 'opacity-0 scale-90'}`}
         style={{ '--slider-percent': percent } as React.CSSProperties}
       >
         {value}분
@@ -50,17 +50,8 @@ const TimeSlider = ({
         onMouseUp={() => setDragging(false)}
         onTouchStart={() => setDragging(true)}
         onTouchEnd={() => setDragging(false)}
-        className="w-full h-2 rounded-full appearance-none cursor-pointer
-          [&::-webkit-slider-runnable-track]:rounded-full
-          [&::-webkit-slider-runnable-track]:h-2
-          [&::-webkit-slider-runnable-track]:bg-[#EAE0F4]
-          [&::-webkit-slider-thumb]:appearance-none
-          [&::-webkit-slider-thumb]:w-5
-          [&::-webkit-slider-thumb]:h-5
-          [&::-webkit-slider-thumb]:rounded-full
-          [&::-webkit-slider-thumb]:bg-[#A594F9]
-          [&::-webkit-slider-thumb]:-mt-1.5
-          [&::-webkit-slider-thumb]:shadow-md"
+        className="crit-time-slider w-full h-2 cursor-pointer appearance-none rounded-full"
+        style={{ '--slider-percent': percent } as React.CSSProperties}
       />
       <div className="flex w-full justify-between mt-2 px-1">
         {steps.map(s => (

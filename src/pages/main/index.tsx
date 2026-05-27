@@ -38,11 +38,11 @@ const Main = () => {
   }, [selectedKeyword]);
 
   return (
-    <div className="relative flex min-h-screen flex-col bg-linear-to-br from-[#F5EFFF] via-white to-[#E8F4F8]">
-      <div className="pointer-events-none absolute top-20 left-10 h-72 w-72 rounded-full bg-[#9F8CFF] opacity-10 blur-3xl max-md:hidden" />
-      <div className="pointer-events-none absolute top-40 right-20 h-96 w-96 rounded-full bg-[#4ECDC4] opacity-10 blur-3xl max-md:hidden" />
-      <div className="pointer-events-none absolute bottom-40 left-1/4 h-80 w-80 rounded-full bg-[#FF6B6B] opacity-10 blur-3xl max-md:hidden" />
-      <div className="pointer-events-none absolute bottom-20 right-10 h-64 w-64 rounded-full bg-[#FFEAA7] opacity-15 blur-3xl max-md:hidden" />
+    <div className="relative flex min-h-screen flex-col bg-gradient-page">
+      <div className="pointer-events-none absolute top-20 left-10 h-72 w-72 rounded-full bg-brand-violet opacity-10 blur-3xl max-md:hidden" />
+      <div className="pointer-events-none absolute top-40 right-20 h-96 w-96 rounded-full bg-decorative-teal opacity-10 blur-3xl max-md:hidden" />
+      <div className="pointer-events-none absolute bottom-40 left-1/4 h-80 w-80 rounded-full bg-reset opacity-10 blur-3xl max-md:hidden" />
+      <div className="pointer-events-none absolute bottom-20 right-10 h-64 w-64 rounded-full bg-decorative-yellow opacity-15 blur-3xl max-md:hidden" />
 
       <Header />
       <div className="relative z-10 flex flex-1 flex-col items-center justify-center gap-4 p-10 px-8 max-md:px-4 max-md:py-8">

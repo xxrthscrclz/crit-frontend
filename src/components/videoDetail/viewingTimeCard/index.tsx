@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import SparkIcon from '@/assets/icons/score-icons/video-detail/sparkle-icon.svg?react';
+import { cssVar } from '@/constants/colors';
 import useCurrentVideoStore from '@/stores/useCurrentVideoStore';
 
 const ViewingTimeCard = () => {
@@ -67,11 +68,11 @@ const ViewingTimeCard = () => {
   };
 
   return (
-    <div className="flex w-full h-full px-6 py-8 justify-center items-center gap-3.5 bg-white rounded-xl border-[0.1px] border-[#8257B4] max-md:flex-col max-md:items-stretch max-md:px-3 max-md:py-4 max-md:gap-4">
+    <div className="flex w-full h-full px-6 py-8 justify-center items-center gap-3.5 bg-white rounded-xl border-[0.1px] border-accent max-md:flex-col max-md:items-stretch max-md:px-3 max-md:py-4 max-md:gap-4">
       {/* 시청자 유지율 분석 영역 */}
       <div className="flex flex-col w-full h-full flex-1 justify-between items-center">
-        <div className="flex w-full justify-start items-center gap-1 text-[#6452CE] typo-body4-semibold">
-          <SparkIcon className="w-4 h-4" />
+        <div className="flex w-full justify-start items-center gap-1 text-brand-deep typo-body4-semibold">
+          <SparkIcon className="crit-icon-brand w-4 h-4 shrink-0" />
           시청자 유지율 분석
         </div>
         {/* 그래프 영역 */}
@@ -102,7 +103,7 @@ const ViewingTimeCard = () => {
                         y1={y}
                         x2="100"
                         y2={y}
-                        stroke="#E0E0E0"
+                        stroke={cssVar.chartGrid}
                         strokeWidth="0.5"
                         vectorEffect="non-scaling-stroke"
                       />
@@ -128,12 +129,12 @@ const ViewingTimeCard = () => {
                       vectorEffect="non-scaling-stroke"
                     />
                     {/* 영역 채우기 */}
-                    <path d={createAreaPath()} fill="#9F8CFF33" />
+                    <path d={createAreaPath()} fill={cssVar.chartAccentSoft} />
                     {/* 유지율 선 */}
                     <path
                       d={createPath()}
                       fill="none"
-                      stroke="#9F8CFF"
+                      stroke={cssVar.chartAccent}
                       strokeWidth="2"
                       vectorEffect="non-scaling-stroke"
                     />
@@ -155,11 +156,11 @@ const ViewingTimeCard = () => {
                         {isVisible && (
                           <>
                             <div
-                              className="absolute w-2 h-2 rounded-full bg-[#9F8CFF] chart-dot-left"
+                              className="absolute w-2 h-2 rounded-full bg-brand-violet chart-dot-left"
                               style={{ '--chart-y': yPercent } as React.CSSProperties}
                             />
                             <div
-                              className="absolute flex flex-col items-center px-3 py-2 rounded-xl text-black whitespace-nowrap z-10 border border-[#6B42FF] glass-tooltip-muted chart-tooltip-center"
+                              className="absolute flex flex-col items-center px-3 py-2 rounded-xl text-black whitespace-nowrap z-10 border border-brand glass-tooltip-muted chart-tooltip-center"
                               style={{ '--chart-y': yPercent } as React.CSSProperties}
                             >
                               <div className="typo-body5">평균 시청 지속 시간</div>
@@ -193,7 +194,7 @@ const ViewingTimeCard = () => {
         </div>
       </div>
       {/* 주요 이탈 구간 */}
-      <div className="flex flex-col w-52 shrink-0 justify-center items-center px-4.5 py-7 gap-4.5 bg-[#F5EFFF33] rounded-xl border-[0.1px] border-[#8257B4] max-md:w-full max-md:px-4 max-md:py-5 max-md:gap-3">
+      <div className="flex flex-col w-52 shrink-0 justify-center items-center px-4.5 py-7 gap-4.5 bg-accent-soft/20 rounded-xl border-[0.1px] border-accent max-md:w-full max-md:px-4 max-md:py-5 max-md:gap-3">
         <div className="w-full justify-start items-center text-black typo-body4-semibold">
           주요 이탈 구간
         </div>
@@ -205,7 +206,7 @@ const ViewingTimeCard = () => {
           <>
             {/* 평균 시청 시간 */}
             {avgWatchSeconds !== undefined && avgWatchSeconds > 0 && (
-              <div className="w-full text-[#6452CE] typo-body5">
+              <div className="w-full text-brand-deep typo-body5">
                 평균 시청 시간: {formatAvgWatchTime(avgWatchSeconds)}
               </div>
             )}
@@ -218,7 +219,7 @@ const ViewingTimeCard = () => {
               {mainDropOff?.description ?? '이탈 구간 설명 데이터 없음'}
             </div>
             <div
-              className="px-7 py-1 justify-center items-center text-[#8257B4] typo-body6 rounded-lg border border-[#8257B480] cursor-pointer hover:bg-[#8257B410]"
+              className="px-7 py-1 justify-center items-center text-brand-tertiary typo-body6 rounded-lg border border-brand-soft cursor-pointer hover:bg-brand-tertiary/10"
               onClick={() => setShowAllTooltips(prev => !prev)}
             >
               {showAllTooltips ? '구간 접기' : '구간 자세히 보기'}

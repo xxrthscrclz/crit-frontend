@@ -30,7 +30,7 @@ const KeywordCard = ({ animationKey }: KeywordCardProps) => {
   return (
     <div
       key={animationKey}
-      className="relative flex flex-col w-80 p-6 gap-4 mr-30 rounded-2xl bg-white/80 backdrop-blur-md border border-[#8257B4]/30 shadow-lg animate-slide-in-right max-md:mr-0 max-md:w-full max-md:max-w-80 max-md:p-5"
+      className="relative flex flex-col w-80 p-6 gap-4 mr-30 rounded-2xl bg-white/80 backdrop-blur-md border border-brand-soft shadow-lg animate-slide-in-right max-md:mr-0 max-md:w-full max-md:max-w-80 max-md:p-5"
     >
       <button
         onClick={handleClose}
@@ -52,14 +52,14 @@ const KeywordCard = ({ animationKey }: KeywordCardProps) => {
           <line x1="6" y1="6" x2="18" y2="18" />
         </svg>
       </button>
-      <div className="text-[#6B4EFF] typo-title1">{selectedKeyword.text}</div>
+      <div className="text-brand typo-title1">{selectedKeyword.text}</div>
       <div className="flex flex-col gap-2">
         <div className="text-gray-500 typo-body5">검색량</div>
         <div className="text-black typo-title2">{formatValue(selectedKeyword.value)}</div>
       </div>
       <button
         onClick={handleRecommend}
-        className="w-full py-3 bg-[#6B4EFF] text-white typo-body4-semibold rounded-xl hover:opacity-90 transition-opacity"
+        className="w-full py-3 bg-brand text-white typo-body4-semibold rounded-xl hover:opacity-90 transition-opacity"
       >
         이 키워드로 영상 추천받기
       </button>

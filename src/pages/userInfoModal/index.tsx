@@ -32,14 +32,14 @@ const UserInfoModal = ({ onClose }: UserInfoModalProps) => {
       >
         <div className="flex w-full justify-between items-center">
           <div className="text-black typo-title2">마이페이지</div>
-          <CloseIcon className="w-7.5 h-7.5 cursor-pointer" onClick={onClose} />
+          <CloseIcon className="crit-icon-brand w-7.5 h-7.5 cursor-pointer" onClick={onClose} />
         </div>
-        <div className="flex w-full justify-between items-center px-15 py-14 bg-[#F5EFFF] rounded-xl max-md:flex-col max-md:items-start max-md:gap-5 max-md:px-5 max-md:py-8">
+        <div className="flex w-full justify-between items-center px-15 py-14 bg-accent-soft rounded-xl max-md:flex-col max-md:items-start max-md:gap-5 max-md:px-5 max-md:py-8">
           <div className="flex flex-col w-full justify-center items-start gap-5 max-md:gap-4">
             <div className="w-full justify-start items-center typo-title1">
-              안녕하세요, <span className="text-[#6B4EFF]">{channelName}</span>님!
+              안녕하세요, <span className="text-brand">{channelName}</span>님!
             </div>
-            <div className="w-full justify-start items-center text-[#717171] typo-body1-medium">
+            <div className="w-full justify-start items-center text-muted typo-body1-medium">
               CRiT과 함께 더 성장하는 크리에이터가 되어보세요.
             </div>
           </div>
@@ -49,13 +49,13 @@ const UserInfoModal = ({ onClose }: UserInfoModalProps) => {
           <div className="w-full justify-start items-center text-black typo-title1">
             프로필 정보
           </div>
-          <div className="flex flex-col w-full px-5.5 py-2.5 justify-center items-center gap-2.5 rounded-xl border border-[#8257B4]">
+          <div className="flex flex-col w-full px-5.5 py-2.5 justify-center items-center gap-2.5 rounded-xl border border-accent">
             <UserInfoModalItem type="name" value={channelName ?? '사용자'} />
-            <div className="w-full h-px bg-[#8257B4]"></div>
+            <div className="w-full h-px bg-brand-tertiary"></div>
             <UserInfoModalItem type="email" value={userEmail ?? '-'} />
-            <div className="w-full h-px bg-[#8257B4]"></div>
+            <div className="w-full h-px bg-brand-tertiary"></div>
             <UserInfoModalItem type="date" value={joinDate ?? '-'} />
-            <div className="w-full h-px bg-[#8257B4]"></div>
+            <div className="w-full h-px bg-brand-tertiary"></div>
             <UserInfoModalItem type="accountType" value="무료 사용자" />
           </div>
         </div>

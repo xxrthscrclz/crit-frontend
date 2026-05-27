@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import ReasonContainer from './reasonContainer';
 import SparkIcon from '@/assets/icons/score-icons/video-detail/sparkle-icon.svg?react';
+import { cssVar } from '@/constants/colors';
 import useCurrentVideoStore from '@/stores/useCurrentVideoStore';
 
 const ViewGrowthCard = () => {
@@ -66,10 +67,10 @@ const ViewGrowthCard = () => {
   };
 
   return (
-    <div className="flex w-full px-6 py-6 justify-center items-start gap-4 bg-white rounded-xl border-[0.1px] border-[#8257B4] max-md:flex-col max-md:px-3 max-md:py-4">
+    <div className="flex w-full px-6 py-6 justify-center items-start gap-4 bg-white rounded-xl border-[0.1px] border-accent max-md:flex-col max-md:px-3 max-md:py-4">
       <div className="flex flex-col w-full h-full justify-center items-center gap-4">
-        <div className="flex w-full justify-start items-center gap-1 text-[#6452CE] typo-body4-semibold">
-          <SparkIcon className="w-4 h-4" />
+        <div className="flex w-full justify-start items-center gap-1 text-brand-deep typo-body4-semibold">
+          <SparkIcon className="crit-icon-brand w-4 h-4 shrink-0" />
           점수 산정 근거
         </div>
         <div className="flex flex-col w-full h-full justify-between py-5 items-center gap-2.5 max-md:py-2 max-md:gap-2">
@@ -86,21 +87,21 @@ const ViewGrowthCard = () => {
           )}
         </div>
       </div>
-      <div className="w-0.25 h-full bg-[#8257B433] max-md:hidden" />
+      <div className="w-0.25 h-full bg-brand-tertiary/10 max-md:hidden" />
       <div className="flex flex-col w-full justify-center items-center gap-6 max-md:gap-4">
         <div className="flex w-full justify-start items-center gap-1">
           <div className="text-black typo-body4-semibold">조회수 성장 추이</div>
-          <div className="text-[#8B8484] typo-body5">(업로드 후 7일)</div>
+          <div className="text-muted typo-body5">(업로드 후 7일)</div>
         </div>
         <div className="flex flex-col w-full gap-2.5 max-md:gap-2">
           <div className="flex w-full justify-center items-center gap-4">
             <div className="flex items-center gap-1">
-              <div className="w-3 h-0.5 bg-[#9F8CFF]" />
-              <div className="text-[#8B8484] typo-body5">이 영상</div>
+              <div className="w-3 h-0.5 bg-brand-violet" />
+              <div className="text-muted typo-body5">이 영상</div>
             </div>
             <div className="flex items-center gap-1">
-              <div className="w-3 h-0.5 bg-[#8B8484]" />
-              <div className="text-[#8B8484] typo-body5">채널 평균</div>
+              <div className="w-3 h-0.5 bg-body-mid" />
+              <div className="text-muted typo-body5">채널 평균</div>
             </div>
           </div>
           <div className="flex w-full">
@@ -131,7 +132,7 @@ const ViewGrowthCard = () => {
                           y1={y}
                           x2="100"
                           y2={y}
-                          stroke="#E0E0E0"
+                          stroke={cssVar.chartGrid}
                           strokeWidth="0.5"
                           vectorEffect="non-scaling-stroke"
                         />
@@ -162,7 +163,7 @@ const ViewGrowthCard = () => {
                       <path
                         d={createPath(avgData)}
                         fill="none"
-                        stroke="#8B8484"
+                        stroke={cssVar.bodyMidGray}
                         strokeWidth="1"
                         strokeDasharray="4 2"
                         vectorEffect="non-scaling-stroke"
@@ -173,7 +174,7 @@ const ViewGrowthCard = () => {
                       <path
                         d={createPath(videoData)}
                         fill="none"
-                        stroke="#9F8CFF"
+                        stroke={cssVar.chartAccent}
                         strokeWidth="2"
                         vectorEffect="non-scaling-stroke"
                       />
@@ -197,20 +198,20 @@ const ViewGrowthCard = () => {
                           {hoverIndex === i && (
                             <>
                               {/* 세로선 */}
-                              <div className="absolute w-px h-full bg-[#6B42FF] opacity-50 chart-vline-center" />
+                              <div className="absolute w-px h-full bg-brand-active opacity-50 chart-vline-center" />
                               {/* 이 영상 점 */}
                               <div
-                                className="absolute w-2 h-2 rounded-full bg-[#9F8CFF] chart-dot-center"
+                                className="absolute w-2 h-2 rounded-full bg-brand-violet chart-dot-center"
                                 style={{ '--chart-y': videoYPercent } as React.CSSProperties}
                               />
                               {/* 채널 평균 점 */}
                               <div
-                                className="absolute w-2 h-2 rounded-full bg-[#8B8484] chart-dot-center"
+                                className="absolute w-2 h-2 rounded-full bg-body-mid chart-dot-center"
                                 style={{ '--chart-y': avgYPercent } as React.CSSProperties}
                               />
                               {/* 툴팁 */}
                               <div
-                                className="absolute flex flex-col gap-1 px-3 py-2 rounded-xl text-black whitespace-nowrap z-10 border border-[#6B42FF] glass-tooltip chart-tooltip-center"
+                                className="absolute flex flex-col gap-1 px-3 py-2 rounded-xl text-black whitespace-nowrap z-10 border border-brand glass-tooltip chart-tooltip-center"
                                 style={
                                   {
                                     '--chart-y': Math.min(videoYPercent, avgYPercent),
@@ -218,11 +219,11 @@ const ViewGrowthCard = () => {
                                 }
                               >
                                 <div className="flex items-center gap-2">
-                                  <div className="w-2 h-2 rounded-full bg-[#9F8CFF]" />
+                                  <div className="w-2 h-2 rounded-full bg-brand-violet" />
                                   <span className="typo-body5">이 영상: {formatValue(value)}</span>
                                 </div>
                                 <div className="flex items-center gap-2">
-                                  <div className="w-2 h-2 rounded-full bg-[#8B8484]" />
+                                  <div className="w-2 h-2 rounded-full bg-body-mid" />
                                   <span className="typo-body5">
                                     채널 평균: {formatValue(avgValue)}
                                   </span>

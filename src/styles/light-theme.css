@@ -1,0 +1,184 @@
+/* ===== CRIT Light Theme =====
+ * 라이트 모드 디자인 토큰. 컴포넌트는 theme-utilities 클래스 또는 CSS 변수 사용.
+ */
+
+:root,
+[data-theme='light'] {
+  color-scheme: light;
+
+  /* --- Page & Surface --- */
+  --color-bg-page: #ffffff;
+  --color-bg-surface: #ffffff;
+  --color-bg-surface-raised: #fafafa;
+  --color-bg-surface-overlay: #ffffff;
+  --color-bg-overlay: rgb(255 255 255 / 0.85);
+
+  /* --- Accent Surfaces --- */
+  --color-bg-accent-soft: #f5efff;
+  --color-bg-accent-muted: #e8e0ff;
+  --color-bg-input: #ffffff;
+  --color-bg-input-highlight: #faf8ff;
+  --color-bg-muted: #f4f4f4;
+
+  /* --- Text --- */
+  --color-text-primary: #0a0a0a;
+  --color-text-secondary: #232323;
+  --color-text-muted: #717171;
+  --color-text-subtle: #969696;
+  --color-text-on-brand: #ffffff;
+  --color-text-placeholder: #0a0a0a89;
+  --color-text-disabled: #0000004d;
+
+  /* --- Brand --- */
+  --color-brand-primary: #6b4eff;
+  --color-brand-primary-strong: #7c5cff;
+  --color-brand-secondary: #a594f9;
+  --color-brand-tertiary: #8257b4;
+  --color-brand-deep: #6452ce;
+  --color-brand-darker: #6344dd;
+  --color-brand-hover: #8b6fff;
+  --color-brand-active: #6b42ff;
+  --color-brand-indigo: #6765ff;
+  --color-brand-violet: #9f8cff;
+  --color-brand-text-deep: #3d2e9e;
+  --color-brand-text-purple: #4f378a;
+  --color-brand-text-alt: #5a36ea;
+
+  /* --- Border --- */
+  --color-border-default: #dad9d9;
+  --color-border-subtle: rgb(0 0 0 / 0.1);
+  --color-border-accent: #8257b4;
+  --color-border-accent-muted: #e8e2ff;
+  --color-border-accent-strong: #6b4eff;
+  --color-border-brand-secondary: #a594f9;
+  --color-border-brand-soft: #8257b480;
+  --color-border-brand-faint: #8257b433;
+  --color-border-neutral: #e6e8e7;
+  --color-border-overlay: #00000033;
+  --color-border-accent-muted-80: rgb(232 226 255 / 0.8);
+
+  /* --- Interactive --- */
+  --color-hover-brand-soft: rgb(107 78 255 / 0.08);
+  --color-hover-brand-medium: rgb(107 78 255 / 0.1);
+  --color-hover-brand-light: rgb(107 78 255 / 0.06);
+  --color-brand-soft-5: rgb(107 78 255 / 0.05);
+  --color-brand-secondary-10: rgb(165 148 249 / 0.1);
+  --color-brand-secondary-12: rgb(165 148 249 / 0.12);
+  --color-brand-tertiary-10: rgb(130 87 180 / 0.1);
+  --color-active-brand-soft: rgb(107 78 255 / 0.12);
+  --color-active-brand-medium: rgb(124 92 255 / 0.1);
+  --color-shadow-brand: rgb(107 78 255 / 0.28);
+  --color-shadow-brand-sm: rgb(107 78 255 / 0.12);
+  --color-shadow-brand-md: rgb(107 78 255 / 0.18);
+  --color-shadow-brand-lg: rgb(107 78 255 / 0.24);
+
+  /* --- Semantic (점수/상태) --- */
+  --color-success: #5ac467;
+  --color-success-soft: #def3e195;
+  --color-success-track: #def3e1;
+  --color-success-track-alpha: #5ac46733;
+  --color-warning: #ff9d00;
+  --color-warning-soft: #fffcef;
+  --color-danger: #ff0000;
+  --color-danger-soft: #ffefef;
+
+  /* --- Progress / slider --- */
+  --color-progress-track: rgb(0 0 0 / 0.06);
+  --color-progress-track-accent: #eae0f4;
+  --slider-fill: #a594f9;
+  --slider-track: #eae0f4;
+
+  /* --- Gradient surfaces --- */
+  --color-gradient-card-from: #faf8ff;
+  --color-gradient-card-via: #f2ebff;
+  --color-gradient-card-to: #e6dcff;
+  --color-gradient-card-hover-from: #f5f0ff;
+  --color-gradient-card-hover-via: #ebe3ff;
+  --color-gradient-card-hover-to: #ddd0ff;
+  --color-gradient-card-active-from: #ede8ff;
+  --color-gradient-card-active-via: #e0d4ff;
+  --color-gradient-card-active-to: #d4c9ff;
+  --color-gradient-card-selected-from: #f0ebff;
+  --color-gradient-card-selected-via: #e4daff;
+  --color-gradient-card-selected-to: #d4c9ff;
+
+  --color-gradient-pill-from: #f8f6ff;
+  --color-gradient-pill-via: #f3eeff;
+  --color-gradient-pill-to: #ede8ff;
+
+  --color-gradient-panel-from: #ffffff;
+  --color-gradient-panel-via: #fdfcff;
+  --color-gradient-panel-to: #f8f6ff;
+
+  --color-gradient-page-from: #f5efff;
+  --color-gradient-page-via: #ffffff;
+  --color-gradient-page-to: #e8f4f8;
+
+  --color-gradient-accent-soft: #f5efff33;
+
+  /* --- Glass / overlay --- */
+  --color-glass-bg: rgb(255 255 255 / 0.9);
+  --color-glass-bg-muted: rgb(255 255 255 / 0.85);
+  --color-tooltip-bg: rgb(165 148 249 / 0.9);
+
+  /* --- Destructive / reset --- */
+  --color-reset: #ff6b6b;
+  --color-reset-hover: #ff4757;
+  --color-reset-active: #ff8787;
+
+  /* --- Scrollbar --- */
+  --color-scrollbar-thumb: #a594f9;
+
+  /* --- Icon (currentColor SVG) --- */
+  --color-icon-muted: #717171;
+  --color-icon-brand: #6b4eff;
+  --color-icon-secondary: #634dcb;
+
+  /* --- Chart --- */
+  --color-chart-grid: #e0e0e0;
+  --color-chart-accent: #9f8cff;
+  --color-chart-accent-soft: #9f8cff33;
+
+  /* --- Rank badges --- */
+  --color-rank-gold-from: #fff8e7;
+  --color-rank-gold-to: #ffe9a8;
+  --color-rank-gold-border: #f5d76e;
+  --color-rank-gold-text: #9a7209;
+  --color-rank-silver-from: #f8f8f8;
+  --color-rank-silver-to: #ececec;
+  --color-rank-silver-border: #d0d0d0;
+  --color-rank-silver-text: #5c5c5c;
+  --color-rank-bronze-from: #fff0e8;
+  --color-rank-bronze-to: #ffd4b8;
+  --color-rank-bronze-border: #e8b49a;
+  --color-rank-bronze-text: #b85c20;
+
+  /* --- Misc --- */
+  --color-placeholder-dark: #1a1a1a;
+  --color-body-deep: #2d2640;
+  --color-body-gray: #555555;
+  --color-body-light-gray: #929292;
+  --color-body-mid-gray: #8b8484;
+  --color-meta-theme: #6b4eff;
+  --color-analysis-tab: #e4d3ff;
+  --color-star-active: #ffd700;
+  --color-decorative-teal: #4ecdc4;
+  --color-decorative-yellow: #ffeaa7;
+
+  --shadow-brand-card: 0 10px 28px var(--color-shadow-brand-sm);
+  --shadow-brand-card-hover: 0 10px 28px rgb(107 78 255 / 0.14);
+  --shadow-brand-card-active: 0 6px 20px rgb(107 78 255 / 0.2);
+  --shadow-brand-bubble: 0 2px 10px var(--color-shadow-brand-sm),
+    inset 0 1px 0 rgb(255 255 255 / 0.85);
+  --shadow-brand-bubble-hover: 0 8px 22px var(--color-shadow-brand-md),
+    inset 0 1px 0 rgb(255 255 255 / 0.9);
+  --shadow-brand-bubble-selected: 0 10px 26px var(--color-shadow-brand-lg),
+    inset 0 1px 0 rgb(255 255 255 / 0.9);
+}
+
+/* --- Base --- */
+:root body,
+[data-theme='light'] body {
+  background-color: var(--color-bg-page);
+  color: var(--color-text-primary);
+}

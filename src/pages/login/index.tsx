@@ -99,17 +99,17 @@ const LoginPage = () => {
 
         <div className="flex w-[612px] flex-col items-start gap-8 max-md:w-full max-md:gap-6">
           <div className="flex flex-col items-start gap-3 self-stretch">
-            <div className="text-[#232323] typo-login-title">Sign in</div>
-            <div className="text-[#969696] typo-login-body">구글 계정으로 로그인하세요.</div>
+            <div className="text-secondary typo-login-title">Sign in</div>
+            <div className="text-subtle typo-login-body">구글 계정으로 로그인하세요.</div>
           </div>
 
           <button
             type="button"
             onClick={handleGoogleLogin}
-            className="flex h-[54px] px-2 py-4 justify-center items-center self-stretch rounded-[10px] border border-[#E6E8E7] bg-[#CDC1FF] cursor-pointer"
+            className="flex h-[54px] px-2 py-4 justify-center items-center self-stretch rounded-[10px] border border-neutral bg-accent-muted cursor-pointer"
           >
             <div className="flex items-center gap-2">
-              <span className="text-[#232323] typo-login-body">Sign in with Google</span>
+              <span className="text-secondary typo-login-body">Sign in with Google</span>
               <GoogleIcon className="w-6 h-6" />
             </div>
           </button>
@@ -118,7 +118,7 @@ const LoginPage = () => {
             <button
               type="button"
               onClick={handleGuestBrowse}
-              className="flex flex-1 h-[54px] px-2 py-4 justify-center items-center rounded-[10px] text-[#969696] typo-login-guest border-2 border-[#E6E8E7] bg-white cursor-pointer hover:border-[#CDC1FF] hover:text-[#6B4EFF]"
+              className="flex flex-1 h-[54px] px-2 py-4 justify-center items-center rounded-[10px] text-subtle typo-login-guest border-2 border-neutral bg-white cursor-pointer hover:border-accent-muted hover:text-brand"
             >
               <span>비회원으로 둘러보기</span>
             </button>
@@ -126,7 +126,7 @@ const LoginPage = () => {
             <button
               type="button"
               onClick={handleTestLogin}
-              className="flex flex-1 h-[54px] px-2 py-4 justify-center items-center rounded-[10px] text-[#6B4EFF] typo-login-guest border-2 border-[#CDC1FF] bg-white cursor-pointer hover:border-[#6B4EFF] hover:text-[#CDC1FF]"
+              className="flex flex-1 h-[54px] px-2 py-4 justify-center items-center rounded-[10px] text-brand typo-login-guest border-2 border-accent-muted bg-white cursor-pointer hover:border-brand hover:text-brand-secondary"
             >
               <span>테스트 계정으로 로그인</span>
             </button>

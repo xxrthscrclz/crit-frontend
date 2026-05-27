@@ -92,18 +92,18 @@ const FullScriptModal = ({ onClose }: FullScriptModalProps) => {
       onClick={onClose}
     >
       <div
-        className="flex flex-col w-full max-w-200 max-h-[85vh] bg-white rounded-xl border-2 border-[#8257B4] shadow-[0_4px_24px_rgba(130,87,180,0.25)] animate-modal-in"
+        className="flex flex-col w-full max-w-200 max-h-[85vh] bg-white rounded-xl border-2 border-accent shadow-[0_4px_24px_rgba(130,87,180,0.25)] animate-modal-in"
         onClick={e => e.stopPropagation()}
       >
-        <div className="flex w-full items-center justify-between px-6 py-5 border-b border-[#E8E0FF]">
-          <h2 className="typo-title-bold text-[#6452CE]">풀버전 AI 대본</h2>
+        <div className="flex w-full items-center justify-between px-6 py-5 border-b border-accent-muted">
+          <h2 className="typo-title-bold text-brand-deep">풀버전 AI 대본</h2>
           <button
             type="button"
             onClick={onClose}
-            className="flex items-center justify-center w-8 h-8 rounded-lg text-[#0a0a0a89] hover:text-[#6B4EFF] hover:bg-[#F5EFFF] cursor-pointer transition-colors"
+            className="flex items-center justify-center w-8 h-8 rounded-lg text-placeholder hover:text-brand hover:bg-accent-soft cursor-pointer transition-colors"
             aria-label="닫기"
           >
-            <CloseIcon className="w-4 h-4" />
+            <CloseIcon className="crit-icon-brand w-4 h-4" />
           </button>
         </div>
 
@@ -113,7 +113,7 @@ const FullScriptModal = ({ onClose }: FullScriptModalProps) => {
               {[0, 1, 2, 3].map(i => (
                 <div
                   key={i}
-                  className="h-4 rounded-md bg-[#F5EFFF] animate-loading-pulse"
+                  className="h-4 rounded-md bg-accent-soft animate-loading-pulse"
                   style={{ width: `${85 - i * 12}%` }}
                 />
               ))}
@@ -130,15 +130,15 @@ const FullScriptModal = ({ onClose }: FullScriptModalProps) => {
           )}
         </div>
 
-        <div className="flex items-center justify-end gap-2 px-6 py-4 border-t border-[#E8E0FF]">
+        <div className="flex items-center justify-end gap-2 px-6 py-4 border-t border-accent-muted">
           <button
             type="button"
             onClick={handleCopy}
             disabled={!script || isLoading}
-            className={`flex items-center gap-1.5 px-4 py-2 rounded-lg border border-[#A594F9] bg-white typo-label transition-colors cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed ${
+            className={`flex items-center gap-1.5 px-4 py-2 rounded-lg border border-brand-secondary bg-white typo-label transition-colors cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed ${
               copied
-                ? 'text-[#6B4EFF]'
-                : 'text-[#0a0a0a89] hover:text-[#6B4EFF] active:text-[#6B4EFF]'
+                ? 'text-brand'
+                : 'text-placeholder hover:text-brand active:text-brand'
             }`}
           >
             {!copied && <CopyIcon className="w-4 h-4" />}
@@ -148,7 +148,7 @@ const FullScriptModal = ({ onClose }: FullScriptModalProps) => {
             type="button"
             onClick={handlePdfDownload}
             disabled={!script || isLoading || isPdfDownloading}
-            className="flex items-center gap-1.5 px-4 py-2 rounded-lg border border-[#A594F9] bg-white text-[#0a0a0a89] hover:text-[#6B4EFF] active:text-[#6B4EFF] typo-label transition-colors cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed"
+            className="flex items-center gap-1.5 px-4 py-2 rounded-lg border border-brand-secondary bg-white text-placeholder hover:text-brand active:text-brand typo-label transition-colors cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed"
           >
             <DownloadIcon className="w-4 h-4" />
             <span>{isPdfDownloading ? '저장 중...' : 'PDF 저장'}</span>

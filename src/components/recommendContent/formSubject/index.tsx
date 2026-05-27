@@ -56,7 +56,7 @@ const FormSubject = ({ onSelect }: FormSubjectProps) => {
   };
 
   return (
-    <div className="flex w-250 flex-col items-center justify-end gap-10 rounded-xl bg-[#F5EFFF] px-8 py-14 max-md:w-full max-md:gap-6 max-md:px-3 max-md:py-8">
+    <div className="flex w-250 flex-col items-center justify-end gap-10 rounded-xl bg-accent-soft px-8 py-14 max-md:w-full max-md:gap-6 max-md:px-3 max-md:py-8">
       <div
         ref={contentRef}
         className="collapse-panel flex w-full flex-col items-center gap-10 max-md:gap-6"
@@ -67,7 +67,7 @@ const FormSubject = ({ onSelect }: FormSubjectProps) => {
           } as React.CSSProperties
         }
       >
-        <div className="flex w-full justify-center typo-title-bold text-[#717171] text-center whitespace-pre-line">
+        <div className="flex w-full justify-center typo-title-bold text-muted text-center whitespace-pre-line">
           {
             '다음 영상으로 제작하기 좋은 콘텐츠 주제를 확인해보세요.\n관심 있는 주제를 클릭하면 상세 기획을 확인할 수 있습니다.'
           }
@@ -101,7 +101,7 @@ const FormSubject = ({ onSelect }: FormSubjectProps) => {
         <div className="flex w-full items-center relative">
           <div
             onClick={() => setCollapsed(!collapsed)}
-            className="absolute right-0 flex items-center gap-1 cursor-pointer text-[#0a0a0a89] active:text-[#6B4EFF] typo-label"
+            className="absolute right-0 flex items-center gap-1 cursor-pointer text-placeholder active:text-brand typo-label"
           >
             <svg
               className={`w-4 h-4 transition-transform duration-300 ${collapsed ? 'rotate-0' : 'rotate-180'}`}

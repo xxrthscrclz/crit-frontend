@@ -14,7 +14,7 @@ const ScriptBlockContent = ({ raw }: ScriptBlockContentProps) => {
           return (
             <h3
               key={index}
-              className="typo-body4-semibold text-[#6452CE] pt-3 border-t border-[#E8E0FF] first:border-0 first:pt-0"
+              className="typo-body4-semibold text-brand-deep pt-3 border-t border-accent-muted first:border-0 first:pt-0"
             >
               {block.label}
             </h3>
@@ -23,14 +23,14 @@ const ScriptBlockContent = ({ raw }: ScriptBlockContentProps) => {
 
         if (block.type === 'stage') {
           return (
-            <p key={index} className="typo-body6 text-[#8257B4] italic">
+            <p key={index} className="typo-body6 text-brand-tertiary italic">
               {block.label}
             </p>
           );
         }
 
         return (
-          <p key={index} className="typo-body4-semibold text-[#0A0A0A] leading-7 break-keep">
+          <p key={index} className="typo-body4-semibold text-primary leading-7 break-keep">
             {block.content}
           </p>
         );

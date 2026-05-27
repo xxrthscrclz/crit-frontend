@@ -11,6 +11,19 @@
     <meta name="apple-mobile-web-app-title" content="CRIT" />
     <meta name="mobile-web-app-capable" content="yes" />
     <title>CRIT</title>
+    <script>
+      (function () {
+        try {
+          var raw = localStorage.getItem('crit-theme');
+          if (!raw) return;
+          var parsed = JSON.parse(raw);
+          if (parsed && parsed.state && parsed.state.theme === 'dark') {
+            document.documentElement.dataset.theme = 'dark';
+            document.documentElement.style.colorScheme = 'dark';
+          }
+        } catch (e) {}
+      })();
+    </script>
   </head>
   <body>
     <div id="root"></div>

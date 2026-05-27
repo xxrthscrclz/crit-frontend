@@ -34,7 +34,7 @@ const ScoreContainer = ({
 
   return (
     <div className="flex items-center gap-3 self-stretch">
-      {Icon && <Icon className="w-6.5 h-6.5 shrink-0" />}
+      {Icon && <Icon className="crit-icon-secondary w-6.5 h-6.5 shrink-0" />}
       <div
         className="relative flex w-22 shrink-0 text-sm font-medium leading-[140%] -tracking-wide text-black cursor-default"
         onMouseEnter={() => setHovered(true)}
@@ -42,7 +42,7 @@ const ScoreContainer = ({
       >
         {label}
         {hovered && (weight !== undefined || description) && (
-          <div className="absolute -top-14 left-0 px-3 py-2 rounded-lg bg-[#A594F9]/90 text-white text-xs font-medium whitespace-nowrap z-10 transition-all duration-200">
+          <div className="absolute -top-14 left-0 px-3 py-2 rounded-lg bg-brand-secondary/80 text-white text-xs font-medium whitespace-nowrap z-10 transition-all duration-200">
             {description && <div>{description}</div>}
             {weight !== undefined && <div>가중치: {weight}</div>}
           </div>

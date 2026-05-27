@@ -52,30 +52,30 @@ const GuideItem = ({ comment, subcomment, metric, current, target, benchmark }: 
       : 0;
 
   return (
-    <div className="flex flex-1 self-stretch px-5 py-5 items-stretch gap-2.5 rounded-xl bg-[#F5EFFF]">
-      <CommentIcon className="shrink-0 mt-0.5" />
+    <div className="flex flex-1 self-stretch px-5 py-5 items-stretch gap-2.5 rounded-xl bg-accent-soft">
+      <CommentIcon className="crit-icon-brand shrink-0 mt-0.5" />
       <div className="flex flex-1 flex-col justify-between gap-4">
         <div className="flex flex-col gap-2">
           <div className="flex w-full justify-start text-black typo-body4-semibold">{comment}</div>
-          <div className="flex w-full justify-start text-[#555] typo-body5">{subcomment}</div>
+          <div className="flex w-full justify-start text-body-gray typo-body5">{subcomment}</div>
         </div>
         {metric && benchmark && current != null && (
           <div className="flex flex-col gap-1.5">
             <div className="flex justify-between items-center">
-              <span className="text-xs text-[#717171]">{metricLabels[metric] ?? metric}</span>
-              <span className="text-xs font-semibold text-[#7C5CFF]">
+              <span className="text-xs text-muted">{metricLabels[metric] ?? metric}</span>
+              <span className="text-xs font-semibold text-brand-strong">
                 {formatMetricValue(metric, current)} →{' '}
                 {target != null ? formatMetricValue(metric, target) : '-'}
               </span>
             </div>
-            <div className="relative w-full h-2 bg-[#E8E0FF] rounded-full overflow-hidden">
+            <div className="relative w-full h-2 bg-accent-muted rounded-full overflow-hidden benchmark-progress-track">
               <div
-                className="absolute h-full bg-[#7C5CFF] rounded-full transition-all benchmark-progress-fill"
+                className="absolute h-full bg-brand-strong rounded-full transition-all benchmark-progress-fill"
                 style={{ '--benchmark-progress': progressPercent } as React.CSSProperties}
               />
               {benchmark.p50 > 0 && (
                 <div
-                  className="absolute top-0 h-full w-0.5 bg-[#A594F9] benchmark-marker"
+                  className="absolute top-0 h-full w-0.5 bg-brand-secondary benchmark-marker"
                   style={
                     {
                       '--benchmark-marker': Math.min(100, (benchmark.p50 / benchmark.p75) * 100),
@@ -85,7 +85,7 @@ const GuideItem = ({ comment, subcomment, metric, current, target, benchmark }: 
                 />
               )}
             </div>
-            <div className="flex justify-between text-[10px] text-[#999]">
+            <div className="flex justify-between text-[10px] text-subtle">
               <span>하위 25%</span>
               <span>중간</span>
               <span>상위 25%</span>

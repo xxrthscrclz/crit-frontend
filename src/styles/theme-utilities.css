@@ -1,0 +1,563 @@
+/* ===== CRIT Theme Utilities =====
+ * 시맨틱 클래스 — light/dark 토큰 변수에 자동 연동
+ */
+
+@layer utilities {
+  /* --- Background: surface --- */
+  .bg-surface {
+    background-color: var(--color-bg-surface);
+  }
+
+  .bg-surface-raised {
+    background-color: var(--color-bg-surface-raised);
+  }
+
+  .bg-surface-muted {
+    background-color: var(--color-bg-muted);
+  }
+
+  .bg-accent-soft {
+    background-color: var(--color-bg-accent-soft);
+  }
+
+  .bg-accent-muted {
+    background-color: var(--color-bg-accent-muted);
+  }
+
+  .bg-input {
+    background-color: var(--color-bg-input);
+  }
+
+  .bg-input-highlight {
+    background-color: var(--color-bg-input-highlight);
+  }
+
+  /* --- Background: brand --- */
+  .bg-brand {
+    background-color: var(--color-brand-primary);
+  }
+
+  .bg-brand-strong {
+    background-color: var(--color-brand-primary-strong);
+  }
+
+  .bg-brand-secondary {
+    background-color: var(--color-brand-secondary);
+  }
+
+  .bg-brand-tertiary {
+    background-color: var(--color-brand-tertiary);
+  }
+
+  .bg-brand-deep {
+    background-color: var(--color-brand-darker);
+  }
+
+  .bg-brand-violet {
+    background-color: var(--color-brand-violet);
+  }
+
+  .bg-brand-active {
+    background-color: var(--color-brand-active);
+  }
+
+  .bg-body-mid {
+    background-color: var(--color-body-mid-gray);
+  }
+
+  .bg-decorative-teal {
+    background-color: var(--color-decorative-teal);
+  }
+
+  .bg-decorative-yellow {
+    background-color: var(--color-decorative-yellow);
+  }
+
+  .bg-brand-soft\/5 {
+    background-color: var(--color-brand-soft-5);
+  }
+
+  .bg-brand-soft\/6 {
+    background-color: var(--color-hover-brand-light);
+  }
+
+  .bg-brand-soft\/8 {
+    background-color: var(--color-hover-brand-soft);
+  }
+
+  .bg-brand-soft\/10 {
+    background-color: var(--color-hover-brand-medium);
+  }
+
+  .bg-brand-secondary\/10 {
+    background-color: var(--color-brand-secondary-10);
+  }
+
+  .bg-brand-secondary\/12 {
+    background-color: var(--color-brand-secondary-12);
+  }
+
+  .bg-brand-secondary\/80 {
+    background-color: var(--color-tooltip-bg);
+  }
+
+  .bg-brand-tertiary\/10 {
+    background-color: var(--color-brand-tertiary-10);
+  }
+
+  .bg-accent-soft\/20 {
+    background-color: var(--color-gradient-accent-soft);
+  }
+
+  /* --- Background: semantic --- */
+  .bg-success-soft {
+    background-color: var(--color-success-soft);
+  }
+
+  .bg-warning-soft {
+    background-color: var(--color-warning-soft);
+  }
+
+  .bg-danger-soft {
+    background-color: var(--color-danger-soft);
+  }
+
+  .bg-reset {
+    background-color: var(--color-reset);
+  }
+
+  .bg-overlay {
+    background-color: var(--color-border-overlay);
+  }
+
+  .bg-analysis-tab {
+    background-color: var(--color-analysis-tab);
+  }
+
+  .bg-placeholder-dark {
+    background-color: var(--color-placeholder-dark);
+  }
+
+  /* --- Text --- */
+  .text-primary {
+    color: var(--color-text-primary);
+  }
+
+  .text-secondary {
+    color: var(--color-text-secondary);
+  }
+
+  .text-muted {
+    color: var(--color-text-muted);
+  }
+
+  .text-subtle {
+    color: var(--color-text-subtle);
+  }
+
+  .text-on-brand {
+    color: var(--color-text-on-brand);
+  }
+
+  .text-placeholder {
+    color: var(--color-text-placeholder);
+  }
+
+  .text-disabled {
+    color: var(--color-text-disabled);
+  }
+
+  .text-brand {
+    color: var(--color-brand-primary);
+  }
+
+  .text-brand-strong {
+    color: var(--color-brand-primary-strong);
+  }
+
+  .text-brand-secondary {
+    color: var(--color-brand-secondary);
+  }
+
+  .text-brand-tertiary {
+    color: var(--color-brand-tertiary);
+  }
+
+  .text-brand-deep {
+    color: var(--color-brand-deep);
+  }
+
+  .text-brand-violet {
+    color: var(--color-brand-violet);
+  }
+
+  .text-brand-indigo {
+    color: var(--color-brand-indigo);
+  }
+
+  .text-brand-text-deep {
+    color: var(--color-brand-text-deep);
+  }
+
+  .text-brand-text-purple {
+    color: var(--color-brand-text-purple);
+  }
+
+  .text-brand-text-alt {
+    color: var(--color-brand-text-alt);
+  }
+
+  .text-success {
+    color: var(--color-success);
+  }
+
+  .text-warning {
+    color: var(--color-warning);
+  }
+
+  .text-danger {
+    color: var(--color-danger);
+  }
+
+  .text-body-deep {
+    color: var(--color-body-deep);
+  }
+
+  .text-body-gray {
+    color: var(--color-body-gray);
+  }
+
+  .text-body-light {
+    color: var(--color-body-light-gray);
+  }
+
+  /* --- Border --- */
+  .border-default {
+    border-color: var(--color-border-default);
+  }
+
+  .border-subtle {
+    border-color: var(--color-border-subtle);
+  }
+
+  .border-accent {
+    border-color: var(--color-border-accent);
+  }
+
+  .border-accent-muted {
+    border-color: var(--color-border-accent-muted);
+  }
+
+  .border-brand {
+    border-color: var(--color-border-accent-strong);
+  }
+
+  .border-brand-secondary {
+    border-color: var(--color-border-brand-secondary);
+  }
+
+  .border-brand-soft {
+    border-color: var(--color-border-brand-soft);
+  }
+
+  .border-brand-faint {
+    border-color: var(--color-border-brand-faint);
+  }
+
+  .border-neutral {
+    border-color: var(--color-border-neutral);
+  }
+
+  .border-analysis-tab {
+    border-color: var(--color-analysis-tab);
+  }
+
+  .border-l-brand {
+    border-left-color: var(--color-brand-primary);
+  }
+
+  .border-accent-muted\/80 {
+    border-color: var(--color-border-accent-muted-80);
+  }
+
+  /* --- Hover / active backgrounds --- */
+  .hover\:bg-brand-deep:hover {
+    background-color: var(--color-brand-darker);
+  }
+
+  .hover\:bg-brand-hover:hover {
+    background-color: var(--color-brand-hover);
+  }
+
+  .hover\:bg-brand-strong:hover {
+    background-color: var(--color-brand-primary-strong);
+  }
+
+  .hover\:bg-brand-soft\/10:hover {
+    background-color: var(--color-hover-brand-medium);
+  }
+
+  .hover\:bg-accent-soft:hover {
+    background-color: var(--color-bg-accent-soft);
+  }
+
+  .hover\:bg-accent-muted:hover {
+    background-color: var(--color-bg-accent-muted);
+  }
+
+  .hover\:bg-input-highlight:hover {
+    background-color: var(--color-bg-input-highlight);
+  }
+
+  .hover\:bg-reset-hover:hover {
+    background-color: var(--color-reset-hover);
+  }
+
+  .active\:bg-brand-deep:active {
+    background-color: var(--color-brand-darker);
+  }
+
+  .active\:bg-brand-hover:active {
+    background-color: var(--color-brand-hover);
+  }
+
+  .active\:bg-brand-strong:active {
+    background-color: var(--color-brand-primary-strong);
+  }
+
+  .active\:bg-accent-muted:active {
+    background-color: var(--color-bg-accent-muted);
+  }
+
+  .active\:bg-reset-active:active {
+    background-color: var(--color-reset-active);
+  }
+
+  .active\:bg-brand-soft\/10:active {
+    background-color: var(--color-active-brand-medium);
+  }
+
+  /* --- Hover / active text --- */
+  .hover\:text-brand:hover {
+    color: var(--color-brand-primary);
+  }
+
+  .hover\:text-brand-deep:hover {
+    color: var(--color-brand-deep);
+  }
+
+  .hover\:text-brand-secondary:hover {
+    color: var(--color-brand-secondary);
+  }
+
+  .active\:text-brand:active {
+    color: var(--color-brand-primary);
+  }
+
+  /* --- Hover / active border --- */
+  .hover\:border-brand-secondary:hover {
+    border-color: var(--color-border-brand-secondary);
+  }
+
+  .hover\:border-brand:hover {
+    border-color: var(--color-border-accent-strong);
+  }
+
+  .hover\:border-accent-muted:hover {
+    border-color: var(--color-border-accent-muted);
+  }
+
+  .active\:border-brand:active {
+    border-color: var(--color-brand-active);
+  }
+
+  /* --- Gradients --- */
+  .bg-gradient-card {
+    background-image: linear-gradient(
+      to bottom right,
+      var(--color-gradient-card-from),
+      var(--color-gradient-card-via),
+      var(--color-gradient-card-to)
+    );
+  }
+
+  .bg-gradient-pill {
+    background-image: linear-gradient(
+      to right,
+      var(--color-gradient-pill-from),
+      var(--color-gradient-pill-via),
+      var(--color-gradient-pill-to)
+    );
+  }
+
+  .bg-gradient-panel-br {
+    background-image: linear-gradient(
+      to bottom right,
+      var(--color-gradient-panel-from),
+      var(--color-gradient-panel-via),
+      var(--color-gradient-panel-to)
+    );
+  }
+
+  .bg-gradient-panel-b {
+    background-image: linear-gradient(
+      to bottom,
+      var(--color-gradient-panel-from),
+      var(--color-gradient-panel-to)
+    );
+  }
+
+  .bg-gradient-page {
+    background-image: linear-gradient(
+      to bottom right,
+      var(--color-gradient-page-from),
+      var(--color-gradient-page-via),
+      var(--color-gradient-page-to)
+    );
+  }
+
+  .interactive-gradient-card:has(a:hover),
+  .interactive-gradient-card:hover {
+    background-image: linear-gradient(
+      to bottom right,
+      var(--color-gradient-card-hover-from),
+      var(--color-gradient-card-hover-via),
+      var(--color-gradient-card-hover-to)
+    );
+  }
+
+  .interactive-gradient-card:has(a:active),
+  .interactive-gradient-card:active {
+    background-image: linear-gradient(
+      to bottom right,
+      var(--color-gradient-card-active-from),
+      var(--color-gradient-card-active-via),
+      var(--color-gradient-card-active-to)
+    );
+  }
+
+  .bg-gradient-card-selected {
+    background-image: linear-gradient(
+      to bottom right,
+      var(--color-gradient-card-selected-from),
+      var(--color-gradient-card-selected-via),
+      var(--color-gradient-card-selected-to)
+    );
+  }
+
+  .bg-gradient-card-hover {
+    background-image: linear-gradient(
+      to bottom right,
+      var(--color-gradient-card-hover-from),
+      var(--color-gradient-card-hover-via),
+      var(--color-gradient-card-hover-to)
+    );
+  }
+
+  .bg-gradient-card-active {
+    background-image: linear-gradient(
+      to bottom right,
+      var(--color-gradient-card-active-from),
+      var(--color-gradient-card-active-via),
+      var(--color-gradient-card-active-to)
+    );
+  }
+
+  .hover\:bg-gradient-card-hover:hover {
+    background-image: linear-gradient(
+      to bottom right,
+      var(--color-gradient-card-hover-from),
+      var(--color-gradient-card-hover-via),
+      var(--color-gradient-card-hover-to)
+    );
+  }
+
+  .active\:bg-gradient-card-active:active {
+    background-image: linear-gradient(
+      to bottom right,
+      var(--color-gradient-card-active-from),
+      var(--color-gradient-card-active-via),
+      var(--color-gradient-card-active-to)
+    );
+  }
+
+  /* --- Icon utilities --- */
+  .crit-icon-muted {
+    color: var(--color-icon-muted);
+  }
+
+  .crit-icon-brand {
+    color: var(--color-icon-brand);
+  }
+
+  .crit-icon-secondary {
+    color: var(--color-icon-secondary);
+  }
+
+  /* --- Rank badges --- */
+  .rank-badge-gold {
+    border-color: var(--color-rank-gold-border);
+    background-image: linear-gradient(
+      to bottom right,
+      var(--color-rank-gold-from),
+      var(--color-rank-gold-to)
+    );
+    color: var(--color-rank-gold-text);
+  }
+
+  .rank-badge-silver {
+    border-color: var(--color-rank-silver-border);
+    background-image: linear-gradient(
+      to bottom right,
+      var(--color-rank-silver-from),
+      var(--color-rank-silver-to)
+    );
+    color: var(--color-rank-silver-text);
+  }
+
+  .rank-badge-bronze {
+    border-color: var(--color-rank-bronze-border);
+    background-image: linear-gradient(
+      to bottom right,
+      var(--color-rank-bronze-from),
+      var(--color-rank-bronze-to)
+    );
+    color: var(--color-rank-bronze-text);
+  }
+
+  .bg-avatar-ring {
+    background-image: radial-gradient(
+      circle,
+      var(--color-bg-surface) 0%,
+      var(--color-bg-accent-muted) 100%
+    );
+  }
+
+  .text-star-active {
+    color: var(--color-star-active);
+  }
+
+  .shadow-brand-card {
+    box-shadow: var(--shadow-brand-card);
+  }
+
+  .shadow-brand-card-hover {
+    box-shadow: var(--shadow-brand-card-hover);
+  }
+
+  .shadow-brand-card-active {
+    box-shadow: var(--shadow-brand-card-active);
+  }
+
+  .shadow-brand-bubble {
+    box-shadow: var(--shadow-brand-bubble);
+  }
+
+  .shadow-brand-bubble-hover {
+    box-shadow: var(--shadow-brand-bubble-hover);
+  }
+
+  .shadow-brand-bubble-selected {
+    box-shadow: var(--shadow-brand-bubble-selected);
+  }
+}

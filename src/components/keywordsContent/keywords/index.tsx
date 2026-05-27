@@ -3,6 +3,8 @@ import * as d3 from 'd3';
 import cloud from 'd3-cloud';
 import useKeywordStore from '@/stores/useKeywordStore';
 import useTrendKeywordsStore from '@/stores/useTrendKeywordsStore';
+import { brandWordCloudPalette, brandWordCloudPaletteDark } from '@/constants/colors';
+import useThemeStore from '@/stores/useThemeStore';
 import type { KeywordData } from '@/stores/useTrendKeywordsStore';
 
 interface KeywordsProps {
@@ -15,6 +17,7 @@ const Keywords = ({ isShifted = false }: KeywordsProps) => {
   const setSelectedKeyword = useKeywordStore(s => s.setSelectedKeyword);
   const keywords = useTrendKeywordsStore(s => s.keywords);
   const isLoading = useTrendKeywordsStore(s => s.isLoading);
+  const theme = useThemeStore(s => s.theme);
   const [refreshKey, setRefreshKey] = useState(0);
   const [isFading, setIsFading] = useState(false);
   const [dimensions, setDimensions] = useState({ width: 800, height: 600 });
@@ -61,26 +64,7 @@ const Keywords = ({ isShifted = false }: KeywordsProps) => {
       .domain([minValue, maxValue])
       .range([10, Math.min(70, width / 12)]);
 
-    const colors = [
-      '#6B4EFF',
-      '#8257B4',
-      '#9F8CFF',
-      '#634DCB',
-      '#A594F9',
-      '#4F378A',
-      '#FF6B6B',
-      '#4ECDC4',
-      '#45B7D1',
-      '#96CEB4',
-      '#FFEAA7',
-      '#DDA0DD',
-      '#FF8C00',
-      '#20B2AA',
-      '#9370DB',
-      '#3CB371',
-      '#FF69B4',
-      '#00CED1',
-    ];
+    const colors = theme === 'dark' ? brandWordCloudPaletteDark : brandWordCloudPalette;
 
     const layout = cloud<KeywordData & cloud.Word>()
       .size([width, height])
@@ -123,7 +107,7 @@ const Keywords = ({ isShifted = false }: KeywordsProps) => {
       });
 
     layout.start();
-  }, [dimensions, keywords, setSelectedKeyword, refreshKey]);
+  }, [dimensions, keywords, setSelectedKeyword, refreshKey, theme]);
 
   const placeholderClass =
     'flex w-[800px] h-[600px] items-center justify-center max-md:h-[min(75vw,600px)] max-md:min-h-[220px] max-md:w-full max-md:max-w-[800px]';
